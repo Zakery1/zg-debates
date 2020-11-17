@@ -3,7 +3,7 @@ import "./App.css";
 
 //components
 import Header from "./component/Header/Header";
-import IssuesBar from "./component/IssuesBar/IssuesBar";
+import IssuesBar from "./component/CategoriesBar/CategoriesBar";
 import CurrentDiscussion from "./component/CurrentDiscussion/CurrentDiscussion";
 import Footer from "./component/Footer/Footer";
 
