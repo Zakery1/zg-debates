@@ -6,6 +6,7 @@ import Header from "./component/Header/Header";
 import IssuesBar from "./component/CategoriesBar/CategoriesBar";
 import CurrentDiscussion from "./component/CurrentDiscussion/CurrentDiscussion";
 import Footer from "./component/Footer/Footer";
+import Login from "./component/Login/Login";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       <Header />
       <IssuesBar />
       <CurrentDiscussion />
+      <Login/>
       <Footer />
     </div>
   );
