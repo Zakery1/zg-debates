@@ -9,6 +9,8 @@ const Issues: React.FC = () => {
     <div>
       <CatagoriesBar />
       <CurrentDiscussion />
+
+      
     </div>
   );
 };
