@@ -1,4 +1,7 @@
 import React from "react";
+
+import routes from "./routes";
+
 import "./App.css";
 
 //components
@@ -11,10 +14,11 @@ import Login from "./component/Login/Login";
 const App: React.FC = () => {
   return (
     <div className="App">
+      {routes()}
       <Header />
       <IssuesBar />
       <CurrentDiscussion />
-      <Login/>
+      <Login />
       <Footer />
     </div>
   );
