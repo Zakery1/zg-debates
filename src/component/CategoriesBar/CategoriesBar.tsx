@@ -1,6 +1,6 @@
 import React from "react";
 
-import Category from "../Category/Caregory";
+import Category from "../Category/Category";
 import { Link } from "react-router-dom";
 
 interface CategoryItem {
