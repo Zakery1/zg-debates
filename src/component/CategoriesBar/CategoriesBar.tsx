@@ -26,7 +26,10 @@ const CategoriesBar: React.FC = () => {
     );
   });
 
-  return <div className="zg-categories-bar">{availableCategories}</div>;
+  return <div className="zg-categories-bar">
+    <h1>Categories</h1>
+    {availableCategories}
+    </div>;
 };
 
 export default CategoriesBar;

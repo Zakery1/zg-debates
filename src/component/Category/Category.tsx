@@ -7,6 +7,8 @@ interface Category {
   name: string;
 }
 
+
+
 //get Categories that match category
 
 const Category: React.FC<Category> = (props: Category) => {
@@ -20,7 +22,7 @@ const Category: React.FC<Category> = (props: Category) => {
       {/* <Link to={{pathname: issue}}>Another premise</Link> */}
       <Link to="/category/issue">Another premise</Link>
       <br/>
-      <Link to="/">back</Link>
+      <Link to="/">Home</Link>
       <br />
       <br />
     </div>
