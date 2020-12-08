@@ -1,0 +1,25 @@
+.zg-current-discussion {
+  background: gold;
+  text-align: center;
+
+  .zg-position-container {
+    display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    justify-content: space-evenly;
+    // align-items: space-between;
+    // align-content: space-around;
+    .zg-agree {
+      background: greenyellow;
+    }
+    .zg-neutral {
+      background: grey;
+    }
+    .zg-disagree {
+      background: red;
+    }
+  }
+}
+
+@media only screen and (min-width: 501px) {
+}
