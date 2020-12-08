@@ -1,16 +1,15 @@
 .zg-login {
-  display: flex;
-  flex-direction: column;
   background: gold;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
   justify-content: space-around;
-  align-items: center;
-  align-content: stretch;
   .zg-login-title {
+    background: honeydew;
   }
   .zg-login-portal {
+      background: rgb(164, 164, 247);
+      display: flex;
+      flex-direction: column;
   }
 }
 
