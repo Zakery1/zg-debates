@@ -21,7 +21,6 @@ const CurrentDiscussion: React.FC = () => {
 
       <Link to="/category">Back to Premises</Link>
       <br />
-      <Link to="/">Home</Link>
     </div>
   );
 };

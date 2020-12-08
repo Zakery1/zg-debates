@@ -21,7 +21,6 @@ const Category: React.FC = () => {
       {/* <Link to={{pathname: issue}}>Another premise</Link> */}
       <Link to="/category/issue">Orange Man Good</Link>
       <br/>
-      <Link to="/">Home</Link>
       <br />
       <br />
     </div>

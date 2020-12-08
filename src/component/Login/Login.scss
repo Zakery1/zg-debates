@@ -1,0 +1,18 @@
+.zg-login {
+  display: flex;
+  flex-direction: column;
+  background: gold;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: stretch;
+  .zg-login-title {
+  }
+  .zg-login-portal {
+  }
+}
+
+@media only screen and (min-width: 501px) {
+}
