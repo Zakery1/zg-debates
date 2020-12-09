@@ -1,24 +1,24 @@
+@import "../../style/style.scss";
+
 .zg-login {
   background: gold;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   .zg-login-title {
-
     background: rgb(94, 233, 94);
   }
   .zg-login-portal {
+    box-shadow: $box-shadow;
+    margin: 20px;
     background: rgb(164, 164, 247);
     display: flex;
     flex-direction: column;
-    .zg-username {
-
+    .zg-login-username {
     }
-    .zg-password {
-        
+    .zg-login-password {
     }
     .zg-login-button {
-      
     }
   }
 }
