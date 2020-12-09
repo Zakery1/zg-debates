@@ -13,8 +13,8 @@ const Login: React.FC = () => {
         <input className="zg-login-username" type="text" placeholder="Email or Username" />
         <input className="zg-login-password" type="password" placeholder="Password" />
         <button className="zg-login-button">Log In</button>
-        <Link to="/login">Forgot Password?</Link>
-        <button>Sign Up</button>
+        <Link className="zg-forgot-password" to="/login">Forgot Password?</Link>
+        <button className="zg-sign-up-button">Sign Up</button>
       </div>
     </div>
   );

@@ -6,7 +6,10 @@
   flex-direction: column;
   justify-content: space-around;
   .zg-login-title {
+    margin: 20px;
+    padding: 20px;
     background: rgb(94, 233, 94);
+    box-shadow: $box-shadow;
   }
   .zg-login-portal {
     box-shadow: $box-shadow;
@@ -15,10 +18,43 @@
     display: flex;
     flex-direction: column;
     .zg-login-username {
+      font-size: 15px;
+      border-radius: 4px;
+      margin: 20px 40px;
+      height: 30px;
+      padding-left: 7px;
     }
     .zg-login-password {
+      font-size: 15px;
+      border-radius: 4px;
+      margin: 20px 40px;
+      height: 30px;
+      padding-left: 7px;
+    }
+    .zg-login-button:hover {
+      cursor: pointer;
     }
     .zg-login-button {
+      font-size: 15px;
+      border-radius: 4px;
+      background: pink;
+      margin: 20px 40px;
+      height: 40px;
+    }
+    .zg-forgot-password {
+      font-size: 15px;
+      border-radius: 4px;
+      height: 30px;
+    }
+    .zg-sign-up-button:hover {
+      cursor: pointer;
+    }
+    .zg-sign-up-button {
+      font-size: 15px;
+      border-radius: 4px;
+      background: pink;
+      margin: 20px 40px;
+      height: 40px;
     }
   }
 }
