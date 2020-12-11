@@ -6,7 +6,8 @@ import "./Header.scss";
 const Header: React.FC = () => {
   return (
     <div className="zg-header">
-      Header<Link to="/login">login</Link> <Link to="/">Home</Link>
+      <Link className="zg-header-home" to="/">New Twitter</Link>
+      <Link className="zg-header-login" to="/login">Log In</Link>
     </div>
   );
 };
