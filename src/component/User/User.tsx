@@ -2,12 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-interface Post {
-  username: string;
-}
-
 const User: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
     async function fetchUser() {
