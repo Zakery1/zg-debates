@@ -1,7 +1,8 @@
 import React from "react";
 
-// import Category from "../Category/Category";
 import { Link } from "react-router-dom";
+
+import "./CategoriesBar.scss";
 
 interface CategoryItem {
   id: number;
@@ -23,11 +24,12 @@ const CategoriesBar: React.FC = () => {
       <div key={category.id}>
         {/* <Link to="/category" >{category.name}</Link> */}
         <Link
+          className="zg-category"
           to={{
             pathname: "/category",
             state: {
-              name: "zak"
-            }
+              name: "zak",
+            },
           }}
         >
           {category.name}
@@ -38,7 +40,7 @@ const CategoriesBar: React.FC = () => {
 
   return (
     <div className="zg-categories-bar">
-      <h1>Categories</h1>
+      <h1 className="zg-categories-bar-header">Current Topics</h1>
       {availableCategories}
     </div>
   );
