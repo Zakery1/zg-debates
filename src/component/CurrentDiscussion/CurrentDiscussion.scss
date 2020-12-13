@@ -4,6 +4,9 @@
   // background: gold;
   min-height: 570px;
   text-align: center;
+  .zg-current-discussion-header {
+    color: $zg-purple;
+  }
 
   .zg-position-container {
     display: flex;
@@ -24,7 +27,7 @@
   }
   .zg-back-to-premises {
     text-decoration: none;
-   color: $zg-purple 
+    color: $zg-purple;
   }
 }
 

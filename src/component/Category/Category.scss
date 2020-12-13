@@ -1,13 +1,18 @@
 @import "../../style/style.scss";
 
 .zg-category {
-    min-height: 570px;
+  min-height: 570px;
+  .zg-category-header {
+      color: $zg-purple;
+  }
+  .zg-discussion-link {
+    color: $zg-purple;
+    text-decoration: none;
+  }
 }
 
-
 @media only screen and (min-width: 501px) {
-    .zg-category {
-        min-height: 650px;
-    }
-    
+  .zg-category {
+    min-height: 650px;
+  }
 }
