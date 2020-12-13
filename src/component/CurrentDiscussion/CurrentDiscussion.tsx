@@ -19,7 +19,7 @@ const CurrentDiscussion: React.FC = () => {
 
       <br />
 
-      <Link to="/category">Back to Premises</Link>
+      <Link className="zg-back-to-premises" to="/category">Back to Premises</Link>
       <br />
     </div>
   );

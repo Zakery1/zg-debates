@@ -1,26 +1,35 @@
 @import "../../style/style.scss";
 
 .zg-current-discussion {
-  background: gold;
-  min-height: 600px;
+  // background: gold;
+  min-height: 570px;
   text-align: center;
 
   .zg-position-container {
     display: flex;
-
     justify-content: space-evenly;
+    color: $zg-purple;
+    font-size: 20px;
+    font-weight: bold;
 
     .zg-agree {
-      background: greenyellow;
+      // background: greenyellow;
     }
     .zg-neutral {
-      background: grey;
+      // background: grey;
     }
     .zg-disagree {
-      background: red;
+      // background: red;
     }
+  }
+  .zg-back-to-premises {
+    text-decoration: none;
+   color: $zg-purple 
   }
 }
 
 @media only screen and (min-width: 501px) {
+  .zg-current-discussion {
+    min-height: 640px;
+  }
 }

@@ -4,9 +4,11 @@ import React from "react";
 import CatagoriesBar from "../CategoriesBar/CategoriesBar";
 // import CurrentDiscussion from "../CurrentDiscussion/CurrentDiscussion";
 
+import "./Dashboard.scss";
+
 const Dashboard: React.FC = () => {
   return (
-    <div>
+    <div className="zg-dashboard">
       <CatagoriesBar />
     </div>
   );

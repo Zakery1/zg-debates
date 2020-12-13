@@ -1,7 +1,6 @@
 @import "../../style/style.scss";
 
 .zg-categories-bar {
-  min-height: 580px;
   .zg-categories-bar-header {
     color: $zg-purple;
   }
@@ -14,4 +13,6 @@
 
 
 @media only screen and (min-width: 501px) {
+  .zg-categories-bar {
+  }
 }
