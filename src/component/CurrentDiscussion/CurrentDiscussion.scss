@@ -1,5 +1,8 @@
+@import "../../style/style.scss";
+
 .zg-current-discussion {
   background: gold;
+  min-height: 600px;
   text-align: center;
 
   .zg-position-container {
