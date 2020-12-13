@@ -6,8 +6,9 @@ import "./CurrentDiscussion.scss";
 const CurrentDiscussion: React.FC = () => {
   return (
     <div className="zg-current-discussion">
-
-      <h3 className="zg-current-discussion-header">Discusion title/argument will go here.</h3>
+      <h3 className="zg-current-discussion-header">
+        Discusion title/argument will go here.
+      </h3>
       <br />
       <div className="zg-position-container">
         <div className="zg-agree">Agree</div>
@@ -17,7 +18,9 @@ const CurrentDiscussion: React.FC = () => {
 
       <br />
 
-      <Link className="zg-back-to-premises" to="/category">Back to Premises</Link>
+      <Link className="zg-back-to-premises" to="/category">
+        Back to Premises
+      </Link>
       <br />
     </div>
   );
