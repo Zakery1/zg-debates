@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
 
 import { Link } from "react-router-dom";
 
@@ -12,16 +14,24 @@ interface CategoryItem {
 interface CategoriesArray extends Array<CategoryItem> {}
 
 const CategoriesBar: React.FC = () => {
-  //get categories
-  const catagories: CategoriesArray = [
-    { id: 1, name: "Politics" },
-    // { id: 2, name: "Covid" },
-    // { id: 3, name: "Sports" },
-  ];
+  const [categories, setCategories] = useState([]);
 
-  const availableCategories = catagories.map((category: CategoryItem) => {
+  useEffect(() => {
+    async function fetchUser() {
+      await axios
+        .get(`https://fathomless-reaches-38159.herokuapp.com/api/getCategories`)
+        .then((res) => {
+          const user = res.data;
+          setCategories(user);
+        });
+    }
+    fetchUser();
+    console.log("categories", categories)
+  }, [categories]);
+
+  const availableCategories = categories.map((category) => {
     return (
-      <div key={category.id}>
+      <div key={category}>
         {/* <Link to="/category" >{category.name}</Link> */}
         <Link
           className="zg-category"
@@ -32,7 +42,7 @@ const CategoriesBar: React.FC = () => {
             },
           }}
         >
-          {category.name}
+          {category}
         </Link>
       </div>
     );
