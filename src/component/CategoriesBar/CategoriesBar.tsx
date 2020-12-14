@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 import "./CategoriesBar.scss";
 
-interface CategoryItem {
-  id: number;
-  name: string;
-}
+// interface CategoryItem {
+//   id: number;
+//   name: string;
+// }
 
 // interface CategoriesArray extends Array<CategoryItem> {}
 
