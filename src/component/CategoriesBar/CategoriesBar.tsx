@@ -11,7 +11,7 @@ interface CategoryItem {
   name: string;
 }
 
-interface CategoriesArray extends Array<CategoryItem> {}
+// interface CategoriesArray extends Array<CategoryItem> {}
 
 const CategoriesBar: React.FC = () => {
   const [categories, setCategories] = useState([]);
