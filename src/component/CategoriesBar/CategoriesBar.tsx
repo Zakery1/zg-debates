@@ -6,33 +6,33 @@ import { Link } from "react-router-dom";
 
 import "./CategoriesBar.scss";
 
-// interface CategoryItem {
-//   id: number;
-//   name: string;
-// }
+interface CategoryItem {
+  id: number | null;
+  category: string;
+}
 
-// interface CategoriesArray extends Array<CategoryItem> {}
+interface CategoriesArray extends Array<CategoryItem> {}
 
 const CategoriesBar: React.FC = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoriesArray>([
+    { id: null, category: "" },
+  ]);
 
   useEffect(() => {
-    async function fetchUser() {
+    const fetchCategories = async () => {
       await axios
         .get(`https://fathomless-reaches-38159.herokuapp.com/api/getCategories`)
         .then((res) => {
-          const user = res.data;
-          setCategories(user);
+          const retrievedCategories = res.data;
+          setCategories(retrievedCategories);
         });
     }
-    fetchUser();
-    console.log("categories", categories)
-  }, [categories]);
+    fetchCategories();
+  }, []);
 
   const availableCategories = categories.map((category) => {
     return (
-      <div key={category}>
-        {/* <Link to="/category" >{category.name}</Link> */}
+      <div key={category.id}>
         <Link
           className="zg-category"
           to={{
@@ -42,7 +42,7 @@ const CategoriesBar: React.FC = () => {
             },
           }}
         >
-          {category}
+          {category.category}
         </Link>
       </div>
     );
@@ -51,7 +51,8 @@ const CategoriesBar: React.FC = () => {
   return (
     <div className="zg-categories-bar">
       <h1 className="zg-categories-bar-header">Current Topics</h1>
-      {availableCategories}
+      {/* <button onClick={() => fetchUser()}>Get cats</button> */}
+      {categories && availableCategories}
     </div>
   );
 };
