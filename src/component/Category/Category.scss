@@ -3,16 +3,28 @@
 .zg-category {
   min-height: 570px;
   .zg-category-header {
-      color: $zg-purple;
+    color: $zg-purple;
   }
   .zg-discussion-link {
+    font-weight: bolder;
     color: $zg-purple;
     text-decoration: none;
+  }
+  .zg-back-to-topics {
+    display: inline-block;
+    margin: 20px 0 0 0;
+    padding: 7px;
+    border-radius: 10px;
+    background: $zg-purple;
+    color: white;
   }
 }
 
 @media only screen and (min-width: 501px) {
   .zg-category {
     min-height: 650px;
+    .zg-back-to-topics {
+
+    }
   }
 }

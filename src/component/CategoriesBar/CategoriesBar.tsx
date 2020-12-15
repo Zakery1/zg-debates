@@ -26,7 +26,7 @@ const CategoriesBar: React.FC = () => {
           const retrievedCategories = res.data;
           setCategories(retrievedCategories);
         });
-    }
+    };
     fetchCategories();
   }, []);
 

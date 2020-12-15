@@ -26,8 +26,12 @@
     }
   }
   .zg-back-to-premises {
+    font-weight: bolder;
     text-decoration: none;
-    color: $zg-purple;
+    color: white;
+    padding: 7px;
+    border-radius: 10px;
+    background: $zg-purple;
   }
 }
 
