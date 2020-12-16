@@ -11,14 +11,9 @@ export default function routes() {
     <Switch>
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/category" component={Category} />
+      <Route exact path="/category/:cat" component={Category} />
       <Route exact path="/category/issue" component={CurrentDiscussion} />
       <Route path="/" render={() => <div>404</div>} />
-
-
-      {/* <Route path='/book/:id' render={(props) => {
-                    return ( <BookDetail {...props } /> )
-                }} /> */}
     </Switch>
   );
 }
