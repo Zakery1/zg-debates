@@ -4,14 +4,14 @@ import { Link, useParams } from "react-router-dom";
 
 import "./Category.scss";
 
-interface Category {
+interface categoryParams {
   cat: string;
 }
 
 //get Categories that match category
 
 const Category: React.FC = () => {
-  let { cat }: Category = useParams();
+  let { cat }: categoryParams = useParams();
   console.log(cat)
 
   const categoriesArray = [
