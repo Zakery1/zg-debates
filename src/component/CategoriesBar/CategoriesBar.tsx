@@ -36,7 +36,7 @@ const CategoriesBar: React.FC = () => {
         <Link
           className="zg-category"
           to={{
-            pathname: `/category/${category.category}`,
+            pathname: `/${category.category}`,
           }}
         >
           {category.category}
