@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import "./Category.scss";
 
@@ -8,32 +10,50 @@ interface categoryParams {
   cat: string;
 }
 
-//get Categories that match category
+interface Discussion {
+  id: number | null;
+  discussion: string;
+}
+
+interface DiscussionsArray extends Array<Discussion> {}
 
 const Category: React.FC = () => {
   let { cat }: categoryParams = useParams();
-  console.log(cat)
 
-  const categoriesArray = [
-    "Trump did a great job with Covid-19",
-    "Biden is too moderate",
-  ];
+  const [discussions, setDiscussions] = useState<DiscussionsArray>([
+    { id: null, discussion: "" },
+  ]);
 
-  let categories = categoriesArray.map((category, index) => {
+  useEffect(() => {
+    const fetchDiscussions = async () => {
+      await axios
+        .get(
+          `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${cat}`
+        )
+        .then((res) => {
+          const retrievedDiscussions = res.data;
+          setDiscussions(retrievedDiscussions);
+        });
+    };
+    fetchDiscussions();
+  }, []);
+
+  let currentDiscussions = discussions.map((discussion, index) => {
+    console.log("Discusssion", discussion)
     return (
       <Link key={index} className="zg-discussion-link" to="/category/issue">
-        {category}
+        {discussion.discussion}
         <br />
       </Link>
     );
   });
 
+  // console.log("discussions", discussions)
+
   return (
     <div className="zg-category">
-      <h2 className="zg-category-header">
-        Current discsusions in the category
-      </h2>
-      {categories}
+      <h2 className="zg-category-header">Current {cat} discsusions</h2>
+      {currentDiscussions}
       <Link className="zg-back-to-topics" to="/">
         Back to Topics
       </Link>
