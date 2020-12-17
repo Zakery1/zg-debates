@@ -36,10 +36,9 @@ const Category: React.FC = () => {
         });
     };
     fetchDiscussions();
-  }, []);
+  }, [cat]);
 
   let currentDiscussions = discussions.map((discussion, index) => {
-    console.log("Discusssion", discussion)
     return (
       <Link key={index} className="zg-discussion-link" to="/category/issue">
         {discussion.discussion}
