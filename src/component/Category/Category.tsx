@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
@@ -19,6 +19,7 @@ interface DiscussionsArray extends Array<Discussion> {}
 
 const Category: React.FC = () => {
   let { cat }: categoryParams = useParams();
+  let history = useHistory();
 
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
     { id: null, discussion: "" },
@@ -53,7 +54,7 @@ const Category: React.FC = () => {
     <div className="zg-category">
       <h2 className="zg-category-header">Current {cat} discsusions</h2>
       {currentDiscussions}
-      <button className="zg-back-to-topics">Back to Topics</button>
+      <button className="zg-back-to-topics" type="button" onClick={() => history.goBack()}>Back to Topics</button>
     </div>
   );
 };

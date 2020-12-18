@@ -1,8 +1,11 @@
 import React from "react";
 
+import { useHistory } from 'react-router-dom';
+
 import "./CurrentDiscussion.scss";
 
 const CurrentDiscussion: React.FC = () => {
+  let history = useHistory();
   return (
     <div className="zg-current-discussion">
       <h3 className="zg-current-discussion-header">
@@ -17,9 +20,7 @@ const CurrentDiscussion: React.FC = () => {
 
       <br />
 
-      <button className="zg-back-to-premises">
-        Back to Discussions
-      </button>
+      <button className="zg-back-to-premises" type="button" onClick={() => history.goBack()}>Back to Discussions</button>
       <br />
     </div>
   );
