@@ -45,5 +45,6 @@
       "last 1 safari version"
     ]
   },
-  "typings": "./dist/index.d.ts"
+  "typings": "./dist/index.d.ts",
+  "proxy": "http://localhost:8080"
 }

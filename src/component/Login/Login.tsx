@@ -9,13 +9,13 @@ const Login: React.FC = () => {
       <div className="zg-login-title">
         <h1>New Twitter</h1>
       </div>
-      <div className="zg-login-portal">
-        <input className="zg-login-username" type="text" placeholder="Email or Username" />
-        <input className="zg-login-password" type="password" placeholder="Password" />
-        <button className="zg-login-button">Log In</button>
+      <form className="zg-login-portal">
+        <input autoComplete="email" className="zg-login-username" type="text" placeholder="Email or Username" />
+        <input autoComplete="currentPassword" className="zg-login-password" type="password" placeholder="Password" />
+        <button type="submit" className="zg-login-button">Log In</button>
         <Link className="zg-forgot-password" to="/login">Forgot Password?</Link>
         <button className="zg-sign-up-button">Sign Up</button>
-      </div>
+      </form>
     </div>
   );
 };

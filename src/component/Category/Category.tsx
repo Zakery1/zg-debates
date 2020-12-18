@@ -53,9 +53,7 @@ const Category: React.FC = () => {
     <div className="zg-category">
       <h2 className="zg-category-header">Current {cat} discsusions</h2>
       {currentDiscussions}
-      <Link className="zg-back-to-topics" to="/">
-        Back to Topics
-      </Link>
+      <button className="zg-back-to-topics">Back to Topics</button>
     </div>
   );
 };

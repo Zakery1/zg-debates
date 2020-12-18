@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./CurrentDiscussion.scss";
 
@@ -18,9 +17,9 @@ const CurrentDiscussion: React.FC = () => {
 
       <br />
 
-      <Link className="zg-back-to-premises" to="/category">
+      <button className="zg-back-to-premises">
         Back to Discussions
-      </Link>
+      </button>
       <br />
     </div>
   );
