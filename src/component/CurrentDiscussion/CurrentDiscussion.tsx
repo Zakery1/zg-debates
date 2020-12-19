@@ -32,7 +32,7 @@ const CurrentDiscussion: React.FC = () => {
       id: null,
       userId: null,
       discussionId: null,
-      contribution: "string",
+      contribution: "",
       agree: null,
       neutral: null,
       disagree: null,
@@ -50,8 +50,33 @@ const CurrentDiscussion: React.FC = () => {
         });
     };
     fetchContributions();
+
     console.log("contributions in usestate", contributions);
-  }, [setContributions]);
+  }, []);
+
+  let agreeList = contributions.filter(
+    (contribution) => contribution.agree === true
+  ).map(agreeItem => {
+    return (
+      <div key={agreeItem.id}>{agreeItem.contribution}</div>
+    )
+  })
+
+  let neutralList = contributions.filter(
+    (contribution) => contribution.neutral === true
+  ).map(neutralItem => {
+    return (
+      <div key={neutralItem.id}>{neutralItem.contribution}</div>
+    )
+  })
+
+  let disagreeList = contributions.filter(
+    (contribution) => contribution.neutral === true
+  ).map(disagreeItem => {
+    return (
+      <div key={disagreeItem.id}>{disagreeItem.contribution}</div>
+    )
+  })
 
   return (
     <div className="zg-current-discussion">
@@ -60,11 +85,10 @@ const CurrentDiscussion: React.FC = () => {
       </h3>
       <br />
       <div className="zg-position-container">
-        <div className="zg-agree">Agree</div>
-        <div className="zg-neutral">Neutral</div>
-        <div className="zg-disagree">Disagree</div>
+        <div className="zg-agree">Agree <br/>{agreeList}</div>
+        <div className="zg-neutral">Neutral<br/>{neutralList}</div>
+        <div className="zg-disagree">Disagree<br/>{disagreeList}</div>
       </div>
-
       <br />
 
       <button
