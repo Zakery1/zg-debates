@@ -4,6 +4,8 @@ import axios from "axios";
 
 import { useHistory, useParams } from "react-router-dom";
 
+import Contribution from "../Contribution/Contribution";
+
 import "./CurrentDiscussion.scss";
 
 interface discussionParams {
@@ -54,29 +56,23 @@ const CurrentDiscussion: React.FC = () => {
     console.log("contributions in usestate", contributions);
   }, []);
 
-  let agreeList = contributions.filter(
-    (contribution) => contribution.agree === true
-  ).map(agreeItem => {
-    return (
-      <div key={agreeItem.id}>{agreeItem.contribution}</div>
-    )
-  })
+  let agreeList = contributions
+    .filter((contribution) => contribution.agree === true)
+    .map((agreeItem) => {
+      return <div key={agreeItem.id}>{agreeItem.contribution}</div>;
+    });
 
-  let neutralList = contributions.filter(
-    (contribution) => contribution.neutral === true
-  ).map(neutralItem => {
-    return (
-      <div key={neutralItem.id}>{neutralItem.contribution}</div>
-    )
-  })
+  let neutralList = contributions
+    .filter((contribution) => contribution.neutral === true)
+    .map((neutralItem) => {
+      return <div key={neutralItem.id}>{neutralItem.contribution}</div>;
+    });
 
-  let disagreeList = contributions.filter(
-    (contribution) => contribution.neutral === true
-  ).map(disagreeItem => {
-    return (
-      <div key={disagreeItem.id}>{disagreeItem.contribution}</div>
-    )
-  })
+  let disagreeList = contributions
+    .filter((contribution) => contribution.disagree === true)
+    .map((disagreeItem) => {
+      return <div key={disagreeItem.id}>{disagreeItem.contribution}</div>;
+    });
 
   return (
     <div className="zg-current-discussion">
@@ -85,11 +81,24 @@ const CurrentDiscussion: React.FC = () => {
       </h3>
       <br />
       <div className="zg-position-container">
-        <div className="zg-agree">Agree <br/>{agreeList}</div>
-        <div className="zg-neutral">Neutral<br/>{neutralList}</div>
-        <div className="zg-disagree">Disagree<br/>{disagreeList}</div>
+        <div className="zg-agree">
+          Agree <br />
+          {agreeList}
+        </div>
+        <div className="zg-neutral">
+          Neutral
+          <br />
+          {neutralList}
+        </div>
+        <div className="zg-disagree">
+          Disagree
+          <br />
+          {disagreeList}
+        </div>
       </div>
       <br />
+
+      <Contribution />
 
       <button
         className="zg-back-to-premises"
