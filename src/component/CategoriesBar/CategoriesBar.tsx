@@ -21,7 +21,7 @@ const CategoriesBar: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       await axios
-        .get(`https://fathomless-reaches-38159.herokuapp.com/api/getCategories`)
+        .get(`http://localhost:8080/api/getCategories`)
         .then((res) => {
           const retrievedCategories = res.data;
           setCategories(retrievedCategories);

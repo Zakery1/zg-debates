@@ -29,7 +29,8 @@ const Category: React.FC = () => {
     const fetchDiscussions = async () => {
       await axios
         .get(
-          `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${cat}`
+          // `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${cat}`
+          `http://localhost:8080/api/getDiscussions/${cat}`
         )
         .then((res) => {
           const retrievedDiscussions = res.data;
@@ -39,22 +40,32 @@ const Category: React.FC = () => {
     fetchDiscussions();
   }, [cat]);
 
-  let currentDiscussions = discussions.map((discussion, index) => {
+  let currentDiscussions = discussions.map((discussion) => {
     return (
-      <Link key={index} className="zg-discussion-link" to="/category/issue">
+      <Link
+        key={discussion.id}
+        className="zg-discussion-link"
+        to={{
+          pathname: `/discussion/${discussion.id}`,
+        }}
+      >
         {discussion.discussion}
         <br />
       </Link>
     );
   });
 
-  // console.log("discussions", discussions)
-
   return (
     <div className="zg-category">
       <h2 className="zg-category-header">Current {cat} discsusions</h2>
       {currentDiscussions}
-      <button className="zg-back-to-topics" type="button" onClick={() => history.goBack()}>Back to Topics</button>
+      <button
+        className="zg-back-to-topics"
+        type="button"
+        onClick={() => history.goBack()}
+      >
+        Back to Topics
+      </button>
     </div>
   );
 };
