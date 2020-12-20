@@ -11,6 +11,7 @@
   align-items: center;
 
   .zg-body {
+    border-radius: 5px;
     .zg-choice-group {
       .zg-choice-selected {
         border: 5px solid $zg-purple;
@@ -31,7 +32,7 @@
     color: $zg-purple;
     .zg-contribution-input {
       margin-top: 20px;
-      width: 300px;
+      width: 250px;
       height: 100px;
       font-size: 18px;
       border: none;
@@ -62,7 +63,7 @@
       }
       .zg-contribution-input {
         width: 400px;
-        height: 300px;
+        height: 270px;
       }
       .zg-submit-contribution {
       }

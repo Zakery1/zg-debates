@@ -7,6 +7,7 @@ import "./Contribution.scss";
 const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
+  const [contribution, setContribution] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -20,16 +21,46 @@ const Contribution: React.FC = () => {
     <div className="zg-body">
       <h2>Make a contribution to the discussion ---- discussion name</h2>
       <div className="zg-choice-group">
-
-        <button onClick={() => setChoice("agree")} className={"zg-choice-agree " + (choice === "agree" ? "zg-choice-selected" : "" )}>I agree</button>
-        <button onClick={() => setChoice("neutral")} className={"zg-choice-neutral " + (choice === "neutral" ? "zg-choice-selected" : "" )}>I'm neutral</button>
-        <button onClick={() => setChoice("disagree")} className={"zg-choice-disagree " + (choice === "disagree" ? "zg-choice-selected" : "" )}>I disagree</button>
+        <button
+          onClick={() => setChoice("agree")}
+          className={
+            "zg-choice-agree " +
+            (choice === "agree" ? "zg-choice-selected" : "")
+          }
+        >
+          I agree
+        </button>
+        <button
+          onClick={() => setChoice("neutral")}
+          className={
+            "zg-choice-neutral " +
+            (choice === "neutral" ? "zg-choice-selected" : "")
+          }
+        >
+          I'm neutral
+        </button>
+        <button
+          onClick={() => setChoice("disagree")}
+          className={
+            "zg-choice-disagree " +
+            (choice === "disagree" ? "zg-choice-selected" : "")
+          }
+        >
+          I disagree
+        </button>
       </div>
 
-      <textarea className="zg-contribution-input" autoFocus />
+      <textarea
+        className="zg-contribution-input"
+        maxLength={200}
+        autoFocus
+        onChange={(e) => setContribution(e.target.value)}
+      />
       <br />
       <br />
-      <button className="zg-submit-contribution">Submit contribution</button>
+      <button type="submit" className="zg-submit-contribution">
+        Submit contribution
+      </button>
       <br />
       <br />
       <button onClick={handleClose}>Cancel</button>
