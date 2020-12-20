@@ -79,7 +79,6 @@ const CurrentDiscussion: React.FC = () => {
       <h3 className="zg-current-discussion-header">
         Discusion title/argument will go here.
       </h3>
-      <br />
       <div className="zg-position-container">
         <div className="zg-agree">
           <h3>Agree</h3>

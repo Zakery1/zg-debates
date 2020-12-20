@@ -1,5 +1,17 @@
 @import "../../style/style.scss";
 
 .zg-contribution {
-    box-shadow: $box-shadow;
+    outline: 0;
 }
+
+.zg-contribution-modal {
+    outline: 0;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .zg-body {
+      position: absolute;
+      background: white;
+    }
+  }
