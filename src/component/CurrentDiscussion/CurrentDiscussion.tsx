@@ -96,7 +96,7 @@ const CurrentDiscussion: React.FC = () => {
       <br />
 
       <Contribution />
-
+      <br />
       <button
         className="zg-back-to-premises"
         type="button"
