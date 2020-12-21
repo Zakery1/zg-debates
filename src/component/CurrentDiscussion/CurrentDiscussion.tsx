@@ -42,15 +42,16 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  const fetchContributions = async () => {
+    await axios
+      .get(`http://localhost:8080/api/getContributions/${id}`)
+      .then((res) => {
+        console.log("contributions response", res);
+        setContributions(res.data);
+      });
+  };
+
   useEffect(() => {
-    const fetchContributions = async () => {
-      await axios
-        .get(`http://localhost:8080/api/getContributions/${id}`)
-        .then((res) => {
-          console.log("contributions response", res);
-          setContributions(res.data);
-        });
-    };
     fetchContributions();
 
     console.log("contributions in usestate", contributions);

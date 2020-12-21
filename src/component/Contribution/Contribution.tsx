@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Modal from "@material-ui/core/Modal";
+
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
 import "./Contribution.scss";
 
 interface Contribution {
-    userId: number;
-    discussionId: number;
-    contribution: string,
-    agree: boolean | null,
-    neutral: boolean | null,
-    disagree: boolean | null,
-    points: number
+  userId: number;
+  discussionId: number;
+  contribution: string;
+  agree: boolean | null;
+  neutral: boolean | null;
+  disagree: boolean | null;
+  points: number;
+}
+
+interface discussionParams {
+  id: string;
 }
 
 const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
+
+  const { id }: discussionParams = useParams();
+
+  useEffect(() => {});
 
   const handleOpen = () => {
     setOpen(true);
@@ -29,29 +39,32 @@ const Contribution: React.FC = () => {
     setOpen(false);
   };
 
-  // applyForJob(){
-  //   console.log('aaaaaaa', this.state.jobs.id)
-  //   axios.post('/api/apply', {id: this.state.jobs.id}).then( response => {
-  //     console.log(response)
-  //     this.props.history.push("/")
-  //   } )
-  // }
-
   const submitContribution = () => {
     let postData: Contribution = {
       userId: 1,
-      discussionId: 1,
+      discussionId: +id,
       contribution: contribution,
-      agree: true,
+      agree: null,
       neutral: null,
       disagree: null,
       points: 0,
+    };
+
+    if (choice === "agree") {
+      postData.agree = true;
+    } else if (choice === "neutral") {
+      postData.neutral = true;
+    } else {
+      postData.disagree = true;
     }
+
     axios({
       method: "post",
       url: "http://localhost:8080/api/postContribution",
       data: postData,
     });
+    setContribution("");
+    handleClose();
   };
 
   const choiceButtons = ["agree", "neutral", "disagree"].map(
