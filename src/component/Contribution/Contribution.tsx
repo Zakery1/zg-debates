@@ -2,7 +2,19 @@ import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
+import axios from "axios";
+
 import "./Contribution.scss";
+
+interface Contribution {
+    userId: number;
+    discussionId: number;
+    contribution: string,
+    agree: boolean | null,
+    neutral: boolean | null,
+    disagree: boolean | null,
+    points: number
+}
 
 const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -17,38 +29,52 @@ const Contribution: React.FC = () => {
     setOpen(false);
   };
 
+  // applyForJob(){
+  //   console.log('aaaaaaa', this.state.jobs.id)
+  //   axios.post('/api/apply', {id: this.state.jobs.id}).then( response => {
+  //     console.log(response)
+  //     this.props.history.push("/")
+  //   } )
+  // }
+
+  const submitContribution = () => {
+    let postData: Contribution = {
+      userId: 1,
+      discussionId: 1,
+      contribution: contribution,
+      agree: true,
+      neutral: null,
+      disagree: null,
+      points: 0,
+    }
+    axios({
+      method: "post",
+      url: "http://localhost:8080/api/postContribution",
+      data: postData,
+    });
+  };
+
+  const choiceButtons = ["agree", "neutral", "disagree"].map(
+    (selectedChoice, index) => {
+      return (
+        <button
+          key={index}
+          onClick={() => setChoice(selectedChoice)}
+          className={
+            `zg-choice-${selectedChoice} ` +
+            (choice === selectedChoice ? "zg-choice-selected" : "")
+          }
+        >
+          {selectedChoice}
+        </button>
+      );
+    }
+  );
+
   const body = (
     <div className="zg-body">
       <h2>Make a contribution to the discussion ---- discussion name</h2>
-      <div className="zg-choice-group">
-        <button
-          onClick={() => setChoice("agree")}
-          className={
-            "zg-choice-agree " +
-            (choice === "agree" ? "zg-choice-selected" : "")
-          }
-        >
-          I agree
-        </button>
-        <button
-          onClick={() => setChoice("neutral")}
-          className={
-            "zg-choice-neutral " +
-            (choice === "neutral" ? "zg-choice-selected" : "")
-          }
-        >
-          I'm neutral
-        </button>
-        <button
-          onClick={() => setChoice("disagree")}
-          className={
-            "zg-choice-disagree " +
-            (choice === "disagree" ? "zg-choice-selected" : "")
-          }
-        >
-          I disagree
-        </button>
-      </div>
+      <div className="zg-choice-group">{choiceButtons}</div>
 
       <textarea
         className="zg-contribution-input"
@@ -58,7 +84,11 @@ const Contribution: React.FC = () => {
       />
       <br />
       <br />
-      <button type="submit" className="zg-submit-contribution">
+      <button
+        onClick={submitContribution}
+        type="submit"
+        className="zg-submit-contribution"
+      >
         Submit contribution
       </button>
       <br />
