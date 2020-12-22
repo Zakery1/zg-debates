@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
@@ -8,7 +8,7 @@ import axios from "axios";
 
 import "./Contribution.scss";
 
-interface Contribution {
+interface ContributionData {
   userId: number;
   discussionId: number;
   contribution: string;
@@ -29,8 +29,6 @@ const Contribution: React.FC = () => {
 
   const { id }: discussionParams = useParams();
 
-  useEffect(() => {});
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -40,7 +38,7 @@ const Contribution: React.FC = () => {
   };
 
   const submitContribution = () => {
-    let postData: Contribution = {
+    let postData: ContributionData = {
       userId: 1,
       discussionId: +id,
       contribution: contribution,
@@ -50,6 +48,7 @@ const Contribution: React.FC = () => {
       points: 0,
     };
 
+    console.log("post data", postData);
     if (choice === "agree") {
       postData.agree = true;
     } else if (choice === "neutral") {
@@ -97,13 +96,21 @@ const Contribution: React.FC = () => {
       />
       <br />
       <br />
-      <button
-        onClick={submitContribution}
-        type="submit"
-        className="zg-submit-contribution"
-      >
-        Submit contribution
-      </button>
+
+      {choice && contribution ? (
+        <button
+          onClick={submitContribution}
+          type="submit"
+          className="zg-submit-contribution"
+        >
+          Submit Contribution
+        </button>
+      ) : (
+        <button className="zg-submit-contribution" disabled>
+          Submit Contribution
+        </button>
+      )}
+
       <br />
       <br />
       <button onClick={handleClose}>Cancel</button>
