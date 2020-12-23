@@ -42,21 +42,24 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  // let fetchData = React.useCallback(async () => {
+  //   const result = await fetch(`api/crm/get`);
+  //   const body = await result.json();
+  //   setTableData(body);
+  // },[])
+
+  let fetchContributions = React.useCallback(async () => {
+    await axios
+      .get(`http://localhost:8080/api/getContributions/${id}`)
+      .then((res) => {
+        console.log("contributions response", res);
+        setContributions(res.data);
+      });
+  }, [id]);
 
   useEffect(() => {
-    const fetchContributions = async () => {
-      await axios
-        .get(`http://localhost:8080/api/getContributions/${id}`)
-        .then((res) => {
-          console.log("contributions response", res);
-          setContributions(res.data);
-        });
-    };
-  
     fetchContributions();
-
-    console.log("contributions in usestate", contributions);
-  }, []);
+  }, [fetchContributions]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
