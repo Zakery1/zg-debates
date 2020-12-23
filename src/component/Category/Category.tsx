@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useParams, useHistory } from "react-router-dom";
 
+import CreateDiscussion from "../CreateDiscussion/CreateDiscussion";
+
 import axios from "axios";
 
 import "./Category.scss";
@@ -57,8 +59,9 @@ const Category: React.FC = () => {
 
   return (
     <div className="zg-category">
-      <h2 className="zg-category-header">Current {cat} discsusions</h2>
+      <h2 className="zg-category-header">Current {cat} discussions</h2>
       {currentDiscussions}
+      <CreateDiscussion/>
       <button
         className="zg-back-to-topics"
         type="button"
