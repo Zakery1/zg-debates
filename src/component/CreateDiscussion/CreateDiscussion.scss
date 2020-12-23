@@ -1,12 +1,27 @@
 @import "../../style/style.scss";
 
 .zg-create-discussion {
-    display: inline-block;
-    margin: 20px 0 0 0;
-    padding: 7px;
-    border-radius: 10px;
-    background: $zg-purple;
-    color: white;
-    text-decoration: none;
-    font-weight: bolder;
+  display: inline-block;
+  margin: 20px 0 0 0;
+  padding: 7px;
+  border-radius: 10px;
+  background: $zg-purple;
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  .zg-create-discussion-modal {
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+.zg-create-discussion-body {
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-create-discussion-body {
+  }
 }

@@ -85,7 +85,7 @@ const Contribution: React.FC = () => {
   );
 
   const body = (
-    <div className="zg-body">
+    <div className="zg-contribute-body">
       <h2>Make a contribution to the discussion ---- discussion name</h2>
       <div className="zg-choice-group">{choiceButtons}</div>
 
