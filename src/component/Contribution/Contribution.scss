@@ -12,6 +12,12 @@
 
   .zg-contribute-body {
     border-radius: 5px;
+    text-align: center;
+    height: 400px;
+    width: 330px;
+    position: absolute;
+    background: white;
+    color: $zg-purple;
     .zg-choice-group {
       .zg-choice-selected {
         border: 5px solid $zg-purple;
@@ -24,12 +30,7 @@
       .zg-choice-disagree {
       }
     }
-    text-align: center;
-    height: 400px;
-    width: 330px;
-    position: absolute;
-    background: white;
-    color: $zg-purple;
+
     .zg-contribution-input {
       margin-top: 20px;
       width: 250px;

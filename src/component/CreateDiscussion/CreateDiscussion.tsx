@@ -18,25 +18,32 @@ const CreateDiscussion: React.FC = () => {
 
   const body = (
     <div className="zg-create-discussion-body">
+      <h2>Create discussion</h2>
+      <p>Please create discussion related to topic -- topic name -- or a moderator will delete it.</p>
+      <textarea
+        className="zg-discussion-input"
+        maxLength={200}
+        autoFocus
+        // onChange={(e) => setContribution(e.target.value)}
+      />
+      <br/>
+      <button>Create Discussion!</button>
+      <br/>
       <button onClick={handleClose}>Cancel</button>
     </div>
   );
   return (
     <div>
-      <button
-        type="button"
-        className="zg-create-discussion"
-        onClick={handleOpen}
-      >
-        Contribute
-        <Modal
-          className="zg-create-discussion-modal"
-          open={open}
-          onClose={handleClose}
-        >
-          {body}
-        </Modal>
+      <button type="button" onClick={handleOpen}>
+        Create Discussion
       </button>
+      <Modal
+        className="zg-create-discussion-modal"
+        open={open}
+        onClose={handleClose}
+      >
+        {body}
+      </Modal>
     </div>
   );
 };

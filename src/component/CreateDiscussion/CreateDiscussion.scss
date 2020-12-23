@@ -1,27 +1,43 @@
 @import "../../style/style.scss";
 
-.zg-create-discussion {
-  display: inline-block;
-  margin: 20px 0 0 0;
-  padding: 7px;
-  border-radius: 10px;
-  background: $zg-purple;
-  color: white;
-  text-decoration: none;
-  font-weight: bolder;
-  .zg-create-discussion-modal {
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.zg-create-discussion-modal {
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .zg-create-discussion-body {
+    border-radius: 5px;
+    text-align: center;
+    height: 400px;
+    width: 330px;
+    position: absolute;
+    background: white;
+    color: $zg-purple;
+    .zg-discussion-input {
+      margin-top: 20px;
+      width: 250px;
+      height: 100px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      outline: none;
+      color: $zg-purple;
+    }
   }
-
 }
 
 .zg-create-discussion-body {
 }
 
 @media only screen and (min-width: 501px) {
-  .zg-create-discussion-body {
+  .zg-create-discussion-modal {
+    .zg-create-discussion-body {
+      height: 500px;
+      width: 700px;
+      .zg-discussion-input {
+        width: 400px;
+        height: 270px;
+      }
+    }
   }
 }

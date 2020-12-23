@@ -35,6 +35,7 @@ const Category: React.FC = () => {
           `http://localhost:8080/api/getDiscussions/${cat}`
         )
         .then((res) => {
+          console.log("the response", res.data)
           const retrievedDiscussions = res.data;
           setDiscussions(retrievedDiscussions);
         });
