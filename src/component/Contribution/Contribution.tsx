@@ -18,7 +18,7 @@ interface ContributionData {
   points: number;
 }
 
-interface discussionParams {
+interface DiscussionParams {
   id: string;
 }
 
@@ -26,9 +26,8 @@ const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
-  console.log();
 
-  const { id }: discussionParams = useParams();
+  const { id }: DiscussionParams = useParams();
 
   const handleOpen = () => {
     setOpen(true);
