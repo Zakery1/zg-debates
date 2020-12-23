@@ -22,11 +22,11 @@ interface discussionParams {
   id: string;
 }
 
-const Contribution: React.FC = (props) => {
+const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
-  console.log(props);
+  console.log();
 
   const { id }: discussionParams = useParams();
 

@@ -42,12 +42,6 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
-  // let fetchData = React.useCallback(async () => {
-  //   const result = await fetch(`api/crm/get`);
-  //   const body = await result.json();
-  //   setTableData(body);
-  // },[])
-
   let fetchContributions = React.useCallback(async () => {
     await axios
       .get(`http://localhost:8080/api/getContributions/${id}`)
