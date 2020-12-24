@@ -32,7 +32,7 @@ const Category: React.FC = () => {
       await axios
         .get(
           // `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`
-          `http://localhost:8080/api/getDiscussions/${categoryId}`
+          `https://zg-debates.netlify.app/api/getDiscussions/${categoryId}`
         )
         .then((res) => {
           const retrievedDiscussions = res.data;

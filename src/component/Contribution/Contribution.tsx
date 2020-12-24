@@ -59,7 +59,7 @@ const Contribution: React.FC = () => {
 
     axios({
       method: "post",
-      url: "http://localhost:8080/api/postContribution",
+      url: "https://zg-debates.netlify.app/api/postContribution",
       data: postData,
     });
     setContribution("");

@@ -30,9 +30,6 @@ const CurrentDiscussion: React.FC = () => {
   const { id }: discussionParams = useParams();
   let history = useHistory();
 
-  const [updatedContribution, setUpdatedContribution] = useState("");
-  const [editWindow, setEditwindow] = useState(false);
-
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
       id: null,
@@ -46,22 +43,9 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
-  let editContribution = async (contributionId: any) => {
-    let putData = {
-      contribution: updatedContribution,
-    };
-    axios({
-      method: "put",
-      url: `http://localhost:8080/api/editContribution/${id}`,
-      data: putData,
-    }).then((res) => {
-      console.log(res.status);
-    });
-  };
-
   let deleteContribution = async (contributionId: any) => {
     await axios
-      .delete(`http://localhost:8080/api/deleteContribution/${contributionId}`)
+      .delete(`https://zg-debates.netlify.app/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
       });
@@ -70,7 +54,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`http://localhost:8080/api/getContributions/${id}`)
+      .get(`https://zg-debates.netlify.app/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
@@ -89,7 +73,10 @@ const CurrentDiscussion: React.FC = () => {
           <button onClick={() => deleteContribution(agreeItem.id)}>
             Delete
           </button>
-          <EditContributionModal/>
+          <EditContributionModal
+            contributionId={agreeItem.id}
+            contribution={agreeItem.contribution}
+          />
           <br />
           <br />
         </div>
@@ -105,7 +92,10 @@ const CurrentDiscussion: React.FC = () => {
           <button onClick={() => deleteContribution(neutralItem.id)}>
             Delete
           </button>
-          <EditContributionModal/>
+          <EditContributionModal
+            contributionId={neutralItem.id}
+            contribution={neutralItem.contribution}
+          />
           <br />
           <br />
         </div>
@@ -122,7 +112,10 @@ const CurrentDiscussion: React.FC = () => {
           <button onClick={() => deleteContribution(disagreeItem.id)}>
             Delete
           </button>
-          <EditContributionModal/>
+          <EditContributionModal
+            contributionId={disagreeItem.id}
+            contribution={disagreeItem.contribution}
+          />
           <br />
           <br />
         </div>

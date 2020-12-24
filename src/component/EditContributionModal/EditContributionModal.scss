@@ -1,0 +1,54 @@
+@import "../../style/style.scss";
+
+.zg-contribution {
+    outline: 0;
+  }
+  
+  .zg-edit-contribution-modal {
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .zg-edit-contribute-body {
+      border-radius: 5px;
+      text-align: center;
+      height: 400px;
+      width: 330px;
+      position: absolute;
+      background: white;
+      color: $zg-purple;
+  
+      .zg-edit-contribution-input {
+        margin-top: 20px;
+        width: 250px;
+        height: 100px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        outline: none;
+        color: $zg-purple;
+      }
+      .zg-submit-edit-contribution {
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 501px) {
+    .zg-edit-contribution {
+    }
+  
+    .zg-edit-contribution-modal {
+      .zg-contribute-body {
+        height: 500px;
+        width: 700px;
+        .zg-edit-contribution-input {
+          width: 400px;
+          height: 270px;
+        }
+        .zg-submit-edit-contribution {
+        }
+      }
+    }
+  }
+  

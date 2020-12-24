@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 
@@ -33,7 +33,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
 
     axios({
       method: "post",
-      url: "http://localhost:8080/api/createDiscussion",
+      url: "https://zg-debates.netlify.app/api/createDiscussion",
       data: postData,
     }).then((res) => {
       console.log(res.status);
