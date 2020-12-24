@@ -21,7 +21,8 @@ interface TopicParams {
 const CreateDiscussion: React.FC<TopicParams> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
-  let categoryId = props;
+  let {categoryId} = props;
+
 
   const createDiscussion = () => {
     let postData: DiscussionData = {
