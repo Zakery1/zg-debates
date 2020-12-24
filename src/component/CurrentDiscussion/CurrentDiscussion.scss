@@ -9,9 +9,9 @@
   }
 
   .zg-position-container {
+    // background: pink;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     color: $zg-purple;
     font-size: 20px;
     font-weight: bold;
@@ -50,15 +50,15 @@
       color: $zg-purple;
       font-size: 20px;
       font-weight: bold;
-  
+
       .zg-agree {
-        max-width: 200px;
+        width: 400px;
       }
       .zg-neutral {
-        max-width: 200px;
+        width: 400px;
       }
       .zg-disagree {
-        max-width: 200px;
+        width: 400px;
       }
     }
   }

@@ -21,8 +21,7 @@ interface TopicParams {
 const CreateDiscussion: React.FC<TopicParams> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
-  let {categoryId} = props;
-
+  let { categoryId } = props;
 
   const createDiscussion = () => {
     let postData: DiscussionData = {
@@ -60,7 +59,6 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
         className="zg-discussion-input"
         maxLength={200}
         autoFocus
-        // onChange={(e) => setContribution(e.target.value)}
       />
       <br />
       {discussionName ? (
@@ -69,6 +67,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
         <button disabled>Create Discussion!</button>
       )}
 
+      <br />
       <br />
       <button onClick={handleClose}>Cancel</button>
     </div>

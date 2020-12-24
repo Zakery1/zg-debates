@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 
@@ -42,7 +42,7 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
-  let fetchContributions = React.useCallback(async () => {
+  let fetchContributions = useCallback(async () => {
     await axios
       .get(`http://localhost:8080/api/getContributions/${id}`)
       .then((res) => {
@@ -57,19 +57,40 @@ const CurrentDiscussion: React.FC = () => {
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
-      return <div key={agreeItem.id}>{agreeItem.contribution}</div>;
+      return (
+        <div key={agreeItem.id}>
+          {agreeItem.contribution} <button>Edit</button>
+          <button>Delete</button>
+          <br />
+          <br />
+        </div>
+      );
     });
 
   let neutralList = contributions
     .filter((contribution) => contribution.neutral === true)
     .map((neutralItem) => {
-      return <div key={neutralItem.id}>{neutralItem.contribution}</div>;
+      return (
+        <div key={neutralItem.id}>
+          {neutralItem.contribution}
+          <button>Edit</button> <button>Delete</button>
+          <br />
+          <br />
+        </div>
+      );
     });
 
   let disagreeList = contributions
     .filter((contribution) => contribution.disagree === true)
     .map((disagreeItem) => {
-      return <div key={disagreeItem.id}>{disagreeItem.contribution}</div>;
+      return (
+        <div key={disagreeItem.id}>
+          {disagreeItem.contribution}
+          <button>Edit</button> <button>Delete</button>
+          <br />
+          <br />
+        </div>
+      );
     });
 
   return (
@@ -93,7 +114,7 @@ const CurrentDiscussion: React.FC = () => {
       </div>
       <br />
 
-      <Contribution />
+      <Contribution  />
       <br />
       <button
         className="zg-back-to-premises"
