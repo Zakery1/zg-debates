@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
@@ -28,6 +28,7 @@ const Contribution: React.FC = () => {
   const [contribution, setContribution] = useState("");
 
   const { id }: DiscussionParams = useParams();
+  let history = useHistory();
 
   const handleOpen = () => {
     setOpen(true);
@@ -63,6 +64,7 @@ const Contribution: React.FC = () => {
     });
     setContribution("");
     handleClose();
+    history.go(0);
   };
 
   const choiceButtons = ["agree", "neutral", "disagree"].map(
