@@ -35,6 +35,8 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
       method: "post",
       url: "http://localhost:8080/api/createDiscussion",
       data: postData,
+    }).then((res) => {
+      console.log(res.status);
     });
     setDiscussionName("");
     handleClose();
