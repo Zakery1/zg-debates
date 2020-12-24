@@ -42,6 +42,15 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  let deleteContribution = async (contributionId: any) => {
+    await axios
+      .delete(`http://localhost:8080/api/deleteContribution/${contributionId}`)
+      .then((res) => {
+        console.log(res.status);
+      });
+      fetchContributions();
+  };
+
   let fetchContributions = useCallback(async () => {
     await axios
       .get(`http://localhost:8080/api/getContributions/${id}`)
@@ -60,7 +69,7 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div key={agreeItem.id}>
           {agreeItem.contribution} <button>Edit</button>
-          <button>Delete</button>
+          <button onClick={() => deleteContribution(agreeItem.id)}>Delete</button>
           <br />
           <br />
         </div>
@@ -73,7 +82,8 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div key={neutralItem.id}>
           {neutralItem.contribution}
-          <button>Edit</button> <button>Delete</button>
+          <button>Edit</button>
+          <button onClick={() => deleteContribution(neutralItem.id)}>Delete</button>
           <br />
           <br />
         </div>
@@ -86,7 +96,8 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div key={disagreeItem.id}>
           {disagreeItem.contribution}
-          <button>Edit</button> <button>Delete</button>
+          <button>Edit</button>
+          <button onClick={() => deleteContribution(disagreeItem.id)}>Delete</button>
           <br />
           <br />
         </div>
@@ -114,7 +125,7 @@ const CurrentDiscussion: React.FC = () => {
       </div>
       <br />
 
-      <Contribution  />
+      <Contribution />
       <br />
       <button
         className="zg-back-to-premises"
