@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
@@ -22,6 +22,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
   let { categoryId } = props;
+  let history = useHistory();
 
   const createDiscussion = () => {
     let postData: DiscussionData = {
@@ -37,6 +38,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
     });
     setDiscussionName("");
     handleClose();
+    history.go(0);
   };
 
   const handleOpen = () => {
