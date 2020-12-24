@@ -30,9 +30,9 @@ const CategoriesBar: React.FC = () => {
     fetchCategories();
   }, []);
 
-  const availableCategories = categories.map((category) => {
+  const availableCategories = categories.map((category, index) => {
     return (
-      <div key={category.id}>
+      <div key={index}>
         <Link
           className="zg-category"
           to={{

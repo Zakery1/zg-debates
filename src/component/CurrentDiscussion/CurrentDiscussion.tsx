@@ -46,7 +46,6 @@ const CurrentDiscussion: React.FC = () => {
     await axios
       .get(`http://localhost:8080/api/getContributions/${id}`)
       .then((res) => {
-        console.log("contributions response", res);
         setContributions(res.data);
       });
   }, [id]);

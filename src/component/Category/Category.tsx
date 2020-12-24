@@ -9,7 +9,7 @@ import axios from "axios";
 import "./Category.scss";
 
 interface categoryParams {
-  cat: string;
+  categoryId: string;
 }
 
 interface Discussion {
@@ -20,7 +20,7 @@ interface Discussion {
 interface DiscussionsArray extends Array<Discussion> {}
 
 const Category: React.FC = () => {
-  let { cat }: categoryParams = useParams();
+  let { categoryId }: categoryParams = useParams();
   let history = useHistory();
 
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
@@ -31,17 +31,16 @@ const Category: React.FC = () => {
     const fetchDiscussions = async () => {
       await axios
         .get(
-          // `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${cat}`
-          `http://localhost:8080/api/getDiscussions/${cat}`
+          // `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`
+          `http://localhost:8080/api/getDiscussions/${categoryId}`
         )
         .then((res) => {
-          console.log("the response", res.data)
           const retrievedDiscussions = res.data;
           setDiscussions(retrievedDiscussions);
         });
     };
     fetchDiscussions();
-  }, [cat]);
+  }, [categoryId]);
 
   let currentDiscussions = discussions.map((discussion) => {
     return (
@@ -60,9 +59,9 @@ const Category: React.FC = () => {
 
   return (
     <div className="zg-category">
-      <h2 className="zg-category-header">Current {cat} discussions</h2>
+      <h2 className="zg-category-header">Current {categoryId} discussions</h2>
       {currentDiscussions}
-      <CreateDiscussion/>
+      <CreateDiscussion categoryId={categoryId}/>
       <button
         className="zg-back-to-topics"
         type="button"

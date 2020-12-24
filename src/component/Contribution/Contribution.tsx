@@ -48,7 +48,6 @@ const Contribution: React.FC = () => {
       points: 0,
     };
 
-    console.log("post data", postData);
     if (choice === "agree") {
       postData.agree = true;
     } else if (choice === "neutral") {

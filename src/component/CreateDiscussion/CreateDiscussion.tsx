@@ -14,24 +14,21 @@ interface DiscussionData {
   discussionName: string;
 }
 
-interface topicParams {
-  id: string;
+interface TopicParams {
+  categoryId: string;
 }
 
-const CreateDiscussion: React.FC = () => {
+const CreateDiscussion: React.FC<TopicParams> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
-
-  const { id }: topicParams = useParams();
+  let categoryId = props;
 
   const createDiscussion = () => {
     let postData: DiscussionData = {
       creatorId: 1,
-      categoryId: 1,
-      discussionName: discussionName
+      categoryId: +categoryId,
+      discussionName: discussionName,
     };
-
-    console.log("post data", postData);
 
     axios({
       method: "post",
@@ -68,9 +65,7 @@ const CreateDiscussion: React.FC = () => {
       {discussionName ? (
         <button onClick={createDiscussion}>Create Discussion!</button>
       ) : (
-        <button disabled>
-          Create Discussion!
-        </button>
+        <button disabled>Create Discussion!</button>
       )}
 
       <br />
