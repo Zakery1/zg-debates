@@ -31,8 +31,7 @@ const Category: React.FC = () => {
     const fetchDiscussions = async () => {
       await axios
         .get(
-          // `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`
-          `https://zg-debates.netlify.app/api/getDiscussions/${categoryId}`
+          `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`
         )
         .then((res) => {
           const retrievedDiscussions = res.data;

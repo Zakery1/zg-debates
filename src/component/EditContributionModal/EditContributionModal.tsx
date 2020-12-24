@@ -35,7 +35,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (props) =
 
   let editContribution = async () => {
     axios
-      .put(`https://zg-debates.netlify.app/api/editContribution/${contributionId}`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`, {
         updatedContribution,
       })
       .then((res) => {

@@ -45,7 +45,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let deleteContribution = async (contributionId: any) => {
     await axios
-      .delete(`https://zg-debates.netlify.app/api/deleteContribution/${contributionId}`)
+      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
       });
@@ -54,7 +54,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getContributions/${id}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
