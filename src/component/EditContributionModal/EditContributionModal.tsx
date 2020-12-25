@@ -4,7 +4,6 @@ import axios from "axios";
 
 import "./EditContributionModal.scss";
 
-import { useHistory } from "react-router-dom";
 
 import Modal from "@material-ui/core/Modal";
 
@@ -17,8 +16,6 @@ interface Contribution {
 }
 
 const EditContributionModal: React.FC<ContributionId & Contribution> = (props) => {
-
-  let history = useHistory();
 
   let { contributionId, contribution } = props;
 
@@ -43,7 +40,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (props) =
       });
     setUpdatedContribution("");
     handleClose();
-    history.go(0);
+    window.location.reload();
   };
 
   const body = (
