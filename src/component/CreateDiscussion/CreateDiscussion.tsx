@@ -24,20 +24,22 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
   let { categoryId } = props;
   let history = useHistory();
 
-  const createDiscussion = () => {
+  const createDiscussion = async () => {
     let postData: DiscussionData = {
       creatorId: 1,
       categoryId: +categoryId,
       discussionName: discussionName,
     };
 
-    axios({
-      method: "post",
-      url: "https://fathomless-reaches-38159.herokuapp.com/api/createDiscussion",
-      data: postData,
-    }).then((res) => {
-      console.log(res.status);
-    });
+    await axios
+      .post(
+        `https://fathomless-reaches-38159.herokuapp.com/api/createDiscussion`,
+        { data: postData }
+      )
+      .then((res) => {
+        console.log(res.status);
+      });
+
     setDiscussionName("");
     handleClose();
     history.go(0);

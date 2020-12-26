@@ -37,7 +37,7 @@ const Contribution: React.FC = () => {
     setOpen(false);
   };
 
-  const submitContribution = () => {
+  const submitContribution = async () => {
     let postData: ContributionData = {
       userId: 1,
       discussionId: +id,
@@ -56,11 +56,18 @@ const Contribution: React.FC = () => {
       postData.disagree = true;
     }
 
-    axios({
-      method: "post",
-      url: "https://fathomless-reaches-38159.herokuapp.com/api/postContribution",
-      data: postData,
-    });
+    await axios
+      .post(
+        `https://fathomless-reaches-38159.herokuapp.com/api/postContribution`,
+        { data: postData }
+      )
+      .then((res) => {
+        console.log(res.status);
+      })
+      .then((res) => {
+        console.log(res);
+      });
+
     setContribution("");
     handleClose();
     window.location.reload();

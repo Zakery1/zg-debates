@@ -4,7 +4,6 @@ import axios from "axios";
 
 import "./EditContributionModal.scss";
 
-
 import Modal from "@material-ui/core/Modal";
 
 interface ContributionId {
@@ -15,8 +14,9 @@ interface Contribution {
   contribution: string;
 }
 
-const EditContributionModal: React.FC<ContributionId & Contribution> = (props) => {
-
+const EditContributionModal: React.FC<ContributionId & Contribution> = (
+  props
+) => {
   let { contributionId, contribution } = props;
 
   const [updatedContribution, setUpdatedContribution] = useState("");
@@ -31,13 +31,15 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (props) =
   };
 
   let editContribution = async () => {
-    axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`, {
-        updatedContribution,
-      })
+    await axios
+      .put(
+        `https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`,
+        { data: updatedContribution }
+      )
       .then((res) => {
         console.log(res.status);
       });
+
     setUpdatedContribution("");
     handleClose();
     window.location.reload();
