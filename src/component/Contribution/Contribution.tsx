@@ -67,7 +67,7 @@ const Contribution: React.FC = () => {
 
     setContribution("");
     handleClose();
-    window.location.reload();
+    history.go(0);
   };
 
   const choiceButtons = ["agree", "neutral", "disagree"].map(
