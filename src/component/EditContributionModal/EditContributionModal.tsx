@@ -34,7 +34,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
     await axios
       .put(
         `https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`,
-        { data: updatedContribution }
+        { updatedContribution: updatedContribution }
       )
       .then((res) => {
         console.log(res.status);
