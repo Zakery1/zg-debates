@@ -63,9 +63,6 @@ const Contribution: React.FC = () => {
       )
       .then((res) => {
         console.log(res.status);
-      })
-      .then((res) => {
-        console.log(res);
       });
 
     setContribution("");
