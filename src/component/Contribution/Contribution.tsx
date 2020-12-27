@@ -1,8 +1,8 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
