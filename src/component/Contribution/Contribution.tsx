@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useHistory } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
@@ -26,6 +26,8 @@ const Contribution: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
+
+  let history = useHistory();
 
   const { id }: DiscussionParams = useParams();
 
