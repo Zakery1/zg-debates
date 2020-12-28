@@ -43,16 +43,18 @@ const Category: React.FC = () => {
 
   let currentDiscussions = discussions.map((discussion) => {
     return (
-      <Link
-        key={discussion.id}
-        className="zg-discussion-link"
-        to={{
-          pathname: `/discussion/${discussion.id}`,
-        }}
-      >
-        {discussion.discussion}
-        <br />
-      </Link>
+      <div className="zg-category-link-holder">
+        <Link
+          key={discussion.id}
+          className="zg-discussion-link"
+          to={{
+            pathname: `/discussion/${discussion.id}`,
+          }}
+        >
+          {discussion.discussion}
+          <br />
+        </Link>
+      </div>
     );
   });
 

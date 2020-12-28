@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
+import EditIcon from '@material-ui/icons/Edit';
+
 import axios from "axios";
 
 import "./EditContributionModal.scss";
 
 import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
 
 interface ContributionId {
   contributionId: number | null;
@@ -60,29 +63,29 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
       <br />
       <br />
 
-      {updatedContribution ? (
-        <button
+      {updatedContribution.length ? (
+        <Button
           onClick={editContribution}
           type="submit"
           className="zg-submit-edit-contribution"
         >
           Submit Updated Contribution
-        </button>
+        </Button>
       ) : (
-        <button className="zg-submit-edit-contribution" disabled>
+        <Button className="zg-submit-edit-contribution zg-disabled" disabled>
           Submit Updated Contribution
-        </button>
+        </Button>
       )}
 
       <br />
       <br />
-      <button onClick={handleClose}>Cancel</button>
+      <Button className="zg-cancel-edit"  onClick={handleClose}>Cancel</Button>
     </div>
   );
 
   return (
     <div>
-      <button onClick={handleOpen}>Edit</button>
+      <button className="zg-edit-contribution-icon" onClick={handleOpen}><EditIcon/></button>
       <Modal
         className="zg-edit-contribution-modal"
         open={open}

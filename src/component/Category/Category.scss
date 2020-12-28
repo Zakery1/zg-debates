@@ -19,10 +19,17 @@
       }
     }
     .zg-discussion-list {
-      .zg-discussion-link {
-        font-weight: bolder;
-        color: $zg-purple;
-        text-decoration: none;
+      box-shadow: $box-shadow;
+      border: 2px solid $zg-purple;
+      padding: 20px;
+      margin: 0 40px;
+      .zg-category-link-holder {
+        margin: 5px;
+        .zg-discussion-link {
+          font-weight: bolder;
+          color: $zg-purple;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -42,8 +49,11 @@
       .zg-discussion-list {
         display: flex;
         flex-direction: column;
-        .zg-discussion-link {
+        .zg-category-link-holder {
           margin: 20px 0;
+          .zg-discussion-link {
+
+          }
         }
       }
     }

@@ -8,6 +8,18 @@
     color: $zg-purple;
   }
 
+  .zg-discussion-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    .zg-back-to-premises {
+      // margin: 0 0 30px 30px;
+    }
+  }
+
   .zg-position-container {
     // background: pink;
     display: flex;
@@ -16,20 +28,41 @@
     font-size: 20px;
     font-weight: bold;
 
-    .zg-agree {
-      // background: greenyellow;
-    }
-    .zg-neutral {
-      // background: grey;
-    }
-    .zg-disagree {
-      // background: red;
+    .zg-list {
+      border: 1px solid $zg-purple;
+      margin: 0 20px 30px 20px;
+      box-shadow: $box-shadow;
+      min-height: 300px;
+      // width: 350px;
+      .zg-contribution-holder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 20px;
+        // justify-content: space-evenly;
+        .zg-contribution-content {
+          text-align: left;
+          width: 250px;
+          margin: 20px;
+          max-width: 270px;
+          overflow-wrap: break-word;
+          padding-bottom: 20px;
+          border-bottom: solid 0.1px $zg-purple;
+        }
+        // align-content: center;
+        .zg-delete-contribution {
+          height: 33px;
+          color: $zg-purple;
+          background: none;
+          border: none;
+        }
+      }
     }
   }
   .zg-back-to-premises {
     width: 170px;
     box-shadow: $box-shadow;
-    margin: 20px 0 0 0;
+    margin-left: 20px;
     background: $zg-purple;
     color: white;
     text-decoration: none;
@@ -44,6 +77,10 @@
 @media only screen and (min-width: 501px) {
   .zg-current-discussion {
     min-height: 640px;
+    .zg-discussion-buttons {
+      .zg-back-to-premises {
+      }
+    }
     .zg-position-container {
       display: flex;
       flex-direction: row;
@@ -51,19 +88,22 @@
       justify-content: space-evenly;
       // align-items: center;
       align-content: space-evenly;
-
       color: $zg-purple;
       font-size: 20px;
       font-weight: bold;
 
-      .zg-agree {
+      .zg-list {
         width: 400px;
-      }
-      .zg-neutral {
-        width: 400px;
-      }
-      .zg-disagree {
-        width: 400px;
+        min-height: 500px;
+
+        .zg-contribution-content {
+          max-width: 320px;
+          overflow-wrap: break-word;
+        }
+        .zg-contribution-holder {
+          .zg-delete-contribution {
+          }
+        }
       }
     }
   }

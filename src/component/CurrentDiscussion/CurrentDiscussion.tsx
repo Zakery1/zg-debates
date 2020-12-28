@@ -5,6 +5,7 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 import Contribution from "../Contribution/Contribution";
 import EditContributionModal from "../EditContributionModal/EditContributionModal";
@@ -70,15 +71,22 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
       return (
-        <div key={agreeItem.id}>
-          {agreeItem.contribution}
-          <button onClick={() => deleteContribution(agreeItem.id)}>
-            Delete
-          </button>
+        <div className="zg-contribution-holder" key={agreeItem.id}>
+          <span>{agreeItem.points}</span>
+          <div className="zg-contribution-content">
+            {agreeItem.contribution}
+          </div>
+
           <EditContributionModal
             contributionId={agreeItem.id}
             contribution={agreeItem.contribution}
           />
+          <button
+            className="zg-delete-contribution"
+            onClick={() => deleteContribution(agreeItem.id)}
+          >
+            <DeleteOutlinedIcon />
+          </button>
           <br />
           <br />
         </div>
@@ -89,15 +97,22 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.neutral === true)
     .map((neutralItem) => {
       return (
-        <div key={neutralItem.id}>
-          {neutralItem.contribution}
-          <button onClick={() => deleteContribution(neutralItem.id)}>
-            Delete
-          </button>
+        <div className="zg-contribution-holder" key={neutralItem.id}>
+          <span>{neutralItem.points}</span>
+          <div className="zg-contribution-content">
+            {neutralItem.contribution}
+          </div>
+
           <EditContributionModal
             contributionId={neutralItem.id}
             contribution={neutralItem.contribution}
           />
+          <button
+            className="zg-delete-contribution"
+            onClick={() => deleteContribution(neutralItem.id)}
+          >
+            <DeleteOutlinedIcon />
+          </button>
           <br />
           <br />
         </div>
@@ -108,16 +123,22 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.disagree === true)
     .map((disagreeItem) => {
       return (
-        <div key={disagreeItem.id}>
-          {disagreeItem.contribution}
+        <div className="zg-contribution-holder" key={disagreeItem.id}>
+          <span>{disagreeItem.points}</span>
+          <div className="zg-contribution-content">
+            {disagreeItem.contribution}
+          </div>
 
-          <button onClick={() => deleteContribution(disagreeItem.id)}>
-            Delete
-          </button>
           <EditContributionModal
             contributionId={disagreeItem.id}
             contribution={disagreeItem.contribution}
           />
+          <button
+            className="zg-delete-contribution"
+            onClick={() => deleteContribution(disagreeItem.id)}
+          >
+            <DeleteOutlinedIcon />
+          </button>
           <br />
           <br />
         </div>
@@ -129,31 +150,34 @@ const CurrentDiscussion: React.FC = () => {
       <h3 className="zg-current-discussion-header">
         Discusion title/argument will go here.
       </h3>
+      <div className="zg-discussion-buttons">
+        <Contribution />
+        <br />
+        <Button
+          className="zg-back-to-premises"
+          type="button"
+          onClick={() => history.goBack()}
+        >
+          Discussions
+        </Button>
+      </div>
+
       <div className="zg-position-container">
-        <div className="zg-agree">
+        <div className="zg-list">
           <h3>Agree</h3>
           {agreeList}
         </div>
-        <div className="zg-neutral">
+        <div className="zg-list">
           <h3>Neutral</h3>
           {neutralList}
         </div>
-        <div className="zg-disagree">
+        <div className="zg-list">
           <h3>Disagree</h3>
           {disagreeList}
         </div>
       </div>
       <br />
 
-      <Contribution />
-      <br />
-      <Button
-        className="zg-back-to-premises"
-        type="button"
-        onClick={() => history.goBack()}
-      >
-        Back to Discussions
-      </Button>
       <br />
     </div>
   );
