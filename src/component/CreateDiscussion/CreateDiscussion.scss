@@ -1,5 +1,20 @@
 @import "../../style/style.scss";
 
+.zg-create-discussion {
+  .zg-open-discussion-modal {
+    width: 170px;
+    box-shadow: $box-shadow;
+    margin: 20px 0 0 0;
+    background: $zg-purple;
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+  }
+  .zg-open-discussion-modal:hover {
+    background: $zg-purple;
+  }
+}
+
 .zg-create-discussion-modal {
   outline: none;
   display: flex;
@@ -13,6 +28,8 @@
     position: absolute;
     background: white;
     color: $zg-purple;
+    .zg-create-discussions-button {
+    }
     .zg-discussion-input {
       margin-top: 20px;
       width: 250px;
@@ -34,6 +51,9 @@
     .zg-create-discussion-body {
       height: 500px;
       width: 700px;
+      .zg-create-discussion-button {
+        color: $zg-purple;
+      }
       .zg-discussion-input {
         width: 400px;
         height: 270px;

@@ -20,19 +20,17 @@ const CategoriesBar: React.FC = () => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      await axios
-        .get(`https://fathomless-reaches-38159.herokuapp.com/api/getCategories`)
-        .then((res) => {
-          const retrievedCategories = res.data;
-          setCategories(retrievedCategories);
-        });
+      await axios.get(`http://localhost:8080/api/getCategories`).then((res) => {
+        const retrievedCategories = res.data;
+        setCategories(retrievedCategories);
+      });
     };
     fetchCategories();
   }, []);
 
   const availableCategories = categories.map((category, index) => {
     return (
-      <div key={index}>
+      <div className="zg-category-link-holder" key={index}>
         <Link
           className="zg-category"
           to={{
@@ -49,7 +47,9 @@ const CategoriesBar: React.FC = () => {
     <div className="zg-categories-bar">
       <h1 className="zg-categories-bar-header">Current Topics</h1>
       {/* <button onClick={() => fetchUser()}>Get cats</button> */}
-      {categories && availableCategories}
+      <div className="zg-category-container">
+        {categories && availableCategories}
+      </div>
     </div>
   );
 };

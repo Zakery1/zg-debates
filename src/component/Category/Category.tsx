@@ -4,6 +4,8 @@ import { Link, useParams, useHistory } from "react-router-dom";
 
 import CreateDiscussion from "../CreateDiscussion/CreateDiscussion";
 
+import Button from "@material-ui/core/Button";
+
 import axios from "axios";
 
 import "./Category.scss";
@@ -30,9 +32,7 @@ const Category: React.FC = () => {
   useEffect(() => {
     const fetchDiscussions = async () => {
       await axios
-        .get(
-          `https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`
-        )
+        .get(`http://localhost:8080/api/getDiscussions/${categoryId}`)
         .then((res) => {
           const retrievedDiscussions = res.data;
           setDiscussions(retrievedDiscussions);
@@ -59,15 +59,21 @@ const Category: React.FC = () => {
   return (
     <div className="zg-category">
       <h2 className="zg-category-header">Current {categoryId} discussions</h2>
-      {currentDiscussions}
-      <CreateDiscussion categoryId={categoryId}/>
-      <button
-        className="zg-back-to-topics"
-        type="button"
-        onClick={() => history.goBack()}
-      >
-        Back to Topics
-      </button>
+      <div className="zg-category-button-holder">
+        <div className="zg-category-action-holder">
+          <CreateDiscussion categoryId={categoryId} />
+          <Button
+            className="zg-back-to-topics"
+            type="button"
+            onClick={() => history.goBack()}
+          >
+            Back to Topics
+          </Button>
+        </div>
+
+        <br />
+        <div className="zg-discussion-list">{currentDiscussions}</div>
+      </div>
     </div>
   );
 };

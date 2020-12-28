@@ -2,6 +2,18 @@
 
 .zg-contribution {
   outline: 0;
+  .zg-modal-contribute {
+    width: 170px;
+    box-shadow: $box-shadow;
+    margin: 20px 0 0 0;
+    background: $zg-purple;
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+  }
+  .zg-modal-contribute:hover {
+    background: $zg-purple;
+  }
 }
 
 .zg-contribution-modal {
@@ -18,16 +30,44 @@
     position: absolute;
     background: white;
     color: $zg-purple;
+    h2 {
+      margin-bottom: 2px;
+    }
     .zg-choice-group {
-      .zg-choice-selected {
-        border: 5px solid $zg-purple;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
       .zg-choice-agree {
+        width: 80px;
+        box-shadow: $box-shadow;
+        margin: 20px 0 0 0;
+        background: white;
+        color: $zg-purple;
+        text-decoration: none;
+        font-weight: bolder;
       }
       .zg-choice-neutral {
-        margin: 0 20px 0 20px;
+        width: 80px;
+        box-shadow: $box-shadow;
+        margin: 20px 0 0 0;
+        background: white;
+        color: $zg-purple;
+        text-decoration: none;
+        font-weight: bolder;
       }
       .zg-choice-disagree {
+        width: 80px;
+        box-shadow: $box-shadow;
+        margin: 20px 0 0 0;
+        background: white;
+        color: $zg-purple;
+        text-decoration: none;
+        font-weight: bolder;
+      }
+      .zg-choice-selected {
+        color: white;
+        background: $zg-purple;
       }
     }
 
@@ -42,6 +82,17 @@
       color: $zg-purple;
     }
     .zg-submit-contribution {
+      background: white;
+      color: $zg-purple;
+      // box-shadow: $box-shadow;
+    }
+    .zg-disabled {
+      opacity: 60%;
+    }
+    .zg-cancel-contribution-modal {
+      margin-top: 10px;
+      background: white;
+      color: $zg-purple;
     }
   }
 }
@@ -52,15 +103,19 @@
 
   .zg-contribution-modal {
     .zg-contribute-body {
-      height: 500px;
+      height: 550px;
       width: 700px;
       .zg-choice-group {
+        .zg-choice-selected {
+        }
         .zg-choice-agree {
+          width: 170px;
         }
         .zg-choice-neutral {
-          margin: 0px 50px;
+          width: 170px;
         }
         .zg-choice-disagree {
+          width: 170px;
         }
       }
       .zg-contribution-input {

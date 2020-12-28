@@ -4,6 +4,8 @@ import Modal from "@material-ui/core/Modal";
 
 import { useHistory } from "react-router-dom";
 
+import Button from "@material-ui/core/Button";
+
 import axios from "axios";
 
 import "./CreateDiscussion.scss";
@@ -32,10 +34,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
     };
 
     await axios
-      .post(
-        `https://fathomless-reaches-38159.herokuapp.com/api/createDiscussion`,
-        { data: postData }
-      )
+      .post(`http://localhost:8080/api/createDiscussion`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });
@@ -68,21 +67,28 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
       />
       <br />
       {discussionName ? (
-        <button onClick={createDiscussion}>Create Discussion!</button>
+        <Button
+          className="zg-create-discussion-button"
+          onClick={createDiscussion}
+        >
+          Create Discussion!
+        </Button>
       ) : (
-        <button disabled>Create Discussion!</button>
+        <Button style={{opacity:"20%"}} className="zg-create-discussion-button" disabled>
+          Create Discussion!
+        </Button>
       )}
 
       <br />
       <br />
-      <button onClick={handleClose}>Cancel</button>
+      <Button className="zg-create-discussion-button" onClick={handleClose}>Cancel</Button>
     </div>
   );
   return (
-    <div>
-      <button type="button" onClick={handleOpen}>
+    <div className="zg-create-discussion">
+      <Button className="zg-open-discussion-modal" type="button" onClick={handleOpen}>
         Create Discussion
-      </button>
+      </Button>
       <Modal
         className="zg-create-discussion-modal"
         open={open}

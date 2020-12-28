@@ -27,11 +27,16 @@
     }
   }
   .zg-back-to-premises {
-    font-weight: bolder;
-    text-decoration: none;
+    width: 170px;
+    box-shadow: $box-shadow;
+    margin: 20px 0 0 0;
+    background: $zg-purple;
     color: white;
-    padding: 7px;
-    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bolder;
+  }
+
+  .zg-back-to-premises:hover {
     background: $zg-purple;
   }
 }

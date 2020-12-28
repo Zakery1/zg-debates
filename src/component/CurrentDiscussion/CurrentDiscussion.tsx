@@ -4,6 +4,8 @@ import axios from "axios";
 
 import { useHistory, useParams } from "react-router-dom";
 
+import Button from "@material-ui/core/Button";
+
 import Contribution from "../Contribution/Contribution";
 import EditContributionModal from "../EditContributionModal/EditContributionModal";
 
@@ -45,7 +47,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let deleteContribution = async (contributionId: any) => {
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
+      .delete(`http://localhost:8080/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
       });
@@ -54,7 +56,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
+      .get(`http://localhost:8080/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
@@ -145,13 +147,13 @@ const CurrentDiscussion: React.FC = () => {
 
       <Contribution />
       <br />
-      <button
+      <Button
         className="zg-back-to-premises"
         type="button"
         onClick={() => history.goBack()}
       >
         Back to Discussions
-      </button>
+      </Button>
       <br />
     </div>
   );

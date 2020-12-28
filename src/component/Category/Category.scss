@@ -5,28 +5,47 @@
   .zg-category-header {
     color: $zg-purple;
   }
-  .zg-discussion-link {
-    font-weight: bolder;
-    color: $zg-purple;
-    text-decoration: none;
-  }
-  .zg-back-to-topics {
-    display: inline-block;
-    margin: 20px 0 0 0;
-    padding: 7px;
-    border-radius: 10px;
-    background: $zg-purple;
-    color: white;
-    text-decoration: none;
-    font-weight: bolder;
+
+  .zg-category-button-holder {
+    .zg-category-action-holder {
+      .zg-back-to-topics {
+        width: 170px;
+        box-shadow: $box-shadow;
+        margin: 20px 0 0 0;
+        background: $zg-purple;
+        color: white;
+        text-decoration: none;
+        font-weight: bolder;
+      }
+    }
+    .zg-discussion-list {
+      .zg-discussion-link {
+        font-weight: bolder;
+        color: $zg-purple;
+        text-decoration: none;
+      }
+    }
   }
 }
 
 @media only screen and (min-width: 501px) {
   .zg-category {
     min-height: 650px;
-    .zg-back-to-topics {
-
+    .zg-category-button-holder {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .zg-category-action-holder {
+        margin-right: 300px;
+      }
+      .zg-discussion-list {
+        display: flex;
+        flex-direction: column;
+        .zg-discussion-link {
+          margin: 20px 0;
+        }
+      }
     }
   }
 }

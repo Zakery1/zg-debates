@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
 
 import { useParams, useHistory } from "react-router-dom";
 
@@ -60,7 +61,7 @@ const Contribution: React.FC = () => {
 
     await axios
       .post(
-        `https://fathomless-reaches-38159.herokuapp.com/api/postContribution`,
+        `http://localhost:8080/api/postContribution`,
         { data: postData }
       )
       .then((res) => {
@@ -75,7 +76,7 @@ const Contribution: React.FC = () => {
   const choiceButtons = ["agree", "neutral", "disagree"].map(
     (selectedChoice, index) => {
       return (
-        <button
+        <Button
           key={index}
           onClick={() => setChoice(selectedChoice)}
           className={
@@ -84,7 +85,7 @@ const Contribution: React.FC = () => {
           }
         >
           {selectedChoice}
-        </button>
+        </Button>
       );
     }
   );
@@ -104,30 +105,29 @@ const Contribution: React.FC = () => {
       <br />
 
       {choice && contribution ? (
-        <button
+        <Button
           onClick={submitContribution}
           type="submit"
           className="zg-submit-contribution"
         >
           Submit Contribution
-        </button>
+        </Button>
       ) : (
-        <button className="zg-submit-contribution" disabled>
+        <Button className="zg-submit-contribution zg-disabled" disabled>
           Submit Contribution
-        </button>
+        </Button>
       )}
+      <br/>
 
-      <br />
-      <br />
-      <button onClick={handleClose}>Cancel</button>
+      <Button className="zg-cancel-contribution-modal" onClick={handleClose}>Cancel</Button>
     </div>
   );
 
   return (
     <div className="zg-contribution">
-      <button type="button" onClick={handleOpen}>
+      <Button className="zg-modal-contribute" type="button" onClick={handleOpen}>
         Contribute
-      </button>
+      </Button>
       <Modal
         className="zg-contribution-modal"
         open={open}
