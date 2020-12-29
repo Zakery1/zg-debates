@@ -32,7 +32,7 @@ const Category: React.FC = () => {
   useEffect(() => {
     const fetchDiscussions = async () => {
       await axios
-        .get(`http://localhost:8080/api/getDiscussions/${categoryId}`)
+        .get(`https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`)
         .then((res) => {
           const retrievedDiscussions = res.data;
           setDiscussions(retrievedDiscussions);
@@ -41,9 +41,9 @@ const Category: React.FC = () => {
     fetchDiscussions();
   }, [categoryId]);
 
-  let currentDiscussions = discussions.map((discussion) => {
+  let currentDiscussions = discussions.map((discussion, index) => {
     return (
-      <div className="zg-category-link-holder">
+      <div key={index} className="zg-category-link-holder">
         <Link
           key={discussion.id}
           className="zg-discussion-link"
@@ -74,7 +74,11 @@ const Category: React.FC = () => {
         </div>
 
         <br />
-        <div className="zg-discussion-list">{currentDiscussions}</div>
+        {discussions.length ? (
+          <div className="zg-discussion-list">{currentDiscussions}</div>
+        ) : (
+          "we need discussions"
+        )}
       </div>
     </div>
   );

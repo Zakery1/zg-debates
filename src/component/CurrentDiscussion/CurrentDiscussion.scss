@@ -29,7 +29,7 @@
     font-weight: bold;
 
     .zg-list {
-      border: 1px solid $zg-purple;
+      // border: 1px solid $zg-purple;
       margin: 0 20px 30px 20px;
       box-shadow: $box-shadow;
       min-height: 300px;
@@ -51,6 +51,7 @@
         }
         // align-content: center;
         .zg-delete-contribution {
+          cursor: pointer;
           height: 33px;
           color: $zg-purple;
           background: none;

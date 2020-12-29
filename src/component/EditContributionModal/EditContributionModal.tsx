@@ -36,7 +36,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
   let editContribution = async () => {
     await axios
       .put(
-        `http://localhost:8080/api/editContribution/${contributionId}`,
+        `https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`,
         { updatedContribution: updatedContribution }
       )
       .then((res) => {

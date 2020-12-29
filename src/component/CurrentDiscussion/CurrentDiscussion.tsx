@@ -6,6 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 import Contribution from "../Contribution/Contribution";
 import EditContributionModal from "../EditContributionModal/EditContributionModal";
@@ -46,9 +47,17 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  // let arrowUp = (contributionId: any) => {
+  //   let selectedContribution = contributions.filter((contribution) => {
+  //     if( d contribution.id === contributionId;
+
+  //   });
+
+  // };
+
   let deleteContribution = async (contributionId: any) => {
     await axios
-      .delete(`http://localhost:8080/api/deleteContribution/${contributionId}`)
+      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
       });
@@ -57,7 +66,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`http://localhost:8080/api/getContributions/${id}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
@@ -70,9 +79,16 @@ const CurrentDiscussion: React.FC = () => {
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
+      console.log(agreeItem.id)
       return (
         <div className="zg-contribution-holder" key={agreeItem.id}>
-          <span>{agreeItem.points}</span>
+          <span>
+            <span>{agreeItem.points}</span>
+            <span>
+              {" "}
+              {} <ArrowUpwardIcon />
+            </span>
+          </span>
           <div className="zg-contribution-content">
             {agreeItem.contribution}
           </div>
