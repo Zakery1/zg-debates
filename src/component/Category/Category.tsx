@@ -32,7 +32,7 @@ const Category: React.FC = () => {
   useEffect(() => {
     const fetchDiscussions = async () => {
       await axios
-        .get(`https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${categoryId}`)
+        .get(`http://localhost:3000/api/getDiscussions/${categoryId}`)
         .then((res) => {
           const retrievedDiscussions = res.data;
           setDiscussions(retrievedDiscussions);

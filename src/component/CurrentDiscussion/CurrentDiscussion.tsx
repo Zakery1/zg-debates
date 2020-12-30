@@ -57,7 +57,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let deleteContribution = async (contributionId: any) => {
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
+      .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
       });
@@ -66,7 +66,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
+      .get(`http://localhost:3000/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
