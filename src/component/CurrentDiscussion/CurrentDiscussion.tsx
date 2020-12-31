@@ -30,9 +30,22 @@ interface ContributionItem {
 
 interface ContributionsArray extends Array<ContributionItem> {}
 
+interface Vote {
+  id: number | null;
+}
+
+interface VotesArray extends Array<Vote> {}
+
+interface VoteId {
+  id: number | null;
+}
+
+interface VoteIdArray extends Array<VoteId> {}
+
 const CurrentDiscussion: React.FC = () => {
   const { id }: discussionParams = useParams();
   let history = useHistory();
+  let userId = 1;
 
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
@@ -47,6 +60,35 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  const [contributionIds, setContributionIds] = useState<VoteIdArray>([
+    {
+      id: null,
+    },
+  ]);
+
+  const [votes, setVotes] = useState<VotesArray>([
+    {
+      id: null,
+    },
+  ]);
+
+  const [voted, setVoted] = useState<boolean>(false);
+
+  const userVotes = (contributionId: any) => {
+    return votes.includes(contributionId);
+  };
+
+  let fetchVotes = useCallback(async () => {
+    await axios
+      .get(`http://localhost:3000/api/getVotes/${userId}`)
+      .then((res) => {
+        let contributionIds = res.data.map((contribution: any) => {
+          return contribution.contributionId;
+        });
+        setVotes(contributionIds);
+      });
+  }, [userId]);
+
   // let arrowUp = (contributionId: any) => {
   //   let selectedContribution = contributions.filter((contribution) => {
   //     if( d contribution.id === contributionId;
@@ -54,6 +96,21 @@ const CurrentDiscussion: React.FC = () => {
   //   });
 
   // };
+
+  let fetchContributions = useCallback(async () => {
+    await axios
+      .get(`http://localhost:3000/api/getContributions/${id}`)
+      .then((res) => {
+        setContributions(res.data);
+        const contributionIds = res.data.map((contribution: any) => {
+          return contribution.id;
+        });
+        setContributionIds(contributionIds);
+      });
+  }, [id]);
+
+  console.log("contributionIds in array", contributionIds);
+  console.log("this users votes in array", votes);
 
   let deleteContribution = async (contributionId: any) => {
     await axios
@@ -64,30 +121,26 @@ const CurrentDiscussion: React.FC = () => {
     fetchContributions();
   };
 
-  let fetchContributions = useCallback(async () => {
-    await axios
-      .get(`http://localhost:3000/api/getContributions/${id}`)
-      .then((res) => {
-        setContributions(res.data);
-      });
-  }, [id]);
-
   useEffect(() => {
+    fetchVotes();
     fetchContributions();
-  }, [fetchContributions]);
+  }, [fetchContributions, fetchVotes]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
-      console.log(agreeItem.id)
       return (
         <div className="zg-contribution-holder" key={agreeItem.id}>
           <span>
-            <span>{agreeItem.points}</span>
-            <span>
-              {" "}
-              {} <ArrowUpwardIcon />
-            </span>
+            <Button
+              className={
+                "zg-vote-button " + (userVotes(agreeItem.id) ? "zg-voted" : "")
+              }
+              onClick={() => setVoted(!voted)}
+            >
+              <ArrowUpwardIcon />
+              <span>{agreeItem.points}</span>
+            </Button>
           </span>
           <div className="zg-contribution-content">
             {agreeItem.contribution}
@@ -114,7 +167,12 @@ const CurrentDiscussion: React.FC = () => {
     .map((neutralItem) => {
       return (
         <div className="zg-contribution-holder" key={neutralItem.id}>
-          <span>{neutralItem.points}</span>
+          <span>
+            <span>{neutralItem.points}</span>
+            <span className="zg-voted">
+              <ArrowUpwardIcon />
+            </span>
+          </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
           </div>
@@ -140,7 +198,12 @@ const CurrentDiscussion: React.FC = () => {
     .map((disagreeItem) => {
       return (
         <div className="zg-contribution-holder" key={disagreeItem.id}>
-          <span>{disagreeItem.points}</span>
+          <span>
+            <span>{disagreeItem.points}</span>
+            <span className="zg-voted">
+              <ArrowUpwardIcon />
+            </span>
+          </span>
           <div className="zg-contribution-content">
             {disagreeItem.contribution}
           </div>
