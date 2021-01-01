@@ -25,7 +25,7 @@ interface ContributionItem {
   agree: boolean | null;
   neutral: boolean | null;
   disagree: boolean | null;
-  points: number | null;
+  points: number;
 }
 
 interface ContributionsArray extends Array<ContributionItem> {}
@@ -35,12 +35,6 @@ interface Vote {
 }
 
 interface VotesArray extends Array<Vote> {}
-
-interface VoteId {
-  id: number | null;
-}
-
-interface VoteIdArray extends Array<VoteId> {}
 
 const CurrentDiscussion: React.FC = () => {
   const { id }: discussionParams = useParams();
@@ -56,27 +50,11 @@ const CurrentDiscussion: React.FC = () => {
       agree: null,
       neutral: null,
       disagree: null,
-      points: null,
+      points: 0,
     },
   ]);
 
-  const [contributionIds, setContributionIds] = useState<VoteIdArray>([
-    {
-      id: null,
-    },
-  ]);
-
-  const [votes, setVotes] = useState<VotesArray>([
-    {
-      id: null,
-    },
-  ]);
-
-  const [voted, setVoted] = useState<boolean>(false);
-
-  const userVotes = (contributionId: any) => {
-    return votes.includes(contributionId);
-  };
+  const [votes, setVotes] = useState<VotesArray>([{ id: null }]);
 
   let fetchVotes = useCallback(async () => {
     await axios
@@ -89,28 +67,41 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [userId]);
 
-  // let arrowUp = (contributionId: any) => {
-  //   let selectedContribution = contributions.filter((contribution) => {
-  //     if( d contribution.id === contributionId;
+  const userVotes = (contributionId: any) => {
+    return votes.includes(contributionId);
+  };
 
-  //   });
+  let clickArrow = (contributionId: any, points: number) => {
+    const elementIndex = contributions.findIndex(
+      (element) => element.id === contributionId
+    );
+    let updatedContributions = [...contributions];
+    if (userVotes(contributionId)) {
+      setVotes(votes.filter((id) => id !== contributionId));
+      updatedContributions[elementIndex] = {
+        ...updatedContributions[elementIndex],
+        points: points - 1,
+      };
+    } else {
+      setVotes([...votes, contributionId]);
+      updatedContributions[elementIndex] = {
+        ...updatedContributions[elementIndex],
+        points: points + 1,
+      };
+    }
+    setContributions(updatedContributions);
+  };
 
-  // };
+  console.log("contribution array", contributions);
+  console.log("vote array", votes);
 
   let fetchContributions = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
-        const contributionIds = res.data.map((contribution: any) => {
-          return contribution.id;
-        });
-        setContributionIds(contributionIds);
       });
   }, [id]);
-
-  console.log("contributionIds in array", contributionIds);
-  console.log("this users votes in array", votes);
 
   let deleteContribution = async (contributionId: any) => {
     await axios
@@ -121,9 +112,16 @@ const CurrentDiscussion: React.FC = () => {
     fetchContributions();
   };
 
+  let updateVotes = async () => {
+    console.log("SHOULD RUN WHEN LEAVING PAGE")
+  }
+
   useEffect(() => {
     fetchVotes();
     fetchContributions();
+    return () => {
+      updateVotes();
+    }
   }, [fetchContributions, fetchVotes]);
 
   let agreeList = contributions
@@ -136,7 +134,7 @@ const CurrentDiscussion: React.FC = () => {
               className={
                 "zg-vote-button " + (userVotes(agreeItem.id) ? "zg-voted" : "")
               }
-              onClick={() => setVoted(!voted)}
+              onClick={() => clickArrow(agreeItem.id, agreeItem.points)}
             >
               <ArrowUpwardIcon />
               <span>{agreeItem.points}</span>
@@ -168,10 +166,16 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div className="zg-contribution-holder" key={neutralItem.id}>
           <span>
-            <span>{neutralItem.points}</span>
-            <span className="zg-voted">
+            <Button
+              className={
+                "zg-vote-button " +
+                (userVotes(neutralItem.id) ? "zg-voted" : "")
+              }
+              onClick={() => clickArrow(neutralItem.id, neutralItem.points)}
+            >
               <ArrowUpwardIcon />
-            </span>
+              <span>{neutralItem.points}</span>
+            </Button>
           </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
@@ -199,10 +203,16 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div className="zg-contribution-holder" key={disagreeItem.id}>
           <span>
-            <span>{disagreeItem.points}</span>
-            <span className="zg-voted">
+            <Button
+              className={
+                "zg-vote-button " +
+                (userVotes(disagreeItem.id) ? "zg-voted" : "")
+              }
+              onClick={() => clickArrow(disagreeItem.id, disagreeItem.points)}
+            >
               <ArrowUpwardIcon />
-            </span>
+              <span>{disagreeItem.points}</span>
+            </Button>
           </span>
           <div className="zg-contribution-content">
             {disagreeItem.contribution}
