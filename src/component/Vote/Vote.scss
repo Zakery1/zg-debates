@@ -1,0 +1,14 @@
+@import "../../style/style.scss";
+
+.zg-vote-button {
+    cursor: pointer;
+    font-size: 20px;
+    color: grey;
+  }
+  .zg-voted {
+    color: $zg-purple;
+  }
+
+  @media only screen and (min-width: 501px) {
+      
+  }
