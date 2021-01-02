@@ -6,7 +6,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 import Vote from "../Vote/Vote";
 import Contribution from "../Contribution/Contribution";
@@ -78,8 +77,6 @@ const CurrentDiscussion: React.FC = () => {
   //   return votes.includes(contributionId);
   // };
 
-
-
   console.log("contribution array", contributions);
   console.log("initial votes", initialVotes);
   console.log("vote array", votes);
@@ -101,8 +98,6 @@ const CurrentDiscussion: React.FC = () => {
     fetchContributions();
   };
 
-
-
   useEffect(() => {
     fetchVotes();
     fetchContributions();
@@ -113,18 +108,7 @@ const CurrentDiscussion: React.FC = () => {
     .map((agreeItem) => {
       return (
         <div className="zg-contribution-holder" key={agreeItem.id}>
-          <span>
-            {/* <Button
-              className={
-                "zg-vote-button " + (userVotes(agreeItem.id) ? "zg-voted" : "")
-              }
-              onClick={() => clickArrow(agreeItem.id, agreeItem.points)}
-            >
-              <ArrowUpwardIcon />
-              <span>{agreeItem.points}</span>
-            </Button> */}
-            <Vote contributionId={agreeItem.id} points={agreeItem.points} />
-          </span>
+          <Vote contributionId={agreeItem.id} points={agreeItem.points} />
           <div className="zg-contribution-content">
             {agreeItem.contribution}
           </div>
@@ -162,7 +146,6 @@ const CurrentDiscussion: React.FC = () => {
               <span>{neutralItem.points}</span>
             </Button> */}
             <Vote contributionId={neutralItem.id} points={neutralItem.points} />
-
           </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
@@ -200,8 +183,10 @@ const CurrentDiscussion: React.FC = () => {
               <ArrowUpwardIcon />
               <span>{disagreeItem.points}</span>
             </Button> */}
-            <Vote contributionId={disagreeItem.id} points={disagreeItem.points} />
-
+            <Vote
+              contributionId={disagreeItem.id}
+              points={disagreeItem.points}
+            />
           </span>
           <div className="zg-contribution-content">
             {disagreeItem.contribution}

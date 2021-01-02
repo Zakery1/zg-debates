@@ -1,25 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Vote.scss";
 
 import Button from "@material-ui/core/Button";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
-
 interface VoteProps {
-//     id: number | null;
-    contributionId?: number | null;
-    // userId: number | null;
-    // discussionId: number | null;
-    // contribution: string;
-    // agree: boolean | null;
-    // neutral: boolean | null;
-    // disagree: boolean | null;
-    points: number | null;
-  }
-
+  contributionId?: number | null;
+  points: number | null;
+}
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
+//get votes from user component
 
   //   let updateVotes = async () => {};
 
@@ -48,15 +40,15 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   //     setContributions(updatedContributions);
   //   };
 
+  const [voted, setVoted] = useState<boolean>(false);
+
   return (
     <Button
-    //   className={
-    //     "zg-vote-button " + (userVotes(disagreeItem.id) ? "zg-voted" : "")
-    //   }
-    //   onClick={() => clickArrow(disagreeItem.id, disagreeItem.points)}
+      style={{ color: voted ? "#B50097" : "grey" }}
+      onClick={() => setVoted(!voted)}
     >
-      <ArrowUpwardIcon />
-      <span>{props.points}</span>
+      <ArrowUpwardIcon className="zg-vote-arrow" />
+      <span className="zg-points">{props.points}</span>
     </Button>
   );
 };
