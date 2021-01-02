@@ -6,19 +6,20 @@ import Button from "@material-ui/core/Button";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 
-interface ContributionItem {
-    id: number | null;
-    userId: number | null;
-    discussionId: number | null;
-    contribution: string;
-    agree: boolean | null;
-    neutral: boolean | null;
-    disagree: boolean | null;
-    points: number;
+interface VoteProps {
+//     id: number | null;
+    contributionId?: number | null;
+    // userId: number | null;
+    // discussionId: number | null;
+    // contribution: string;
+    // agree: boolean | null;
+    // neutral: boolean | null;
+    // disagree: boolean | null;
+    points: number | null;
   }
 
 
-const Vote: React.FC<{points?: number}> = (points) => {
+const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   //   let updateVotes = async () => {};
 
@@ -55,7 +56,7 @@ const Vote: React.FC<{points?: number}> = (points) => {
     //   onClick={() => clickArrow(disagreeItem.id, disagreeItem.points)}
     >
       <ArrowUpwardIcon />
-      <span>{points.points}</span>
+      <span>{props.points}</span>
     </Button>
   );
 };

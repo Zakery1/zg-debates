@@ -123,7 +123,7 @@ const CurrentDiscussion: React.FC = () => {
               <ArrowUpwardIcon />
               <span>{agreeItem.points}</span>
             </Button> */}
-            <Vote points={agreeItem.points} />
+            <Vote contributionId={agreeItem.id} points={agreeItem.points} />
           </span>
           <div className="zg-contribution-content">
             {agreeItem.contribution}
@@ -161,7 +161,8 @@ const CurrentDiscussion: React.FC = () => {
               <ArrowUpwardIcon />
               <span>{neutralItem.points}</span>
             </Button> */}
-            <Vote/>
+            <Vote contributionId={neutralItem.id} points={neutralItem.points} />
+
           </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
@@ -199,7 +200,8 @@ const CurrentDiscussion: React.FC = () => {
               <ArrowUpwardIcon />
               <span>{disagreeItem.points}</span>
             </Button> */}
-            <Vote/>
+            <Vote contributionId={disagreeItem.id} points={disagreeItem.points} />
+
           </span>
           <div className="zg-contribution-content">
             {disagreeItem.contribution}
