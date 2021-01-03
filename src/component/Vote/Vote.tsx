@@ -8,17 +8,17 @@ import Button from "@material-ui/core/Button";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 interface VoteProps {
-  contributionId?: number | null;
-  points: number | null;
+  contributionId: number | null;
+  points: number;
   initialVote: boolean;
 }
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [voted, setVoted] = useState<boolean>(props.initialVote);
 
-  let userId: number = 1;
+  const [points, setPoints] = useState<number>(props.points);
 
-  let deleteConfig = { userId: userId, contributionId: props.contributionId}
+  let deleteConfig = { userId: 1, contributionId: props.contributionId}
 
   let removeVote = async () => {
     await axios
@@ -33,6 +33,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       .delete(`http://localhost:3000/api/removeVoteFromRecord`, {data: deleteConfig}).then((res) => {
         console.log(res.status);
       });
+      setPoints(points - 1);
   };
 
   let addVote = async () => {
@@ -51,6 +52,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       .then((res) => {
         console.log(res.status);
       });
+      setPoints(points + 1);
   };
 
   const castVote = () => {
@@ -68,7 +70,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       onClick={() => castVote()}
     >
       <ArrowUpwardIcon className="zg-vote-arrow" />
-      <span className="zg-points">{props.points}</span>
+      <span className="zg-points">{points}</span>
     </Button>
   );
 };
