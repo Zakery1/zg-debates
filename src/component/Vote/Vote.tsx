@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+
 import axios from "axios";
 
 import "./Vote.scss";
@@ -18,9 +20,17 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   const [points, setPoints] = useState<number>(props.points);
 
-  let deleteConfig = { userId: 1, contributionId: props.contributionId}
+  const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
+
+  let deleteConfig = { userId: 1, contributionId: props.contributionId };
 
   let removeVote = async () => {
+    setPoints(points - 1);
+    setVoteDisabled(true);
+    setTimeout(() => {
+      setVoteDisabled(false);
+    }, 2000);
+
     await axios
       .put(`http://localhost:3000/api/subtractPointFromContribution`, {
         contributionId: props.contributionId,
@@ -30,13 +40,21 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`http://localhost:3000/api/removeVoteFromRecord`, {data: deleteConfig}).then((res) => {
+      .delete(`http://localhost:3000/api/removeVoteFromRecord`, {
+        data: deleteConfig,
+      })
+      .then((res) => {
         console.log(res.status);
       });
-      setPoints(points - 1);
+
   };
 
   let addVote = async () => {
+    setVoteDisabled(true);
+    setPoints(points + 1);
+    setTimeout(() => {
+      setVoteDisabled(false);
+    }, 2000);
     await axios
       .put(`http://localhost:3000/api/addPointToContribution`, {
         contributionId: props.contributionId,
@@ -52,7 +70,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       .then((res) => {
         console.log(res.status);
       });
-      setPoints(points + 1);
+
   };
 
   const castVote = () => {
@@ -66,10 +84,13 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   return (
     <Button
-      style={{ color: voted ? "#B50097" : "grey" }}
+      disabled={voteDisabled}
+      style={{ color: voted ? "#B50097" : "grey", width: "100px" }}
       onClick={() => castVote()}
     >
+      {voteDisabled ? <CheckCircleIcon style={{ color: "#rgb(128, 176, 56)", height: "15px"}} className="zg-vote-check" /> : "   "}
       <ArrowUpwardIcon className="zg-vote-arrow" />
+
       <span className="zg-points">{points}</span>
     </Button>
   );
