@@ -1,10 +1,21 @@
 @import "../../style/style.scss";
 
-.zg-edit-contribution-icon {
-  background: none;
-  color: $zg-purple;
+.zg-contribution-content {
+  cursor: text;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+  width: 250px;
+  margin: 20px 0;
+  max-width: 270px;
+  overflow-wrap: break-word;
+  padding-bottom: 20px;
   border: none;
-  cursor: pointer;
+  outline: none;
+  color: $zg-purple;
+  font-size: 15px;
+  font-weight: bolder;
+  background: none;
 }
 
 .zg-edit-contribution-modal {
@@ -36,7 +47,7 @@
       color: $zg-purple;
     }
     .zg-disabled {
-      opacity: .5;
+      opacity: 0.5;
     }
     .zg-cancel-edit {
       color: $zg-purple;
@@ -45,7 +56,6 @@
 }
 
 @media only screen and (min-width: 501px) {
-
   .zg-edit-contribution-modal {
     .zg-edit-contribute-body {
       height: 500px;

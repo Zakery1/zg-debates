@@ -11,17 +11,12 @@ interface ContributionId {
   contributionId: number | null;
 }
 
-interface ContributionPoints {
-  contributionPoints: number | null;
-}
-
-const DeleteContribution: React.FC<ContributionId & ContributionPoints> = (
+const DeleteContribution: React.FC<ContributionId> = (
   props
 ) => {
   const [open, setOpen] = useState(false);
 
   let contributionId = props.contributionId;
-  let contributionPoints = props.contributionPoints;
 
   // if props.contributionPoints >1, delete all votes associated with contribution from votes table
 
@@ -63,7 +58,7 @@ const DeleteContribution: React.FC<ContributionId & ContributionPoints> = (
   return (
     <div>
       <button onClick={handleOpen} className="zg-delete-contribution">
-        <DeleteOutlinedIcon />
+        <DeleteOutlinedIcon style={{height: "20px"}} />
       </button>
       <Modal
         className="zg-delete-contribution-modal"

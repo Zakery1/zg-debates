@@ -46,6 +46,8 @@
         margin-right: 300px;
       }
       .zg-discussion-list {
+        min-height: 500px;
+        min-width: 300px;
         display: flex;
         flex-direction: column;
         .zg-category-link-holder {

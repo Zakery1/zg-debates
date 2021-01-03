@@ -5,12 +5,9 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
-import DeleteContribution from "../DeleteContribution/DeleteContribution";
-import Vote from "../Vote/Vote";
+import CreateContribution from "../CreateContribution/CreateContribution";
 import Contribution from "../Contribution/Contribution";
-import EditContributionModal from "../EditContributionModal/EditContributionModal";
 
 import "./CurrentDiscussion.scss";
 
@@ -37,8 +34,6 @@ interface IVote {
 
 interface VotesArray extends Array<IVote> {}
 
-interface InitialVotes extends Array<IVote> {}
-
 const CurrentDiscussion: React.FC = () => {
   const { id }: discussionParams = useParams();
   let history = useHistory();
@@ -58,9 +53,6 @@ const CurrentDiscussion: React.FC = () => {
   ]);
 
   const [votes, setVotes] = useState<VotesArray>([{ id: null }]);
-  const [initialVotes, setInitialVotes] = useState<InitialVotes>([
-    { id: null },
-  ]);
 
   let fetchVotes = useCallback(async () => {
     await axios
@@ -70,17 +62,12 @@ const CurrentDiscussion: React.FC = () => {
           return contribution.contributionId;
         });
         setVotes(contributionIds);
-        setInitialVotes(contributionIds);
       });
   }, [userId]);
 
   const userVotes = (contributionId: any) => {
     return votes.includes(contributionId);
   };
-
-  console.log("contribution array", contributions);
-  console.log("initial votes", initialVotes);
-  console.log("vote array", votes);
 
   let fetchContributions = useCallback(async () => {
     await axios
@@ -89,15 +76,6 @@ const CurrentDiscussion: React.FC = () => {
         setContributions(res.data);
       });
   }, [id]);
-
-  // let deleteContribution = async (contributionId: any) => {
-  //   await axios
-  //     .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
-  //     .then((res) => {
-  //       console.log(res.status);
-  //     });
-  //   fetchContributions();
-  // };
 
   useEffect(() => {
     fetchVotes();
@@ -108,30 +86,13 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
       return (
-        <div className="zg-contribution-holder" key={agreeItem.id}>
-          <Vote
-            contributionId={agreeItem.id}
-            points={agreeItem.points}
-            initialVote={userVotes(agreeItem.id)}
-          />
-          <div className="zg-contribution-content">
-            {agreeItem.contribution}
-          </div>
-
-          <EditContributionModal
-            contributionId={agreeItem.id}
-            contribution={agreeItem.contribution}
-          />
-          <DeleteContribution contributionPoints={agreeItem.points} contributionId={agreeItem.id}/>
-          {/* <button
-            className="zg-delete-contribution"
-            onClick={() => deleteContribution(agreeItem.id)}
-          >
-            <DeleteOutlinedIcon />
-          </button> */}
-          <br />
-          <br />
-        </div>
+        <Contribution
+          key={agreeItem.id}
+          contributionId={agreeItem.id}
+          points={agreeItem.points}
+          initialVote={userVotes(agreeItem.id)}
+          contribution={agreeItem.contribution}
+        />
       );
     });
 
@@ -139,31 +100,13 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.neutral === true)
     .map((neutralItem) => {
       return (
-        <div className="zg-contribution-holder" key={neutralItem.id}>
-          <span>
-            <Vote
-              contributionId={neutralItem.id}
-              points={neutralItem.points}
-              initialVote={userVotes(neutralItem.id)}
-            />
-          </span>
-          <div className="zg-contribution-content">
-            {neutralItem.contribution}
-          </div>
-
-          <EditContributionModal
-            contributionId={neutralItem.id}
-            contribution={neutralItem.contribution}
-          />
-          {/* <button
-            className="zg-delete-contribution"
-            onClick={() => deleteContribution(neutralItem.id)}
-          >
-            <DeleteOutlinedIcon />
-          </button> */}
-          <br />
-          <br />
-        </div>
+        <Contribution
+          key={neutralItem.id}
+          contributionId={neutralItem.id}
+          points={neutralItem.points}
+          initialVote={userVotes(neutralItem.id)}
+          contribution={neutralItem.contribution}
+        />
       );
     });
 
@@ -171,31 +114,13 @@ const CurrentDiscussion: React.FC = () => {
     .filter((contribution) => contribution.disagree === true)
     .map((disagreeItem) => {
       return (
-        <div className="zg-contribution-holder" key={disagreeItem.id}>
-          <span>
-            <Vote
-              contributionId={disagreeItem.id}
-              points={disagreeItem.points}
-              initialVote={userVotes(disagreeItem.id)}
-            />
-          </span>
-          <div className="zg-contribution-content">
-            {disagreeItem.contribution}
-          </div>
-
-          <EditContributionModal
-            contributionId={disagreeItem.id}
-            contribution={disagreeItem.contribution}
-          />
-          {/* <button
-            className="zg-delete-contribution"
-            onClick={() => deleteContribution(disagreeItem.id)}
-          >
-            <DeleteOutlinedIcon />
-          </button> */}
-          <br />
-          <br />
-        </div>
+        <Contribution
+          key={disagreeItem.id}
+          contributionId={disagreeItem.id}
+          points={disagreeItem.points}
+          initialVote={userVotes(disagreeItem.id)}
+          contribution={disagreeItem.contribution}
+        />
       );
     });
 
@@ -205,7 +130,7 @@ const CurrentDiscussion: React.FC = () => {
         Discusion title/argument will go here.
       </h3>
       <div className="zg-discussion-buttons">
-        <Contribution />
+        <CreateContribution />
         <br />
         <Button
           className="zg-back-to-premises"
@@ -231,7 +156,6 @@ const CurrentDiscussion: React.FC = () => {
         </div>
       </div>
       <br />
-
       <br />
     </div>
   );

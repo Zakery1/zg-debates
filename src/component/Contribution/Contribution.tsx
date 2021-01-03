@@ -1,140 +1,34 @@
-import React, { useState } from "react";
-
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-
-import { useParams, useHistory } from "react-router-dom";
-
-import axios from "axios";
+import React from "react";
 
 import "./Contribution.scss";
 
-interface ContributionData {
-  userId: number;
-  discussionId: number;
-  contribution: string;
-  agree: boolean | null;
-  neutral: boolean | null;
-  disagree: boolean | null;
+import Vote from "../Vote/Vote";
+import EditContributionModal from "../EditContributionModal/EditContributionModal";
+import DeleteContribution from "../DeleteContribution/DeleteContribution";
+
+interface ContributionProps {
+  contributionId: number | null;
   points: number;
+  initialVote: boolean;
+  contribution: string;
 }
 
-interface DiscussionParams {
-  id: string;
-}
-
-const Contribution: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const [choice, setChoice] = useState("");
-  const [contribution, setContribution] = useState("");
-
-  let history = useHistory();
-
-  const { id }: DiscussionParams = useParams();
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const submitContribution = async () => {
-    let postData: ContributionData = {
-      userId: 1,
-      discussionId: +id,
-      contribution: contribution,
-      agree: null,
-      neutral: null,
-      disagree: null,
-      points: 0,
-    };
-
-    if (choice === "agree") {
-      postData.agree = true;
-    } else if (choice === "neutral") {
-      postData.neutral = true;
-    } else {
-      postData.disagree = true;
-    }
-
-    await axios
-      .post(
-        `http://localhost:3000/api/postContribution`,
-        { data: postData }
-      )
-      .then((res) => {
-        console.log(res.status);
-      });
-
-    setContribution("");
-    handleClose();
-    history.go(0);
-  };
-
-  const choiceButtons = ["agree", "neutral", "disagree"].map(
-    (selectedChoice, index) => {
-      return (
-        <Button
-          key={index}
-          onClick={() => setChoice(selectedChoice)}
-          className={
-            `zg-choice-${selectedChoice} ` +
-            (choice === selectedChoice ? "zg-choice-selected" : "")
-          }
-        >
-          {selectedChoice}
-        </Button>
-      );
-    }
-  );
-
-  const body = (
-    <div className="zg-contribute-body">
-      <h2>Make a contribution to the discussion ---- discussion name</h2>
-      <div className="zg-choice-group">{choiceButtons}</div>
-
-      <textarea
-        className="zg-contribution-input"
-        maxLength={200}
-        autoFocus
-        onChange={(e) => setContribution(e.target.value)}
-      />
-      <br />
-      <br />
-
-      {choice && contribution ? (
-        <Button
-          onClick={submitContribution}
-          type="submit"
-          className="zg-submit-contribution"
-        >
-          Submit Contribution
-        </Button>
-      ) : (
-        <Button className="zg-submit-contribution zg-disabled" disabled>
-          Submit Contribution
-        </Button>
-      )}
-      <br/>
-
-      <Button className="zg-cancel-contribution-modal" onClick={handleClose}>Cancel</Button>
-    </div>
-  );
-
+const Contribution: React.FC<ContributionProps> = (
+  props: ContributionProps
+) => {
+  console.log("contribution props here:", props);
   return (
-    <div className="zg-contribution">
-      <Button className="zg-modal-contribute" type="button" onClick={handleOpen}>
-        Contribute
-      </Button>
-      <Modal
-        className="zg-contribution-modal"
-        open={open}
-        onClose={handleClose}
-      >
-        {body}
-      </Modal>
+    <div className="zg-contribution-container">
+      <Vote
+        contributionId={props.contributionId}
+        points={props.points}
+        initialVote={props.initialVote}
+      />
+      <EditContributionModal
+        contributionId={props.contributionId}
+        contribution={props.contribution}
+      />
+      <DeleteContribution contributionId={props.contributionId} />
     </div>
   );
 };

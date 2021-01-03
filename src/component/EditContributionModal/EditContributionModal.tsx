@@ -20,7 +20,9 @@ interface Contribution {
 const EditContributionModal: React.FC<ContributionId & Contribution> = (
   props
 ) => {
-  let { contributionId, contribution } = props;
+  let { contributionId } = props;
+
+  let [contribution, setContribution] = useState(props.contribution);
 
   const [updatedContribution, setUpdatedContribution] = useState("");
   const [open, setOpen] = useState(false);
@@ -31,6 +33,14 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  let getSingleContribution = async () => {
+    await axios
+      .get(`http://localhost:3000/api/getSingleContribution/${contributionId}`)
+      .then((res) => {
+        setContribution(res.data);
+      });
   };
 
   let editContribution = async () => {
@@ -44,7 +54,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
     setUpdatedContribution("");
     handleClose();
-    window.location.reload();
+    getSingleContribution();
   };
 
   const body = (
@@ -55,7 +65,6 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
         className="zg-edit-contribution-input"
         maxLength={200}
         autoFocus
-        // onChange={(e) => setContribution(e.target.value)}
         defaultValue={contribution}
         onChange={(e) => setUpdatedContribution(e.target.value)}
       />
@@ -86,8 +95,8 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   return (
     <div>
-      <button className="zg-edit-contribution-icon" onClick={handleOpen}>
-        <EditIcon />
+      <button className="zg-contribution-content" onClick={handleOpen}>
+        {contribution}
       </button>
       <Modal
         className="zg-edit-contribution-modal"
