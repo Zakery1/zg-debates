@@ -1,0 +1,66 @@
+@import "../../style/style.scss";
+
+.zg-delete-contribution {
+  cursor: pointer;
+  height: 33px;
+  color: $zg-purple;
+  background: none;
+  border: none;
+}
+
+.zg-delete-contribution-modal {
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  .zg-delete-contribute-body {
+    margin: 20px;
+    border-radius: 5px;
+    text-align: center;
+    height: 400px;
+    width: 330px;
+    position: absolute;
+    background: white;
+    color: $zg-purple;
+    h2 {
+        margin-top: 50px;
+    }
+    .zg-delete-modal-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      .zg-submit-delete-contribution {
+        margin-top: 40px;
+        color: white;
+        background: $zg-purple;
+      }
+      .zg-cancel-delete {
+          margin-top: 40px;
+        color: $zg-purple;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-delete-contribution-modal {
+    .zg-delete-contribute-body {
+      height: 500px;
+      width: 700px;
+      .zg-delete-contribution-input {
+        width: 400px;
+        height: 270px;
+      }
+      .zg-delete-modal-buttons {
+        .zg-submit-delete-contribution {
+
+        }
+
+        .zg-cancel-delete {
+        }
+      }
+    }
+  }
+}

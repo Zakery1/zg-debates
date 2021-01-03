@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 
 import axios from "axios";
 
@@ -35,10 +35,9 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   let editContribution = async () => {
     await axios
-      .put(
-        `http://localhost:3000/api/editContribution/${contributionId}`,
-        { updatedContribution: updatedContribution }
-      )
+      .put(`http://localhost:3000/api/editContribution/${contributionId}`, {
+        updatedContribution: updatedContribution,
+      })
       .then((res) => {
         console.log(res.status);
       });
@@ -79,13 +78,17 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
       <br />
       <br />
-      <Button className="zg-cancel-edit"  onClick={handleClose}>Cancel</Button>
+      <Button className="zg-cancel-edit" onClick={handleClose}>
+        Cancel
+      </Button>
     </div>
   );
 
   return (
     <div>
-      <button className="zg-edit-contribution-icon" onClick={handleOpen}><EditIcon/></button>
+      <button className="zg-edit-contribution-icon" onClick={handleOpen}>
+        <EditIcon />
+      </button>
       <Modal
         className="zg-edit-contribution-modal"
         open={open}

@@ -7,6 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
+import DeleteContribution from "../DeleteContribution/DeleteContribution";
 import Vote from "../Vote/Vote";
 import Contribution from "../Contribution/Contribution";
 import EditContributionModal from "../EditContributionModal/EditContributionModal";
@@ -89,14 +90,14 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [id]);
 
-  let deleteContribution = async (contributionId: any) => {
-    await axios
-      .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
-      .then((res) => {
-        console.log(res.status);
-      });
-    fetchContributions();
-  };
+  // let deleteContribution = async (contributionId: any) => {
+  //   await axios
+  //     .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
+  //     .then((res) => {
+  //       console.log(res.status);
+  //     });
+  //   fetchContributions();
+  // };
 
   useEffect(() => {
     fetchVotes();
@@ -108,7 +109,11 @@ const CurrentDiscussion: React.FC = () => {
     .map((agreeItem) => {
       return (
         <div className="zg-contribution-holder" key={agreeItem.id}>
-          <Vote contributionId={agreeItem.id} points={agreeItem.points} initialVote={userVotes(agreeItem.id)} />
+          <Vote
+            contributionId={agreeItem.id}
+            points={agreeItem.points}
+            initialVote={userVotes(agreeItem.id)}
+          />
           <div className="zg-contribution-content">
             {agreeItem.contribution}
           </div>
@@ -117,12 +122,13 @@ const CurrentDiscussion: React.FC = () => {
             contributionId={agreeItem.id}
             contribution={agreeItem.contribution}
           />
-          <button
+          <DeleteContribution contributionPoints={agreeItem.points} contributionId={agreeItem.id}/>
+          {/* <button
             className="zg-delete-contribution"
             onClick={() => deleteContribution(agreeItem.id)}
           >
             <DeleteOutlinedIcon />
-          </button>
+          </button> */}
           <br />
           <br />
         </div>
@@ -135,7 +141,11 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div className="zg-contribution-holder" key={neutralItem.id}>
           <span>
-            <Vote contributionId={neutralItem.id} points={neutralItem.points} initialVote={userVotes(neutralItem.id)}  />
+            <Vote
+              contributionId={neutralItem.id}
+              points={neutralItem.points}
+              initialVote={userVotes(neutralItem.id)}
+            />
           </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
@@ -145,12 +155,12 @@ const CurrentDiscussion: React.FC = () => {
             contributionId={neutralItem.id}
             contribution={neutralItem.contribution}
           />
-          <button
+          {/* <button
             className="zg-delete-contribution"
             onClick={() => deleteContribution(neutralItem.id)}
           >
             <DeleteOutlinedIcon />
-          </button>
+          </button> */}
           <br />
           <br />
         </div>
@@ -166,7 +176,7 @@ const CurrentDiscussion: React.FC = () => {
             <Vote
               contributionId={disagreeItem.id}
               points={disagreeItem.points}
-              initialVote={userVotes(disagreeItem.id)} 
+              initialVote={userVotes(disagreeItem.id)}
             />
           </span>
           <div className="zg-contribution-content">
@@ -177,12 +187,12 @@ const CurrentDiscussion: React.FC = () => {
             contributionId={disagreeItem.id}
             contribution={disagreeItem.contribution}
           />
-          <button
+          {/* <button
             className="zg-delete-contribution"
             onClick={() => deleteContribution(disagreeItem.id)}
           >
             <DeleteOutlinedIcon />
-          </button>
+          </button> */}
           <br />
           <br />
         </div>
