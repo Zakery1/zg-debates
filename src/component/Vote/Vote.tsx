@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import axios from "axios";
+
 import "./Vote.scss";
 
 import Button from "@material-ui/core/Button";
@@ -8,44 +10,50 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 interface VoteProps {
   contributionId?: number | null;
   points: number | null;
+  initialVote: boolean;
 }
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
-//get votes from user component
+  const [voted, setVoted] = useState<boolean>(props.initialVote);
 
-  //   let updateVotes = async () => {};
+  let removeVote = async () => {
+    await axios
+      .put(`http://localhost:3000/api/subtractPointFromContribution`, {
+        contributionId: props.contributionId,
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
 
-  // const userVotes = (contributionId: any) => {
-  //     // return votes.includes(contributionId);
-  //   };
+    // setUpdatedContribution("");
+    // handleClose();
+    // window.location.reload();
+  };
 
-  //   let clickArrow = (contributionId: any, points: number) => {
-  //     const elementIndex = contributions.findIndex(
-  //       (element) => element.id === contributionId
-  //     );
-  //     let updatedContributions = [...contributions];
-  //     if (userVotes(contributionId)) {
-  //       setVotes(votes.filter((id) => id !== contributionId));
-  //       updatedContributions[elementIndex] = {
-  //         ...updatedContributions[elementIndex],
-  //         points: points - 1,
-  //       };
-  //     } else {
-  //       setVotes([...votes, contributionId]);
-  //       updatedContributions[elementIndex] = {
-  //         ...updatedContributions[elementIndex],
-  //         points: points + 1,
-  //       };
-  //     }
-  //     setContributions(updatedContributions);
-  //   };
+  let addVote = async () => {
+    await axios
+      .put(`http://localhost:3000/api/addPointToContribution`, {
+        contributionId: props.contributionId,
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
+  };
 
-  const [voted, setVoted] = useState<boolean>(false);
+  const castVote = () => {
+    setVoted(!voted);
+    if (voted) {
+      removeVote();
+    } else {
+      addVote();
+      //add vote, addPointToContribution and addVoteToRecord
+    }
+  };
 
   return (
     <Button
       style={{ color: voted ? "#B50097" : "grey" }}
-      onClick={() => setVoted(!voted)}
+      onClick={() => castVote()}
     >
       <ArrowUpwardIcon className="zg-vote-arrow" />
       <span className="zg-points">{props.points}</span>

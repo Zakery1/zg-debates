@@ -30,13 +30,13 @@ interface ContributionItem {
 
 interface ContributionsArray extends Array<ContributionItem> {}
 
-interface Vote {
+interface IVote {
   id: number | null;
 }
 
-interface VotesArray extends Array<Vote> {}
+interface VotesArray extends Array<IVote> {}
 
-interface InitialVotes extends Array<Vote> {}
+interface InitialVotes extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
   const { id }: discussionParams = useParams();
@@ -73,9 +73,9 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [userId]);
 
-  // const userVotes = (contributionId: any) => {
-  //   return votes.includes(contributionId);
-  // };
+  const userVotes = (contributionId: any) => {
+    return votes.includes(contributionId);
+  };
 
   console.log("contribution array", contributions);
   console.log("initial votes", initialVotes);
@@ -108,7 +108,7 @@ const CurrentDiscussion: React.FC = () => {
     .map((agreeItem) => {
       return (
         <div className="zg-contribution-holder" key={agreeItem.id}>
-          <Vote contributionId={agreeItem.id} points={agreeItem.points} />
+          <Vote contributionId={agreeItem.id} points={agreeItem.points} initialVote={userVotes(agreeItem.id)} />
           <div className="zg-contribution-content">
             {agreeItem.contribution}
           </div>
@@ -135,17 +135,7 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div className="zg-contribution-holder" key={neutralItem.id}>
           <span>
-            {/* <Button
-              className={
-                "zg-vote-button " +
-                (userVotes(neutralItem.id) ? "zg-voted" : "")
-              }
-              onClick={() => clickArrow(neutralItem.id, neutralItem.points)}
-            >
-              <ArrowUpwardIcon />
-              <span>{neutralItem.points}</span>
-            </Button> */}
-            <Vote contributionId={neutralItem.id} points={neutralItem.points} />
+            <Vote contributionId={neutralItem.id} points={neutralItem.points} initialVote={userVotes(neutralItem.id)}  />
           </span>
           <div className="zg-contribution-content">
             {neutralItem.contribution}
@@ -173,19 +163,10 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <div className="zg-contribution-holder" key={disagreeItem.id}>
           <span>
-            {/* <Button
-              className={
-                "zg-vote-button " +
-                (userVotes(disagreeItem.id) ? "zg-voted" : "")
-              }
-              onClick={() => clickArrow(disagreeItem.id, disagreeItem.points)}
-            >
-              <ArrowUpwardIcon />
-              <span>{disagreeItem.points}</span>
-            </Button> */}
             <Vote
               contributionId={disagreeItem.id}
               points={disagreeItem.points}
+              initialVote={userVotes(disagreeItem.id)} 
             />
           </span>
           <div className="zg-contribution-content">
