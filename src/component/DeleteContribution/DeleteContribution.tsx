@@ -7,24 +7,37 @@ import Button from "@material-ui/core/Button";
 import "./DeleteContribution.scss";
 import axios from "axios";
 
-interface ContributionId {
+interface DeleteProps {
   contributionId: number | null;
+  points: number | null;
 }
 
-const DeleteContribution: React.FC<ContributionId> = (
-  props
-) => {
+const DeleteContribution: React.FC<DeleteProps> = (props) => {
   const [open, setOpen] = useState(false);
+  const [contributionDeleted, setContributionDeleted] = useState(false);
 
   let contributionId = props.contributionId;
+
+  let points = props.points;
 
   // if props.contributionPoints >1, delete all votes associated with contribution from votes table
 
   let deleteContribution = async () => {
+    if (points != null) {
+      await axios
+        .delete(
+          `http://localhost:3000/api/removeVotesFromContribution/${contributionId}`
+        )
+        .then((res) => {
+          console.log(res.status);
+        });
+    }
+
     await axios
       .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
+        window.location.reload();
       });
   };
 
@@ -58,7 +71,7 @@ const DeleteContribution: React.FC<ContributionId> = (
   return (
     <div>
       <button onClick={handleOpen} className="zg-delete-contribution">
-        <DeleteOutlinedIcon style={{height: "20px"}} />
+        <DeleteOutlinedIcon style={{ height: "20px" }} />
       </button>
       <Modal
         className="zg-delete-contribution-modal"

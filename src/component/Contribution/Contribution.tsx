@@ -28,7 +28,10 @@ const Contribution: React.FC<ContributionProps> = (
         contributionId={props.contributionId}
         contribution={props.contribution}
       />
-      <DeleteContribution contributionId={props.contributionId} />
+      <DeleteContribution
+        points={props.points}
+        contributionId={props.contributionId}
+      />
     </div>
   );
 };
