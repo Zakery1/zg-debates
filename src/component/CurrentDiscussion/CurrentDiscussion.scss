@@ -37,15 +37,18 @@
 
     .zg-list-agree {
      margin-right: 20px;
+     border-radius: 0% 3% 3% 0;
     }
 
     .zg-list-neutral {
       margin-right: 10px;
       margin-left: 10px;
+      border-radius: 3%;
     }
 
     .zg-list-disagree {
       margin-left: 20px;
+      border-radius: 3% 0 0 3%;
     }
 
   }
