@@ -2,20 +2,22 @@
 
 .zg-contribution-content {
   cursor: text;
-  display: flex;
+text-align: left;
   align-items: flex-start;
   justify-content: left;
   width: 250px;
   margin: 20px 0;
   max-width: 270px;
-  overflow-wrap: break-word;
-  padding-bottom: 20px;
+  white-space: normal; 
+  padding-bottom: 10px;
   border: none;
   outline: none;
   color: $zg-purple;
   font-size: 15px;
   font-weight: bolder;
   background: none;
+  // white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .zg-edit-contribution-modal {
