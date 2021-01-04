@@ -142,15 +142,15 @@ const CurrentDiscussion: React.FC = () => {
       </div>
 
       <div className="zg-position-container">
-        <div className="zg-list">
+        <div className="zg-list zg-list-agree">
           <h3>Agree</h3>
           {agreeList}
         </div>
-        <div className="zg-list">
+        <div className="zg-list zg-list-neutral">
           <h3>Neutral</h3>
           {neutralList}
         </div>
-        <div className="zg-list">
+        <div className="zg-list zg-list-disagree">
           <h3>Disagree</h3>
           {disagreeList}
         </div>
