@@ -14,19 +14,16 @@ interface DeleteProps {
 
 const DeleteContribution: React.FC<DeleteProps> = (props) => {
   const [open, setOpen] = useState(false);
-  const [contributionDeleted, setContributionDeleted] = useState(false);
 
   let contributionId = props.contributionId;
 
   let points = props.points;
 
-  // if props.contributionPoints >1, delete all votes associated with contribution from votes table
-
   let deleteContribution = async () => {
     if (points != null) {
       await axios
         .delete(
-          `http://localhost:3000/api/removeVotesFromContribution/${contributionId}`
+          `https://fathomless-reaches-38159.herokuapp.com/api/removeVotesFromContribution/${contributionId}`
         )
         .then((res) => {
           console.log(res.status);
@@ -34,7 +31,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
     }
 
     await axios
-      .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
+      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();

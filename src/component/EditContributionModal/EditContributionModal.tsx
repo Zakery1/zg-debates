@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import EditIcon from "@material-ui/icons/Edit";
-
 import axios from "axios";
 
 import "./EditContributionModal.scss";
@@ -37,7 +35,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   let getSingleContribution = async () => {
     await axios
-      .get(`http://localhost:3000/api/getSingleContribution/${contributionId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getSingleContribution/${contributionId}`)
       .then((res) => {
         setContribution(res.data);
       });
@@ -45,7 +43,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   let editContribution = async () => {
     await axios
-      .put(`http://localhost:3000/api/editContribution/${contributionId}`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/editContribution/${contributionId}`, {
         updatedContribution: updatedContribution,
       })
       .then((res) => {

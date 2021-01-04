@@ -56,7 +56,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/getVotes/${userId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getVotes/${userId}`)
       .then((res) => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
@@ -71,7 +71,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/getContributions/${id}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
       .then((res) => {
         setContributions(res.data);
       });
