@@ -8,7 +8,7 @@ import "./Dashboard.scss";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="zg-dashboard">
+    <div>
       <CatagoriesBar />
     </div>
   );

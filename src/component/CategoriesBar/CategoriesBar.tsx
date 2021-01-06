@@ -6,17 +6,35 @@ import { Link } from "react-router-dom";
 
 import "./CategoriesBar.scss";
 
+import Category from "../Category/Category";
+
 interface CategoryItem {
   id: number | null;
-  category: string;
+  categoryName: string;
 }
 
 interface CategoriesArray extends Array<CategoryItem> {}
 
 const CategoriesBar: React.FC = () => {
+  const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [category, setCategory] = useState<CategoryItem>(
+    {id: null, categoryName: ""}
+  );
   const [categories, setCategories] = useState<CategoriesArray>([
-    { id: null, category: "" },
+    { id: null, categoryName: "" },
   ]);
+
+  const selectCategory = (id: number | null, name: string) => {
+    setShowCategory(true);
+    setCategory({id: id, categoryName: name})
+    return;
+  }
+
+  const hideCategory = () => {
+    setShowCategory(false);
+    setCategory({id: null, categoryName: ""})
+    return;
+  }
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -31,25 +49,26 @@ const CategoriesBar: React.FC = () => {
   const availableCategories = categories.map((category, index) => {
     return (
       <div className="zg-category-link-holder" key={index}>
-        <Link
-          className="zg-category"
-          to={{
-            pathname: `/${category.id}`,
-          }}
-        >
-          {category.category}
-        </Link>
+        <button onClick={() => selectCategory(category.id, category.categoryName)} className="zg-single-category">
+          {category.categoryName}
+        </button>
       </div>
     );
   });
 
   return (
+    <div className="zg-categories-bar-holder">
     <div className="zg-categories-bar">
-      <h1 className="zg-categories-bar-header">Current Topics</h1>
+      <span className="zg-categories-bar-header">Current Topics</span>
+      {/* < Category/> */}
       {/* <button onClick={() => fetchUser()}>Get cats</button> */}
+      {categories.length ? 
       <div className="zg-category-container">
-        {categories && availableCategories}
+          {availableCategories} 
       </div>
+      : ""}
+    </div>
+    {showCategory ? <Category hideCategory={hideCategory} categoryId={category.id} categoryName={category.categoryName} /> : ""}
     </div>
   );
 };

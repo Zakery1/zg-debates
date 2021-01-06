@@ -17,7 +17,7 @@ const User: React.FC = () => {
   //   fetchUser();
   // }, [username]);
 
-  return <div></div>;
+  return <span></span>;
 };
 
 export default User;

@@ -6,9 +6,10 @@
 
 @media only screen and (min-width: 501px) {
   .zg-dashboard {
-    min-height: 75vw;
+    // min-height: 75vw;
     display: flex;
-    align-items: stretch;
-    align-content: stretch;
+    flex-direction: row;
+    // align-items: stretch;
+    // align-content: stretch;
   }
 }

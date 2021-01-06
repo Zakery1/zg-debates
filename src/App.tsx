@@ -13,7 +13,6 @@ const App: React.FC = () => {
     <div className="App">
       <Header />
       <div className="zg-routes"> {routes()}</div>
-
       <Footer />
     </div>
   );

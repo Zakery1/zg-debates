@@ -12,12 +12,12 @@ import "./CreateDiscussion.scss";
 
 interface DiscussionData {
   creatorId: number;
-  categoryId: number;
+  categoryId: number | null;
   discussionName: string;
 }
 
 interface TopicParams {
-  categoryId: string;
+  categoryId: number | null;
 }
 
 const CreateDiscussion: React.FC<TopicParams> = (props) => {
@@ -29,7 +29,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
   const createDiscussion = async () => {
     let postData: DiscussionData = {
       creatorId: 1,
-      categoryId: +categoryId,
+      categoryId: categoryId,
       discussionName: discussionName,
     };
 

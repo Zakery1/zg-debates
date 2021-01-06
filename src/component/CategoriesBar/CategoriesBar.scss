@@ -1,44 +1,57 @@
 @import "../../style/style.scss";
 
 .zg-categories-bar {
+  text-align: left;
   margin: 0 40px;
   box-shadow: $box-shadow;
 
-  // background: yellow;
   .zg-categories-bar-header {
+    margin-top: 10px;
     color: $zg-purple;
+    padding-top: 10px;
   }
 
   .zg-category-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // border: 2px solid $zg-purple;
+    font-size: 10px;
     .zg-category-link-holder {
       padding: 10px;
       margin: 10px;
-      .zg-category {
+      .zg-single-category {
+        font-family: "Cormorant", serif;
+        text-align: left;
         font-size: 20px;
         font-weight: bolder;
         color: $zg-purple;
         text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
       }
     }
   }
 }
 
+.zg-category-popout {
+}
+
 @media only screen and (min-width: 501px) {
-  .zg-categories-bar {
-    min-width: 250px;
-    margin: 0;
-    .zg-category-container {
-      align-items: flex-start;
-      // flex-direction: row;
-      // margin: 0 40px;
-      .zg-category-link-holder {
-        padding: 10px;
-        margin: 10px;
-        .zg-category {
+  .zg-categories-bar-holder {
+    display: flex;
+    .zg-categories-bar {
+      width: 200px;
+      padding-top: 10px;
+      margin: 0;
+      min-height: 100vh;
+      .zg-categories-bar-header {
+      }
+      .zg-category-container {
+        align-items: flex-start;
+        .zg-category-link-holder {
+          padding: 10px 10px 10px 0;
+          margin: 10px 10px 10px 0;
+          .zg-single-category {
+            font-size: 15px;
+          }
         }
       }
     }
