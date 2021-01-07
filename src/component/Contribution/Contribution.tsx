@@ -16,7 +16,6 @@ interface ContributionProps {
 const Contribution: React.FC<ContributionProps> = (
   props: ContributionProps
 ) => {
-  console.log("contribution props here:", props);
   return (
     <div className="zg-contribution-container">
       <Vote

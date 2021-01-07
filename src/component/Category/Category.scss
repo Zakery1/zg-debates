@@ -35,9 +35,9 @@
 
 @media only screen and (min-width: 501px) {
   .zg-category {
-    background: green;
-    padding-left: 100px;
+    // padding-left: 100px;
     display: flex;
+    flex: 7;
     flex-direction: column;
 
     .zg-category-button-holder {

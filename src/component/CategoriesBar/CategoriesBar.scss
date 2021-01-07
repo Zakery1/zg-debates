@@ -38,7 +38,8 @@
   .zg-categories-bar-holder {
     display: flex;
     .zg-categories-bar {
-      width: 200px;
+      flex: 1;
+      // width: 200px;
       padding-top: 10px;
       margin: 0;
       min-height: 100vh;

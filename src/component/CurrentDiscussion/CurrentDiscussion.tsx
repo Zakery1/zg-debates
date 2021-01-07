@@ -11,10 +11,6 @@ import Contribution from "../Contribution/Contribution";
 
 import "./CurrentDiscussion.scss";
 
-interface discussionParams {
-  id: string;
-}
-
 interface ContributionItem {
   id: number | null;
   userId: number | null;
@@ -32,12 +28,22 @@ interface IVote {
   id: number | null;
 }
 
+interface DiscussionName {
+  discussionName: string;
+}
+
+// interface IContributionId {
+//   contributionId: number;
+// }
+
 interface VotesArray extends Array<IVote> {}
 
-const CurrentDiscussion: React.FC = () => {
-  const { id }: discussionParams = useParams();
-  let history = useHistory();
+const CurrentDiscussion: React.FC<DiscussionName> = (props) => {
+  const { id } = useParams<{ id: string | undefined }>();
+
   let userId = 1;
+
+  let history = useHistory();
 
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
@@ -73,6 +79,7 @@ const CurrentDiscussion: React.FC = () => {
     await axios
       .get(`http://localhost:3000/api/getContributions/${id}`)
       .then((res) => {
+        console.log("fetchContributions response", res);
         setContributions(res.data);
       });
   }, [id]);
@@ -126,16 +133,14 @@ const CurrentDiscussion: React.FC = () => {
 
   return (
     <div className="zg-current-discussion">
-      <h3 className="zg-current-discussion-header">
-        Discusion title/argument will go here.
-      </h3>
+      <h3 className="zg-current-discussion-header">discussion </h3>
       <div className="zg-discussion-buttons">
         <CreateContribution />
         <br />
         <Button
           className="zg-back-to-premises"
           type="button"
-          onClick={() => history.goBack()}
+          onClick={() => history.push("/")}
         >
           Discussions
         </Button>
