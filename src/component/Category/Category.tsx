@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import CreateDiscussion from "../CreateDiscussion/CreateDiscussion";
-import CurrentDiscussion from "../CurrentDiscussion/CurrentDiscussion";
-
 
 import axios from "axios";
 
 import "./Category.scss";
-
 
 interface CategoryProps {
   categoryId: number | null;
@@ -23,19 +20,15 @@ interface Discussion {
 
 interface DiscussionsArray extends Array<Discussion> {}
 
-const Category: React.FC<CategoryProps> = (
-  props
-) => {
+const Category: React.FC<CategoryProps> = (props) => {
   const [category, setCategory] = useState<CategoryProps>({
     categoryId: null,
     categoryName: "",
   });
 
-
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
     { id: null, discussion: "" },
   ]);
-
 
   useEffect(() => {
     const fetchDiscussions = async () => {

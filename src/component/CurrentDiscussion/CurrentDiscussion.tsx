@@ -28,20 +28,14 @@ interface IVote {
   id: number | null;
 }
 
-interface DiscussionName {
-  discussionName: string;
-}
-
-// interface IContributionId {
-//   contributionId: number;
-// }
-
 interface VotesArray extends Array<IVote> {}
 
-const CurrentDiscussion: React.FC<DiscussionName> = (props) => {
+const CurrentDiscussion: React.FC = () => {
   const { id } = useParams<{ id: string | undefined }>();
 
   let userId = 1;
+
+  const [discussionName, setDiscussionName] = useState("");
 
   let history = useHistory();
 
@@ -75,6 +69,14 @@ const CurrentDiscussion: React.FC<DiscussionName> = (props) => {
     return votes.includes(contributionId);
   };
 
+  let fetchDiscussionTitle =useCallback( async () => {
+    await axios.get(`http://localhost:3000/api/getDiscussionTitle/${id}`)
+    .then((res) => {
+      console.log("fetchDiscussionTitle response", res);
+      setDiscussionName(res.data);
+    });
+  }, [id]);
+
   let fetchContributions = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/getContributions/${id}`)
@@ -85,9 +87,10 @@ const CurrentDiscussion: React.FC<DiscussionName> = (props) => {
   }, [id]);
 
   useEffect(() => {
+    fetchDiscussionTitle();
     fetchVotes();
     fetchContributions();
-  }, [fetchContributions, fetchVotes]);
+  }, [fetchContributions, fetchVotes, fetchDiscussionTitle]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
@@ -133,7 +136,7 @@ const CurrentDiscussion: React.FC<DiscussionName> = (props) => {
 
   return (
     <div className="zg-current-discussion">
-      <h3 className="zg-current-discussion-header">discussion </h3>
+      <h3 className="zg-current-discussion-header">{discussionName} </h3>
       <div className="zg-discussion-buttons">
         <CreateContribution />
         <br />
