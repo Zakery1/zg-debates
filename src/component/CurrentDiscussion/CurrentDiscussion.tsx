@@ -138,15 +138,16 @@ const CurrentDiscussion: React.FC = () => {
     <div className="zg-current-discussion">
       <h3 className="zg-current-discussion-header">{discussionName} </h3>
       <div className="zg-discussion-buttons">
-        <CreateContribution />
+        <CreateContribution fetchContributions={fetchContributions} />
         <br />
-        <Button
+        {/* <Button
           className="zg-back-to-premises"
           type="button"
-          onClick={() => history.push("/")}
+          onClick={() =>  history.goBack()}
         >
+          
           Discussions
-        </Button>
+        </Button> */}
       </div>
 
       <div className="zg-position-container">

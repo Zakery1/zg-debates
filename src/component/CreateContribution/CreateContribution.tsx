@@ -19,11 +19,15 @@ interface ContributionData {
   points: number;
 }
 
+interface FetchContributions {
+  fetchContributions: () => Promise<void>;
+}
+
 interface DiscussionParams {
   id: string;
 }
 
-const CreateContribution: React.FC = () => {
+const CreateContribution: React.FC<FetchContributions> = (props) => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
@@ -70,7 +74,7 @@ const CreateContribution: React.FC = () => {
 
     setContribution("");
     handleClose();
-    history.go(0);
+    props.fetchContributions();
   };
 
   const choiceButtons = ["agree", "neutral", "disagree"].map(
