@@ -29,16 +29,17 @@ const Category: React.FC<CategoryProps> = (props) => {
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
     { id: null, discussion: "" },
   ]);
+  const fetchDiscussions = async () => {
+    await axios
+      .get(`http://localhost:3000/api/getDiscussions/${props.categoryId}`)
+      .then((res) => {
+        const retrievedDiscussions = res.data;
+        setDiscussions(retrievedDiscussions);
+      });
+  };
 
   useEffect(() => {
-    const fetchDiscussions = async () => {
-      await axios
-        .get(`http://localhost:3000/api/getDiscussions/${props.categoryId}`)
-        .then((res) => {
-          const retrievedDiscussions = res.data;
-          setDiscussions(retrievedDiscussions);
-        });
-    };
+
     fetchDiscussions();
     console.log("watch useeffect");
   }, [props.categoryId]);
@@ -61,7 +62,7 @@ const Category: React.FC<CategoryProps> = (props) => {
       </h2>
       <div className="zg-category-button-holder">
         <div className="zg-category-action-holder">
-          <CreateDiscussion categoryId={props.categoryId} />
+          <CreateDiscussion categoryId={props.categoryId} fetchDiscussions={fetchDiscussions} />
         </div>
 
         <br />

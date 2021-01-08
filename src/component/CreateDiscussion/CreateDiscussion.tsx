@@ -10,6 +10,10 @@ import axios from "axios";
 
 import "./CreateDiscussion.scss";
 
+interface FetchDiscussions {
+  fetchDiscussions: () => Promise<void>;
+}
+
 interface DiscussionData {
   creatorId: number;
   categoryId: number | null;
@@ -20,7 +24,7 @@ interface TopicParams {
   categoryId: number | null;
 }
 
-const CreateDiscussion: React.FC<TopicParams> = (props) => {
+const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
   let { categoryId } = props;
@@ -41,7 +45,7 @@ const CreateDiscussion: React.FC<TopicParams> = (props) => {
 
     setDiscussionName("");
     handleClose();
-    history.go(0);
+    props.fetchDiscussions();
   };
 
   const handleOpen = () => {
