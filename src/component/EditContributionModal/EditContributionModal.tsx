@@ -7,15 +7,13 @@ import "./EditContributionModal.scss";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 
-interface ContributionId {
+interface EditContributionProps {
   contributionId: number | null;
-}
-
-interface Contribution {
   contribution: string;
+  discussionName: string;
 }
 
-const EditContributionModal: React.FC<ContributionId & Contribution> = (
+const EditContributionModal: React.FC<EditContributionProps> = (
   props
 ) => {
   let { contributionId } = props;
@@ -57,7 +55,7 @@ const EditContributionModal: React.FC<ContributionId & Contribution> = (
 
   const body = (
     <div className="zg-edit-contribute-body">
-      <h2>Make a contribution to the discussion ---- discussion name</h2>
+      <h2>{props.discussionName}</h2>
 
       <textarea
         className="zg-edit-contribution-input"

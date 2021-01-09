@@ -11,6 +11,7 @@ interface ContributionProps {
   points: number;
   initialVote: boolean;
   contribution: string;
+  discussionName: string;
 }
 
 const Contribution: React.FC<ContributionProps> = (
@@ -24,6 +25,7 @@ const Contribution: React.FC<ContributionProps> = (
         initialVote={props.initialVote}
       />
       <EditContributionModal
+        discussionName={props.discussionName}
         contributionId={props.contributionId}
         contribution={props.contribution}
       />

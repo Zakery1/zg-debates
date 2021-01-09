@@ -65,12 +65,13 @@ const CurrentDiscussion: React.FC = () => {
     return votes.includes(contributionId);
   };
 
-  let fetchDiscussionTitle =useCallback( async () => {
-    await axios.get(`http://localhost:3000/api/getDiscussionTitle/${id}`)
-    .then((res) => {
-      console.log("fetchDiscussionTitle response", res);
-      setDiscussionName(res.data);
-    });
+  let fetchDiscussionTitle = useCallback(async () => {
+    await axios
+      .get(`http://localhost:3000/api/getDiscussionTitle/${id}`)
+      .then((res) => {
+        console.log("fetchDiscussionTitle response", res);
+        setDiscussionName(res.data);
+      });
   }, [id]);
 
   let fetchContributions = useCallback(async () => {
@@ -93,6 +94,7 @@ const CurrentDiscussion: React.FC = () => {
     .map((agreeItem) => {
       return (
         <Contribution
+          discussionName={discussionName}
           key={agreeItem.id}
           contributionId={agreeItem.id}
           points={agreeItem.points}
@@ -107,6 +109,7 @@ const CurrentDiscussion: React.FC = () => {
     .map((neutralItem) => {
       return (
         <Contribution
+          discussionName={discussionName}
           key={neutralItem.id}
           contributionId={neutralItem.id}
           points={neutralItem.points}
@@ -121,6 +124,7 @@ const CurrentDiscussion: React.FC = () => {
     .map((disagreeItem) => {
       return (
         <Contribution
+          discussionName={discussionName}
           key={disagreeItem.id}
           contributionId={disagreeItem.id}
           points={disagreeItem.points}
@@ -134,7 +138,10 @@ const CurrentDiscussion: React.FC = () => {
     <div className="zg-current-discussion">
       <h3 className="zg-current-discussion-header">{discussionName} </h3>
       <div className="zg-discussion-buttons">
-        <CreateContribution discussionName={discussionName} fetchContributions={fetchContributions} />
+        <CreateContribution
+          discussionName={discussionName}
+          fetchContributions={fetchContributions}
+        />
         <br />
         {/* <Button
           className="zg-back-to-premises"
