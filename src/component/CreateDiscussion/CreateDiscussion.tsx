@@ -14,6 +14,7 @@ interface FetchDiscussions {
   fetchDiscussions: () => Promise<void>;
 }
 
+
 interface DiscussionData {
   creatorId: number;
   categoryId: number | null;

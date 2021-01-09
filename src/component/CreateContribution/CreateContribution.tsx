@@ -20,11 +20,8 @@ interface ContributionData {
 }
 
 
-interface FetchContributions {
+interface CreateContributionProps {
   fetchContributions: () => Promise<void>;
-}
-
-interface DiscussionName {
   discussionName: string;
 }
 
@@ -33,7 +30,7 @@ interface DiscussionParams {
   id: string;
 }
 
-const CreateContribution: React.FC<FetchContributions & DiscussionName> = (props) => {
+const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");

@@ -13,9 +13,7 @@ interface EditContributionProps {
   discussionName: string;
 }
 
-const EditContributionModal: React.FC<EditContributionProps> = (
-  props
-) => {
+const EditContributionModal: React.FC<EditContributionProps> = (props) => {
   let { contributionId } = props;
 
   let [contribution, setContribution] = useState(props.contribution);
