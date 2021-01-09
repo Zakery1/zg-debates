@@ -1,6 +1,7 @@
 @import "../../style/style.scss";
 
 .zg-contribution {
+  font-family: $zg-font;
   outline: 0;
   .zg-modal-contribute {
     width: 170px;
@@ -10,6 +11,7 @@
     color: white;
     text-decoration: none;
     font-weight: bolder;
+    font-family: $zg-font;
   }
   .zg-modal-contribute:hover {
     background: $zg-purple;
@@ -17,6 +19,7 @@
 }
 
 .zg-contribution-modal {
+  font-family: $zg-font;
   outline: none;
   display: flex;
   justify-content: center;
@@ -30,6 +33,7 @@
     position: absolute;
     background: white;
     color: $zg-purple;
+
     h2 {
       margin-bottom: 2px;
     }
@@ -46,6 +50,7 @@
         color: $zg-purple;
         text-decoration: none;
         font-weight: bolder;
+        font-family: $zg-font;
       }
       .zg-choice-neutral {
         width: 80px;
@@ -55,6 +60,7 @@
         color: $zg-purple;
         text-decoration: none;
         font-weight: bolder;
+        font-family: $zg-font;
       }
       .zg-choice-disagree {
         width: 80px;
@@ -64,6 +70,7 @@
         color: $zg-purple;
         text-decoration: none;
         font-weight: bolder;
+        font-family: $zg-font;
       }
       .zg-choice-selected {
         color: white;
@@ -80,10 +87,12 @@
       border: none;
       outline: none;
       color: $zg-purple;
+      font-family: $zg-font;
     }
     .zg-submit-contribution {
       background: white;
       color: $zg-purple;
+      font-family: $zg-font;
       // box-shadow: $box-shadow;
     }
     .zg-disabled {
@@ -93,6 +102,7 @@
       margin-top: 10px;
       background: white;
       color: $zg-purple;
+      font-family: $zg-font;
     }
   }
 }

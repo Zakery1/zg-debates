@@ -1,6 +1,7 @@
 @import "../../style/style.scss";
 
 .zg-category {
+  // background: palevioletred;
   .zg-category-header {
     color: $zg-purple;
   }
@@ -18,10 +19,11 @@
       }
     }
     .zg-discussion-list {
-      box-shadow: $box-shadow;
+      // box-shadow: $box-shadow;
       padding: 20px;
-      margin: 30px 40px 0 40px;
+      margin: 0 40px 0 40px;
       .zg-category-link-holder {
+        
         margin: 5px;
         .zg-discussion-link {
           font-weight: bolder;
@@ -36,8 +38,9 @@
 @media only screen and (min-width: 501px) {
   .zg-category {
     // padding-left: 100px;
+    min-width: 1100px;
     display: flex;
-    flex: 7;
+
     flex-direction: column;
 
     .zg-category-button-holder {
@@ -49,11 +52,12 @@
       }
       .zg-discussion-list {
         min-height: 500px;
-        min-width: 300px;
+
         display: flex;
         flex-direction: column;
         .zg-category-link-holder {
-          margin: 20px 0;
+          text-align: left;
+          margin: 5px 0;
           .zg-discussion-link {
           }
         }

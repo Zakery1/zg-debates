@@ -89,7 +89,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       onClick={() => castVote()}
     >
       {voteDisabled ? <CheckCircleIcon style={{ color: "#rgb(128, 176, 56)", height: "15px"}} className="zg-vote-check" /> : ""}
-      <ArrowUpwardIcon className="zg-vote-arrow" />
+      <ArrowUpwardIcon style={{height: "20px"}} className="zg-vote-arrow" />
 
       <span className="zg-points">{points}</span>
     </Button>

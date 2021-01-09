@@ -19,15 +19,21 @@ interface ContributionData {
   points: number;
 }
 
+
 interface FetchContributions {
   fetchContributions: () => Promise<void>;
 }
+
+interface DiscussionName {
+  discussionName: string;
+}
+
 
 interface DiscussionParams {
   id: string;
 }
 
-const CreateContribution: React.FC<FetchContributions> = (props) => {
+const CreateContribution: React.FC<FetchContributions & DiscussionName> = (props) => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
@@ -64,10 +70,7 @@ const CreateContribution: React.FC<FetchContributions> = (props) => {
     }
 
     await axios
-      .post(
-        `http://localhost:3000/api/postContribution`,
-        { data: postData }
-      )
+      .post(`http://localhost:3000/api/postContribution`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });
@@ -96,7 +99,7 @@ const CreateContribution: React.FC<FetchContributions> = (props) => {
 
   const body = (
     <div className="zg-contribute-body">
-      <h2>Make a contribution to the discussion ---- discussion name</h2>
+      <h2>{props.discussionName}</h2>
       <div className="zg-choice-group">{choiceButtons}</div>
 
       <textarea
@@ -121,15 +124,21 @@ const CreateContribution: React.FC<FetchContributions> = (props) => {
           Submit Contribution
         </Button>
       )}
-      <br/>
+      <br />
 
-      <Button className="zg-cancel-contribution-modal" onClick={handleClose}>Cancel</Button>
+      <Button className="zg-cancel-contribution-modal" onClick={handleClose}>
+        Cancel
+      </Button>
     </div>
   );
 
   return (
     <div className="zg-contribution">
-      <Button className="zg-modal-contribute" type="button" onClick={handleOpen}>
+      <Button
+        className="zg-modal-contribute"
+        type="button"
+        onClick={handleOpen}
+      >
         Contribute
       </Button>
       <Modal

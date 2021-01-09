@@ -2,16 +2,18 @@
 
 .zg-create-discussion {
   .zg-open-discussion-modal {
+    font-family: $zg-font;
     width: 170px;
-    box-shadow: $box-shadow;
+    // box-shadow: $box-shadow;
     margin: 20px 0 0 0;
-    background: $zg-purple;
-    color: white;
+    color: $zg-purple;
+    // background: $zg-purple;
     text-decoration: none;
     font-weight: bolder;
   }
   .zg-open-discussion-modal:hover {
-    background: $zg-purple;
+    // background: $zg-purple;
+    color: $zg-purple;
   }
 }
 

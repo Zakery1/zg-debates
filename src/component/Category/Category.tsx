@@ -39,7 +39,6 @@ const Category: React.FC<CategoryProps> = (props) => {
   };
 
   useEffect(() => {
-
     fetchDiscussions();
     console.log("watch useeffect");
   }, [props.categoryId]);
@@ -47,10 +46,9 @@ const Category: React.FC<CategoryProps> = (props) => {
   let currentDiscussions = discussions.map((discussion, index) => {
     return (
       <div key={index} className="zg-category-link-holder">
-        <Link to={`/discussion/${discussion.id}`}>
+        <Link className="zg-discussion-link" to={`/discussion/${discussion.id}`}>
           {discussion.discussion}
         </Link>
-        <br />
       </div>
     );
   });
@@ -64,8 +62,6 @@ const Category: React.FC<CategoryProps> = (props) => {
         <div className="zg-category-action-holder">
           <CreateDiscussion categoryId={props.categoryId} fetchDiscussions={fetchDiscussions} />
         </div>
-
-        <br />
         {discussions.length ? (
           <div className="zg-discussion-list">{currentDiscussions}</div>
         ) : (

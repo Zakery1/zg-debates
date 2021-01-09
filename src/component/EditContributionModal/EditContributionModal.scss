@@ -13,11 +13,12 @@ text-align: left;
   border: none;
   outline: none;
   color: $zg-purple;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bolder;
   background: none;
   // white-space: normal;
   overflow-wrap: break-word;
+  font-family: $zg-font;
 }
 
 .zg-edit-contribution-modal {

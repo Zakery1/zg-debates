@@ -2,9 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 
-import { useHistory, useParams } from "react-router-dom";
-
-import Button from "@material-ui/core/Button";
+import { useParams } from "react-router-dom";
 
 import CreateContribution from "../CreateContribution/CreateContribution";
 import Contribution from "../Contribution/Contribution";
@@ -36,8 +34,6 @@ const CurrentDiscussion: React.FC = () => {
   let userId = 1;
 
   const [discussionName, setDiscussionName] = useState("");
-
-  let history = useHistory();
 
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
@@ -138,7 +134,7 @@ const CurrentDiscussion: React.FC = () => {
     <div className="zg-current-discussion">
       <h3 className="zg-current-discussion-header">{discussionName} </h3>
       <div className="zg-discussion-buttons">
-        <CreateContribution fetchContributions={fetchContributions} />
+        <CreateContribution discussionName={discussionName} fetchContributions={fetchContributions} />
         <br />
         {/* <Button
           className="zg-back-to-premises"
