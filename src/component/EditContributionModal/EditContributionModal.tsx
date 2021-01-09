@@ -4,8 +4,7 @@ import axios from "axios";
 
 import "./EditContributionModal.scss";
 
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
+import { Modal, Tooltip, IconButton, Button } from "@material-ui/core";
 
 interface EditContributionProps {
   contributionId: number | null;
@@ -89,9 +88,12 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   return (
     <div>
-      <button className="zg-contribution-content" onClick={handleOpen}>
-        {contribution}
-      </button>
+      <Tooltip placement="top" title="Edit">
+        <button className="zg-contribution-content" onClick={handleOpen}>
+          {contribution}
+        </button>
+      </Tooltip>
+
       <Modal
         className="zg-edit-contribution-modal"
         open={open}

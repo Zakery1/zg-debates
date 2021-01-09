@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import Modal from "@material-ui/core/Modal";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import Button from "@material-ui/core/Button";
+import axios from "axios";
+
+import DeleteIcon from "@material-ui/icons/DeleteOutlined";
+
+import { Modal, Tooltip, IconButton, Button } from "@material-ui/core";
 
 import "./DeleteContribution.scss";
-import axios from "axios";
 
 interface DeleteProps {
   contributionId: number | null;
@@ -67,9 +68,18 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
 
   return (
     <div>
-      <button onClick={handleOpen} className="zg-delete-contribution">
-        <DeleteOutlinedIcon style={{ height: "20px" }} />
-      </button>
+      <Tooltip
+        onClick={handleOpen}
+        title="Delete"
+      >
+        <IconButton
+          style={{ height: "30px", width: "30px" }}
+          aria-label="delete"
+        >
+          <DeleteIcon style={{ height: "17px" }} />
+        </IconButton>
+      </Tooltip>
+
       <Modal
         className="zg-delete-contribution-modal"
         open={open}
