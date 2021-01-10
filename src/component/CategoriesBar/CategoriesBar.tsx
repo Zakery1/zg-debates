@@ -23,6 +23,7 @@ const CategoriesBar: React.FC = () => {
     { id: null, categoryName: "" },
   ]);
 
+
   const selectCategory = (id: number | null, name: string) => {
     setShowCategory(true);
     setCategory({ id: id, categoryName: name });
