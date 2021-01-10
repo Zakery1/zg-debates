@@ -16,11 +16,22 @@ const Register: React.FC = () => {
   };
 
   const body = (
-    <div className="zg-register-modal-body">
-      <button type="button" onClick={handleClose}>
-        hey
-      </button>
-    </div>
+    <form className="zg-register-modal-body">
+        <h3 className="">Register</h3>
+        <input placeholder="username" type="text" className="zg-register-form" />
+        <input placeholder="password"  className="zg-register-form" />
+        <input placeholder="re-enter password" type="password" className="zg-register-form" />
+        <button className="zg-register-form" type="submit">
+          Submit
+        </button>
+        <button
+          className="zg-register-form"
+          type="button"
+          onClick={handleClose}
+        >
+          Cancel
+        </button>
+    </form>
   );
 
   return (
@@ -29,7 +40,7 @@ const Register: React.FC = () => {
         Register
       </button>
 
-      <Modal className="zg-register-modal" open={open} onClick={handleClose}>
+      <Modal className="zg-register-modal" open={open} onClose={handleClose}>
         {body}
       </Modal>
     </div>

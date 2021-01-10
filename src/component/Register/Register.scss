@@ -13,25 +13,44 @@
 }
 
 .zg-register-modal {
+
   outline: none;
   display: flex;
   justify-content: center;
   align-items: center;
-//   align-content: center;
   .zg-register-modal-body {
-    border-radius: 5px;
+    background: gold;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    // justify-content: s;
+
+    border-radius: 5px;
     height: 400px;
     width: 330px;
     position: absolute;
-    background: white;
+
     color: $zg-purple;
+    h3 {
+      margin-top: 50px;
+    }
+
+    .zg-register-form {
+      margin-top: 10px;
+      color: $zg-purple;
+      font-family: $zg-font;
+      font-weight: bolder;
+
+    }
   }
 }
 
 @media only screen and (min-width: 501px) {
   .zg-register-modal {
     .zg-register-modal-body {
+      background: gold;
       height: 500px;
       width: 700px;
     }
