@@ -28,12 +28,12 @@ const Login: React.FC = () => {
         <button type="submit" className="zg-login-button">
           Log In
         </button>
-        <Link className="zg-forgot-password" to="/login">
+        {/* <Link className="zg-forgot-password" to="/login">
           Forgot Password?
-        </Link>
-        <button className="zg-sign-up-button">
+        </Link> */}
+        {/* <button className="zg-sign-up-button"> */}
           <Register />
-        </button>
+        {/* </button>/ */}
       </form>
     </div>
   );
