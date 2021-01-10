@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+
 import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
@@ -19,12 +21,10 @@ interface ContributionData {
   points: number;
 }
 
-
 interface CreateContributionProps {
   fetchContributions: () => Promise<void>;
   discussionName: string;
 }
-
 
 interface DiscussionParams {
   id: string;
@@ -136,7 +136,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
         type="button"
         onClick={handleOpen}
       >
-        Contribute
+        Contribute <AddCircleIcon className="zg-plus-icon" />
       </Button>
       <Modal
         className="zg-contribution-modal"
