@@ -10,7 +10,7 @@ export default function routes() {
   return (
     <Switch>
       <Route exact path="/" component={Dashboard} />
-      <Route path="/login" component={Login} />
+      <Route exact path="/login" component={Login} />
       <Route exact path="/discussion/:id" component={CurrentDiscussion} />
       <Route path="/" render={() => <div>404</div>} />
     </Switch>
