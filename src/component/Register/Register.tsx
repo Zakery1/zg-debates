@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import ChekUsername from "../CheckUsername/CheckUsername";
+import CheckUsername from "../CheckUsername/CheckUsername";
 
 import { Modal, Button } from "@material-ui/core";
 
@@ -12,7 +12,7 @@ const Register: React.FC = () => {
   const [passwordTwo, setPasswordTwo] = useState<string>();
   const [passwordNote, setPasswordNote] = useState<string>();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
-
+  const [username, setUsername] = useState<string>("");
   const handleOpen = () => {
     setOpen(true);
   };
@@ -42,8 +42,15 @@ const Register: React.FC = () => {
   const body = (
     <form className="zg-register-modal-body">
       <h1 className="">Register</h1>
-      <input placeholder="username" type="text" className="zg-register-form" />
-      <ChekUsername />
+      <input
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="username"
+        type="text"
+        className="zg-register-form"
+      />
+
+      <CheckUsername username={username} />
+
       <input
         placeholder="password"
         type="password"
