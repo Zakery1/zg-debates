@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-import "./Register.scss";
+import ChekUsername from "../CheckUsername/CheckUsername";
 
 import { Modal, Button } from "@material-ui/core";
+
+import "./Register.scss";
 
 const Register: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -41,6 +43,7 @@ const Register: React.FC = () => {
     <form className="zg-register-modal-body">
       <h1 className="">Register</h1>
       <input placeholder="username" type="text" className="zg-register-form" />
+      <ChekUsername />
       <input
         placeholder="password"
         type="password"
@@ -56,6 +59,7 @@ const Register: React.FC = () => {
       <Button
         onClick={sumbitRegistration}
         className="zg-register-form form-button"
+        disabled={submitDisabled}
       >
         Submit
       </Button>

@@ -17,7 +17,7 @@ const Login: React.FC = () => {
           autoComplete="email"
           className="zg-login-username"
           type="text"
-          placeholder="Email or Username"
+          placeholder="Username"
         />
         <input
           autoComplete="currentPassword"
