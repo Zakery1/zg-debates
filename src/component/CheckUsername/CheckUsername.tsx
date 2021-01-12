@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 
 import axios from "axios";
 
@@ -6,10 +6,11 @@ import "./CheckUsername.scss";
 
 interface CheckUsernameProps {
   username: string;
+  validUsername: boolean;
+  setValidUsername: Dispatch<SetStateAction<boolean>>;
 }
 
 const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
-  const [validUsername, setValidUsername] = useState<boolean>(true);
 
   const checkUsername = async () => {
     if (props.username) {
@@ -19,9 +20,9 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
         )
         .then((res) => {
           if (res.data.length) {
-            setValidUsername(true);
+            props.setValidUsername(true);
           } else {
-            setValidUsername(false);
+            props.setValidUsername(false);
           }
         });
     }
@@ -33,7 +34,7 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
 
   return (
     <span>
-      {props.username.length > 1 && validUsername ? (
+      {props.username.length > 1 && props.validUsername ? (
         <span style={{ color: "red" }} className="zg-register-form">
           <br />
           Username Already Exists

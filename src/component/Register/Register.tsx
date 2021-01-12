@@ -13,6 +13,9 @@ const Register: React.FC = () => {
   const [passwordNote, setPasswordNote] = useState<string>();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
   const [username, setUsername] = useState<string>("");
+  const [validUsername, setValidUsername] = useState<boolean>(true);
+
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -49,7 +52,7 @@ const Register: React.FC = () => {
         className="zg-register-form"
       />
 
-      <CheckUsername username={username} />
+      <CheckUsername username={username} validUsername={validUsername} setValidUsername={setValidUsername} />
 
       <input
         placeholder="password"
