@@ -23,20 +23,21 @@ const CategoriesBar: React.FC = () => {
     { id: null, categoryName: "" },
   ]);
 
-
   const selectCategory = (id: number | null, name: string) => {
     setShowCategory(true);
     setCategory({ id: id, categoryName: name });
     return;
   };
 
+  const fetchCategories = async () => {
+    await axios.get(`http://localhost:3000/api/getCategories`).then((res) => {
+      const retrievedCategories = res.data;
+      setCategories(retrievedCategories);
+    });
+  };
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      await axios.get(`https://zg-debates.netlify.app/api/getCategories`).then((res) => {
-        const retrievedCategories = res.data;
-        setCategories(retrievedCategories);
-      });
-    };
+    console.log("watch use effect");
     fetchCategories();
   }, []);
 

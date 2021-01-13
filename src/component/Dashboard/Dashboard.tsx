@@ -9,7 +9,9 @@ import "./Dashboard.scss";
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <CatagoriesBar />
+      <React.StrictMode>
+        <CatagoriesBar />
+      </React.StrictMode>
     </div>
   );
 };
