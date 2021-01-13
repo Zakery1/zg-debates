@@ -20,7 +20,7 @@ const CategoriesBar: React.FC = () => {
     categoryName: "",
   });
   const [categories, setCategories] = useState<CategoriesArray>([
-    { id: 0, categoryName: "" },
+    { id: null, categoryName: "" },
   ]);
 
 
@@ -38,7 +38,7 @@ const CategoriesBar: React.FC = () => {
       });
     };
     fetchCategories();
-  }, []);
+  });
 
   const availableCategories = categories.map((category, index) => {
     return (
