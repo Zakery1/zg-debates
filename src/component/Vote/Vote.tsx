@@ -5,7 +5,7 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 import axios from "axios";
 
-import { Tooltip, IconButton, Button } from "@material-ui/core";
+import { Tooltip, IconButton } from "@material-ui/core";
 
 import "./Vote.scss";
 

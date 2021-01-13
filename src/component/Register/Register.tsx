@@ -1,20 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-import CheckUsername from "../CheckUsername/CheckUsername";
-
-import { Modal, Button } from "@material-ui/core";
+import axios from "axios";
 
 import "./Register.scss";
 
+import CheckUsername from "../CheckUsername/CheckUsername";
+import CheckPasswords from "../CheckPasswords/CheckPasswords";
+
+import { Modal, Button } from "@material-ui/core";
+
+interface RegistrationData {
+  username: string;
+  password: string;
+}
+
 const Register: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [password, setPassword] = useState<string | undefined>();
-  const [passwordTwo, setPasswordTwo] = useState<string>();
-  const [passwordNote, setPasswordNote] = useState<string>();
-  const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
+  const [passwordOne, setPasswordOne] = useState<string>("");
+  const [passwordTwo, setPasswordTwo] = useState<string>("");
   const [username, setUsername] = useState<string>("");
-  const [validUsername, setValidUsername] = useState<boolean>(true);
+  const [validPassword, setValidPassword] = useState<boolean>(false);
+  const [validUsername, setValidUsername] = useState<boolean>(false);
+  const [validRegistration, setValidRegistration] = useState<boolean>(false);
 
+  const sumbitRegistration = async () => {
+    let registrationData: RegistrationData = {
+      username: username,
+      password: passwordOne,
+    };
+    await axios
+      .post("http://localhost:3000/api/registerUser", { data: registrationData })
+      .then((res) => {
+        console.log(res.data);
+      });
+    handleClose();
+  };
+
+  const checkRegistration = useCallback(() => {
+    if (validPassword && validUsername) {
+      setValidRegistration(true);
+    }
+  }, [validPassword, validUsername]);
+
+  useEffect(() => {
+    checkRegistration();
+    console.log("watch it")
+  }, [checkRegistration]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -22,24 +53,6 @@ const Register: React.FC = () => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  //check if username is unqique
-
-  const checkPasswordsMatch = () => {
-    if (password && password.length < 7) {
-      return setPasswordNote("password too short");
-    } else if (password !== passwordTwo) {
-      return setPasswordNote("passwords don't match");
-    } else {
-      return true;
-    }
-  };
-
-  const sumbitRegistration = () => {
-    if (checkPasswordsMatch()) {
-      console.log("password good");
-    }
   };
 
   const body = (
@@ -52,32 +65,27 @@ const Register: React.FC = () => {
         className="zg-register-form"
       />
 
-      <CheckUsername username={username} validUsername={validUsername} setValidUsername={setValidUsername} />
+      <CheckUsername
+        username={username}
+        validUsername={validUsername}
+        setValidUsername={setValidUsername}
+      />
+      <CheckPasswords
+        passwordOne={passwordOne}
+        passwordTwo={passwordTwo}
+        setPasswordOne={setPasswordOne}
+        setPasswordTwo={setPasswordTwo}
+        setValidPassword={setValidPassword}
+        validPassword={validPassword}
+      />
 
-      <input
-        placeholder="password"
-        type="password"
-        className="zg-register-form"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        placeholder="re-enter password"
-        type="password"
-        className="zg-register-form"
-        onChange={(e) => setPasswordTwo(e.target.value)}
-      />
       <Button
         onClick={sumbitRegistration}
         className="zg-register-form form-button"
-        disabled={submitDisabled}
+        disabled={!validRegistration}
       >
         Submit
       </Button>
-      {passwordNote ? (
-        <span className="zg-password-invalid">{passwordNote}</span>
-      ) : (
-        ""
-      )}
 
       <Button
         className="zg-register-form form-button"

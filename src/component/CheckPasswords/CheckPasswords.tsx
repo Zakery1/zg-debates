@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 
 import "./CheckPasswords.scss";
 
@@ -22,7 +28,7 @@ const CheckPasswords: React.FC<SetPasswordProps> = (props) => {
     }
   };
 
-  const runValidation = () => {
+  const runValidation = useCallback(() => {
     if (props.passwordOne !== props.passwordTwo) {
       props.setValidPassword(false);
       setPasswordNote("passwords dont match");
@@ -33,11 +39,11 @@ const CheckPasswords: React.FC<SetPasswordProps> = (props) => {
       setPasswordNote("");
       props.setValidPassword(true);
     }
-  };
+  }, [props]);
 
   useEffect(() => {
     runValidation();
-  }, [props.passwordOne, props.passwordTwo]);
+  }, [runValidation]);
 
   return (
     <span style={{ display: "flex", flexDirection: "column" }}>

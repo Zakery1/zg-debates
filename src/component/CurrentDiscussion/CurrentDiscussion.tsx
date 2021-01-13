@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 import CreateContribution from "../CreateContribution/CreateContribution";
 import Contribution from "../Contribution/Contribution";
-import CategoriesBar from "../CategoriesBar/CategoriesBar";
 
 import "./CurrentDiscussion.scss";
 

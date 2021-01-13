@@ -4,7 +4,7 @@ import axios from "axios";
 
 import "./EditContributionModal.scss";
 
-import { Modal, Tooltip, IconButton, Button } from "@material-ui/core";
+import { Modal, Tooltip, Button } from "@material-ui/core";
 
 interface EditContributionProps {
   contributionId: number | null;

@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -34,8 +34,6 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const [open, setOpen] = useState(false);
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
-
-  let history = useHistory();
 
   const { id }: DiscussionParams = useParams();
 

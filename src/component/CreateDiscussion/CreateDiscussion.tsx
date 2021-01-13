@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
-import { useHistory } from "react-router-dom";
-
 import Button from "@material-ui/core/Button";
 
 import axios from "axios";
@@ -16,7 +14,7 @@ interface FetchDiscussions {
 
 
 interface DiscussionData {
-  creatorId: number;
+  creatorId: number | null;
   categoryId: number | null;
   discussionName: string;
 }
@@ -29,7 +27,6 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
   const [discussionName, setDiscussionName] = useState("");
   const [open, setOpen] = useState(false);
   let { categoryId } = props;
-  let history = useHistory();
 
   const createDiscussion = async () => {
     let postData: DiscussionData = {

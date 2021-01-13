@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import axios from "axios";
 
 import Register from "../Register/Register";
 
 import "./Login.scss";
 
 const Login: React.FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const login = async () => {
+    await axios
+      .post("http://localhost:3000/api/loginUser", {username: username, password: password})
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((error) => {
+        console.log("Axios error POST on login", error);
+        alert("invalid username of password");
+      });
+  };
+
   return (
     <div className="zg-login">
       <div className="zg-login-title">
@@ -18,21 +33,27 @@ const Login: React.FC = () => {
           className="zg-login-username"
           type="text"
           placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           autoComplete="currentPassword"
           className="zg-login-password"
           type="password"
           placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="zg-login-button">
+        <button
+          onClick={() => login()}
+          type="button"
+          className="zg-login-button"
+        >
           Log In
         </button>
         {/* <Link className="zg-forgot-password" to="/login">
           Forgot Password?
         </Link> */}
         {/* <button className="zg-sign-up-button"> */}
-          <Register />
+        <Register />
         {/* </button>/ */}
       </form>
     </div>

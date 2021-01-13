@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -21,27 +21,23 @@ interface Discussion {
 interface DiscussionsArray extends Array<Discussion> {}
 
 const Category: React.FC<CategoryProps> = (props) => {
-  const [category, setCategory] = useState<CategoryProps>({
-    categoryId: null,
-    categoryName: "",
-  });
 
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
     { id: null, discussion: "" },
   ]);
-  const fetchDiscussions = async () => {
+  const fetchDiscussions = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/getDiscussions/${props.categoryId}`)
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
-  };
+  },[props.categoryId]);
 
   useEffect(() => {
     fetchDiscussions();
     console.log("watch useeffect");
-  }, [props.categoryId]);
+  }, [fetchDiscussions]);
 
   let currentDiscussions = discussions.map((discussion, index) => {
     return (
