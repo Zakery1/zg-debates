@@ -20,7 +20,7 @@ const CategoriesBar: React.FC = () => {
     categoryName: "",
   });
   const [categories, setCategories] = useState<CategoriesArray>([
-    { id: null, categoryName: "" },
+    { id: 0, categoryName: "" },
   ]);
 
 
