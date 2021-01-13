@@ -53,7 +53,7 @@ const CheckPasswords: React.FC<SetPasswordProps> = (props) => {
         className="zg-register-form"
         onChange={(e) => setPassword(2, e.target.value)}
       />
-      {!props.validPassword && props.passwordOne.length > 0 ? passwordNote : "good"}
+      {!props.validPassword && props.passwordOne.length > 0 ? passwordNote : ""}
     </span>
   );
 };
