@@ -38,7 +38,7 @@ const CategoriesBar: React.FC = () => {
       });
     };
     fetchCategories();
-  });
+  }, []);
 
   const availableCategories = categories.map((category, index) => {
     return (
