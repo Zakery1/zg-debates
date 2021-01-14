@@ -29,6 +29,7 @@ const CategoriesBar: React.FC = () => {
 
   const fetchCategories = async () => {
     await axios.get(`https://zg-debates.netlify.app/api/getCategories`).then((res) => {
+      console.log("response", res)
       setCategories([...res.data]);
     });
   };
