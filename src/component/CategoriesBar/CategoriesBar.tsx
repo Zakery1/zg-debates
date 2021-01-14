@@ -19,9 +19,7 @@ const CategoriesBar: React.FC = () => {
     id: null,
     categoryName: "",
   });
-  const [categories, setCategories] = useState<CategoriesArray>([
-    { id: null, categoryName: "" },
-  ]);
+  const [categories, setCategories] = useState<CategoriesArray>([]);
 
   const selectCategory = (id: number | null, name: string) => {
     setShowCategory(true);
@@ -31,8 +29,7 @@ const CategoriesBar: React.FC = () => {
 
   const fetchCategories = async () => {
     await axios.get(`http://localhost:3000/api/getCategories`).then((res) => {
-      const retrievedCategories = res.data;
-      setCategories(retrievedCategories);
+      setCategories([...res.data]);
     });
   };
 

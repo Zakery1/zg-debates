@@ -50,23 +50,6 @@ const CurrentDiscussion: React.FC = () => {
 
   const [votes, setVotes] = useState<VotesArray>([]);
 
-  console.log("typeof contributions", typeof contributions, contributions);
-
-  // const [items, setItems] = useState([]);
-  // const [itemName, setItemName] = useState("");
-
-  // const addItem = event => {
-  //   event.preventDefault();
-  //   setItems([
-  //     ...items,
-  //     {
-  //       id: items.length,
-  //       name: itemName
-  //     }
-  //   ]);
-  //   setItemName("");
-  // };
-
   let fetchVotes = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/getVotes/${userId}`)
