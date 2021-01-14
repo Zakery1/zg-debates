@@ -24,7 +24,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
     if (points != null) {
       await axios
         .delete(
-          `http://localhost:3000/api/removeVotesFromContribution/${contributionId}`
+          `https://zg-debates.netlify.app/api/removeVotesFromContribution/${contributionId}`
         )
         .then((res) => {
           console.log(res.status);
@@ -32,7 +32,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
     }
 
     await axios
-      .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
+      .delete(`https://zg-debates.netlify.app/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();
