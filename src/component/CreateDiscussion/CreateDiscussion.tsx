@@ -38,7 +38,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     };
 
     await axios
-      .post(`https://zg-debates.netlify.app/api/createDiscussion`, { data: postData })
+      .post(`https://fathomless-reaches-38159.herokuapp.com/api/createDiscussion`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });
