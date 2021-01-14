@@ -48,16 +48,33 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
-  const [votes, setVotes] = useState<VotesArray>([{ id: null }]);
+  const [votes, setVotes] = useState<VotesArray>([]);
+
+  console.log("typeof contributions", typeof contributions, contributions);
+
+  // const [items, setItems] = useState([]);
+  // const [itemName, setItemName] = useState("");
+
+  // const addItem = event => {
+  //   event.preventDefault();
+  //   setItems([
+  //     ...items,
+  //     {
+  //       id: items.length,
+  //       name: itemName
+  //     }
+  //   ]);
+  //   setItemName("");
+  // };
 
   let fetchVotes = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getVotes/${userId}`)
+      .get(`http://localhost:3000/api/getVotes/${userId}`)
       .then((res) => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
         });
-        setVotes(contributionIds);
+        setVotes(prevVotes => [...prevVotes,...contributionIds]);
       });
   }, [userId]);
 
@@ -67,7 +84,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchDiscussionTitle = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getDiscussionTitle/${id}`)
+      .get(`http://localhost:3000/api/getDiscussionTitle/${id}`)
       .then((res) => {
         console.log("fetchDiscussionTitle response", res);
         setDiscussionName(res.data);
@@ -76,7 +93,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getContributions/${id}`)
+      .get(`http://localhost:3000/api/getContributions/${id}`)
       .then((res) => {
         console.log("fetchContributions response", res);
         setContributions(res.data);

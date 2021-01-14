@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
 
 import Button from "@material-ui/core/Button";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+
 
 import axios from "axios";
 
@@ -36,7 +38,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     };
 
     await axios
-      .post(`https://zg-debates.netlify.app/api/createDiscussion`, { data: postData })
+      .post(`http://localhost:3000/api/createDiscussion`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });
@@ -90,6 +92,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     <div className="zg-create-discussion">
       <Button className="zg-open-discussion-modal" type="button" onClick={handleOpen}>
         Create Discussion
+        <AddCircleIcon className="zg-add-icon"/>
       </Button>
       <Modal
         className="zg-create-discussion-modal"

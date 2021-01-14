@@ -30,7 +30,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let getSingleContribution = async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getSingleContribution/${contributionId}`)
+      .get(`http://localhost:3000/api/getSingleContribution/${contributionId}`)
       .then((res) => {
         setContribution(res.data);
       });
@@ -38,7 +38,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let editContribution = async () => {
     await axios
-      .put(`https://zg-debates.netlify.app/api/editContribution/${contributionId}`, {
+      .put(`http://localhost:3000/api/editContribution/${contributionId}`, {
         updatedContribution: updatedContribution,
       })
       .then((res) => {

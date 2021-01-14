@@ -27,7 +27,7 @@ const Category: React.FC<CategoryProps> = (props) => {
   ]);
   const fetchDiscussions = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getDiscussions/${props.categoryId}`)
+      .get(`http://localhost:3000/api/getDiscussions/${props.categoryId}`)
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);

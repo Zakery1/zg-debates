@@ -32,7 +32,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     }, 2000);
 
     await axios
-      .put(`https://zg-debates.netlify.app/api/subtractPointFromContribution`, {
+      .put(`http://localhost:3000/api/subtractPointFromContribution`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
@@ -40,7 +40,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`https://zg-debates.netlify.app/api/removeVoteFromRecord`, {
+      .delete(`http://localhost:3000/api/removeVoteFromRecord`, {
         data: deleteConfig,
       })
       .then((res) => {
@@ -55,14 +55,14 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       setVoteDisabled(false);
     }, 2000);
     await axios
-      .put(`https://zg-debates.netlify.app/api/addPointToContribution`, {
+      .put(`http://localhost:3000/api/addPointToContribution`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
         console.log(res.status);
       });
     await axios
-      .post(`https://zg-debates.netlify.app/api/addVoteToRecord`, {
+      .post(`http://localhost:3000/api/addVoteToRecord`, {
         userId: 1,
         contributionId: props.contributionId,
       })

@@ -3,11 +3,16 @@
 .zg-create-discussion {
   .zg-open-discussion-modal {
     font-family: $zg-font;
-    width: 170px;
+    width: 200px;
     margin: 20px 0 0 0;
     color: $zg-purple;
     text-decoration: none;
     font-weight: bolder;
+
+    .zg-add-icon {
+      margin: 0 4px;
+      height: 17px;
+    }
   }
   .zg-open-discussion-modal:hover {
     color: $zg-purple;
