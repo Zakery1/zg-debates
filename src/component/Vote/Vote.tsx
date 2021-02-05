@@ -107,7 +107,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
           />
         </IconButton>
       </Tooltip>
-      <span style={{ color: voted ? "#B50097" : "grey" }} className="zg-points">
+      <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
         {points}
       </span>
     </div>
