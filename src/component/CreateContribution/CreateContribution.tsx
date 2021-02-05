@@ -65,7 +65,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
     }
 
     await axios
-      .post(`http://localhost:3000/api/postContribution`, { data: postData })
+      .post(`https://zg-debates.netlify.app/api/postContribution`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

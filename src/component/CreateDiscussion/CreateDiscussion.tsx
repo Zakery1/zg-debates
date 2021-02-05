@@ -38,7 +38,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     };
 
     await axios
-      .post(`http://localhost:3000/api/createDiscussion`, { data: postData })
+      .post(`https://zg-debates.netlify.app/api/createDiscussion`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

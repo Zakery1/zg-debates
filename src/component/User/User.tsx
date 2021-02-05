@@ -8,7 +8,7 @@ const User: React.FC = () => {
   // useEffect(() => {
   //   async function fetchUser() {
   //     await axios
-  //       .get(`http://localhost:3000/api/getUserById/1`)
+  //       .get(`https://zg-debates.netlify.app/api/getUserById/1`)
   //       .then((res) => {
   //         const user = res.data;
   //         setUsername(user);

@@ -12,7 +12,7 @@ const Login: React.FC = () => {
 
   const login = async () => {
     await axios
-      .post("http://localhost:3000/api/loginUser", {username: username, password: password})
+      .post("https://zg-debates.netlify.app/api/loginUser", {username: username, password: password})
       .then((res) => {
         console.log("res", res);
       })
