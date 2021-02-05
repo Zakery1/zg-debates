@@ -84,7 +84,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     <div className="zg-vote-container">
       {voteDisabled ? (
         <CheckCircleIcon
-          style={{ color: voted ? "#B50097" : "grey", height: "15px" }}
+          style={{ color: voted ? "#24519b" : "grey", height: "15px" }}
           className="zg-vote-check"
         />
       ) : (
@@ -94,7 +94,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
         <IconButton
           disabled={voteDisabled}
           style={{
-            color: voted ? "#B50097" : "grey",
+            color: voted ? "#24519b" : "grey",
             height: "30px",
             width: "30px",
           }}
