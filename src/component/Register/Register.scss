@@ -1,5 +1,9 @@
 @import "../../style/style.scss";
 
+h1 {
+  font-family: $zg-font;
+}
+
 .zg-register-button {
   cursor: pointer;
   margin: 20px 0;
@@ -10,6 +14,7 @@
   font-weight: bolder;
   background: none;
   font-family: $zg-font;
+  
 }
 
 .zg-register-modal {
@@ -46,13 +51,14 @@
       background: none;
       margin-top: 25px;
       color: $zg-purple;
-      font-family: $zg-font;
+      
       font-weight: bolder;
       font-size: 18px;
     }
     .form-button {
       width: 100px;
       cursor: pointer;
+      font-family: $zg-font;
     }
   }
 }

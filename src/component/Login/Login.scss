@@ -5,8 +5,9 @@
   flex-direction: column;
   justify-content: space-around;
   .zg-login-title {
-    color: $zg-purple;
     font-family: $zg-font;
+    color: $zg-purple;
+    
   }
   .zg-login-portal {
     margin: 20px;
@@ -14,7 +15,7 @@
     flex-direction: column;
     .zg-login-username {
       border: none;
-      font-family: $zg-font;
+      
       font-size: 18px;
       height: 30px;
       margin: 30px 40px 10px 40px;
@@ -27,7 +28,7 @@
       height: 30px;
       padding-left: 7px;
       border: none;
-      font-family: $zg-font;
+      
       font-size: 18px;
     }
     .zg-login-button:hover {
@@ -48,7 +49,7 @@
       font-weight: bolder;
       height: 30px;
       color: $zg-purple;
-      font-family: $zg-font;
+      
       font-size: 18px;
       text-decoration: none;
     }
@@ -63,7 +64,7 @@
       margin: 20px 40px;
       height: 40px;
       border: none;
-      font-family: $zg-font;
+      // font-family: $zg-font;
       font-size: 18px;
     }
   }

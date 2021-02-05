@@ -24,7 +24,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
     if (points != null) {
       await axios
         .delete(
-          `https://fathomless-reaches-38159.herokuapp.com/api/removeVotesFromContribution/${contributionId}`
+          `http://localhost:3000/api/removeVotesFromContribution/${contributionId}`
         )
         .then((res) => {
           console.log(res.status);
@@ -32,7 +32,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
     }
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
+      .delete(`http://localhost:3000/api/deleteContribution/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();
