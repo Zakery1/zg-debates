@@ -65,7 +65,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
     }
 
     await axios
-      .post(`https://zg-debates.netlify.app/api/postContribution`, { data: postData })
+      .post(`https://fathomless-reaches-38159.herokuapp.com/api/postContribution`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

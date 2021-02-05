@@ -32,7 +32,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     }, 2000);
 
     await axios
-      .put(`https://zg-debates.netlify.app/api/subtractPointFromContribution`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/subtractPointFromContribution`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
@@ -40,7 +40,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`https://zg-debates.netlify.app/api/removeVoteFromRecord`, {
+      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/removeVoteFromRecord`, {
         data: deleteConfig,
       })
       .then((res) => {
@@ -55,14 +55,14 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       setVoteDisabled(false);
     }, 2000);
     await axios
-      .put(`https://zg-debates.netlify.app/api/addPointToContribution`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/addPointToContribution`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
         console.log(res.status);
       });
     await axios
-      .post(`https://zg-debates.netlify.app/api/addVoteToRecord`, {
+      .post(`https://fathomless-reaches-38159.herokuapp.com/api/addVoteToRecord`, {
         userId: 1,
         contributionId: props.contributionId,
       })

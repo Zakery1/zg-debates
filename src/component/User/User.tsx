@@ -8,7 +8,7 @@ const User: React.FC = () => {
   // useEffect(() => {
   //   async function fetchUser() {
   //     await axios
-  //       .get(`https://zg-debates.netlify.app/api/getUserById/1`)
+  //       .get(`https://fathomless-reaches-38159.herokuapp.com/api/getUserById/1`)
   //       .then((res) => {
   //         const user = res.data;
   //         setUsername(user);

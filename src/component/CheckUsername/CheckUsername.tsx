@@ -15,7 +15,7 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
     if (props.username) {
       await axios
         .get(
-          `https://zg-debates.netlify.app/api/checkIfUsernameExists/${props.username}`
+          `https://fathomless-reaches-38159.herokuapp.com/api/checkIfUsernameExists/${props.username}`
         )
         .then((res) => {
           if (res.data.length > 0) {

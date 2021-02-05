@@ -52,7 +52,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getVotes/${userId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getVotes/${userId}`)
       .then((res) => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
@@ -67,7 +67,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchDiscussionTitle = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getDiscussionTitle/${id}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getDiscussionTitle/${id}`)
       .then((res) => {
         console.log("fetchDiscussionTitle response", res);
         setDiscussionName(res.data);
@@ -76,7 +76,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getContributions/${id}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getContributions/${id}`)
       .then((res) => {
         console.log("fetchContributions response", res);
         setContributions(res.data);

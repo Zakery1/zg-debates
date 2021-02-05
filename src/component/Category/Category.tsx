@@ -27,7 +27,7 @@ const Category: React.FC<CategoryProps> = (props) => {
   ]);
   const fetchDiscussions = useCallback(async () => {
     await axios
-      .get(`https://zg-debates.netlify.app/api/getDiscussions/${props.categoryId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${props.categoryId}`)
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);

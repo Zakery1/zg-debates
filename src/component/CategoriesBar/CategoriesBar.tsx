@@ -28,7 +28,7 @@ const CategoriesBar: React.FC = () => {
   };
 
   const fetchCategories = async () => {
-    await axios.get(`https://zg-debates.netlify.app/api/getCategories`).then((res) => {
+    await axios.get(`https://fathomless-reaches-38159.herokuapp.com/api/getCategories`).then((res) => {
       console.log("response", res)
       setCategories([...res.data]);
     });
