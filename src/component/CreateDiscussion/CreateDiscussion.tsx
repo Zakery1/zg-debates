@@ -38,7 +38,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     };
 
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/createDiscussion`, { data: postData })
+      .post(`http://localhost:3000/api/discussions`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

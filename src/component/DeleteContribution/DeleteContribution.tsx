@@ -23,16 +23,14 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
   let deleteContribution = async () => {
     if (points != null) {
       await axios
-        .delete(
-          `https://fathomless-reaches-38159.herokuapp.com/api/removeVotesFromContribution/${contributionId}`
-        )
+        .delete(`http://localhost:3000/api/votes/${contributionId}`)
         .then((res) => {
           console.log(res.status);
         });
     }
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/deleteContribution/${contributionId}`)
+      .delete(`http://localhost:3000/api/contributions/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();
@@ -68,10 +66,7 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
 
   return (
     <div>
-      <Tooltip
-        onClick={handleOpen}
-        title="Delete"
-      >
+      <Tooltip onClick={handleOpen} title="Delete">
         <IconButton
           style={{ height: "30px", width: "30px" }}
           aria-label="delete"

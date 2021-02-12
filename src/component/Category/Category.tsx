@@ -15,24 +15,26 @@ interface CategoryProps {
 
 interface Discussion {
   id: number | null;
-  discussion: string;
+  name: string;
 }
 
 interface DiscussionsArray extends Array<Discussion> {}
 
 const Category: React.FC<CategoryProps> = (props) => {
-
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
-    { id: null, discussion: "" },
+    { id: null, name: "" },
   ]);
   const fetchDiscussions = useCallback(async () => {
     await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/getDiscussions/${props.categoryId}`)
+      .get(
+        `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
+      )
       .then((res) => {
+        console.log("res", res);
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
-  },[props.categoryId]);
+  }, [props.categoryId]);
 
   useEffect(() => {
     fetchDiscussions();
@@ -42,8 +44,11 @@ const Category: React.FC<CategoryProps> = (props) => {
   let currentDiscussions = discussions.map((discussion, index) => {
     return (
       <div key={index} className="zg-category-link-holder">
-        <Link className="zg-discussion-link" to={`/discussion/${discussion.id}`}>
-          {discussion.discussion}
+        <Link
+          className="zg-discussion-link"
+          to={`/discussion/${discussion.id}`}
+        >
+          {discussion.name}
         </Link>
       </div>
     );
@@ -56,7 +61,10 @@ const Category: React.FC<CategoryProps> = (props) => {
       </h2>
       <div className="zg-category-button-holder">
         <div className="zg-category-action-holder">
-          <CreateDiscussion categoryId={props.categoryId} fetchDiscussions={fetchDiscussions} />
+          <CreateDiscussion
+            categoryId={props.categoryId}
+            fetchDiscussions={fetchDiscussions}
+          />
         </div>
         {discussions.length ? (
           <div className="zg-discussion-list">{currentDiscussions}</div>

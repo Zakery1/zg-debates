@@ -32,7 +32,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     }, 2000);
 
     await axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/subtractPointFromContribution`, {
+      .put(`http://localhost:3000/api/contributions`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
@@ -40,7 +40,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/removeVoteFromRecord`, {
+      .delete(`http://localhost:3000/api/votes`, {
         data: deleteConfig,
       })
       .then((res) => {
@@ -55,14 +55,14 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       setVoteDisabled(false);
     }, 2000);
     await axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/addPointToContribution`, {
+      .put(`http://localhost:3000/api/contributions`, {
         contributionId: props.contributionId,
       })
       .then((res) => {
         console.log(res.status);
       });
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/addVoteToRecord`, {
+      .post(`http://localhost:3000/api/votes`, {
         userId: 1,
         contributionId: props.contributionId,
       })
@@ -91,6 +91,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
         ""
       )}
       <Tooltip title={voted ? "Remove Vote" : "Vote"}>
+        <span>
         <IconButton
           disabled={voteDisabled}
           style={{
@@ -106,6 +107,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
             className="zg-vote-arrow"
           />
         </IconButton>
+        </span>
       </Tooltip>
       <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
         {points}
