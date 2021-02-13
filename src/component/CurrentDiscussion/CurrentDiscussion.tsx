@@ -29,7 +29,7 @@ interface IVote {
 interface VotesArray extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
-  const { id } = useParams<{ id: string | undefined }>();
+  const { categoryId } = useParams<{ categoryId: string | undefined }>();
 
   let userId = 1;
 
@@ -67,21 +67,21 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchDiscussionTitle = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/discussions/?discussionId=${id}`)
+      .get(`http://localhost:3000/api/discussions/:${categoryId}`)
       .then((res) => {
         console.log("fetchDiscussionTitle response", res);
         setDiscussionName(res.data);
       });
-  }, [id]);
+  }, [categoryId]);
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/contributions/${id}`)
+      .get(`http://localhost:3000/api/contributions/${categoryId}`)
       .then((res) => {
         console.log("fetchContributions response", res);
         setContributions(res.data);
       });
-  }, [id]);
+  }, [categoryId]);
 
   useEffect(() => {
     fetchDiscussionTitle();

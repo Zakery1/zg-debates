@@ -27,10 +27,10 @@ const Category: React.FC<CategoryProps> = (props) => {
   const fetchDiscussions = useCallback(async () => {
     await axios
       .get(
-        `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
+        `http://localhost:3000/api/discussions/${props.categoryId}`
       )
       .then((res) => {
-        console.log("res", res);
+        console.log("res", res.data);
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
