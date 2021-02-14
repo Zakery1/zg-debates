@@ -29,7 +29,8 @@ interface IVote {
 interface VotesArray extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
-  const { categoryId } = useParams<{ categoryId: string | undefined }>();
+  const { id } = useParams<{ id: string | undefined }>();
+  console.log("first cat id", id);
 
   let userId = 1;
 
@@ -50,6 +51,16 @@ const CurrentDiscussion: React.FC = () => {
 
   const [votes, setVotes] = useState<VotesArray>([]);
 
+  let fetchDiscussion = useCallback(async () => {
+    console.log("categoryid", id);
+    await axios
+      .get(`http://localhost:3000/api/discussions/${id}`)
+      .then((res) => {
+        console.log("fetchDiscussion response", res);
+        setDiscussionName(res.data);
+      });
+  }, [id]);
+
   let fetchVotes = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/contributions/${userId}`)
@@ -57,7 +68,7 @@ const CurrentDiscussion: React.FC = () => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
         });
-        setVotes(prevVotes => [...prevVotes,...contributionIds]);
+        setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
       });
   }, [userId]);
 
@@ -65,23 +76,16 @@ const CurrentDiscussion: React.FC = () => {
     return votes.includes(contributionId);
   };
 
-  let fetchDiscussion = useCallback(async () => {
-    await axios
-      .get(`http://localhost:3000/api/discussions/:${categoryId}`)
-      .then((res) => {
-        console.log("fetchDiscussion response", res);
-        setDiscussionName(res.data);
-      });
-  }, [categoryId]);
-
   let fetchContributions = useCallback(async () => {
+    console.log("categoryid", id);
+
     await axios
-      .get(`http://localhost:3000/api/contributions/${categoryId}`)
+      .get(`http://localhost:3000/api/contributions/${id}`)
       .then((res) => {
         console.log("fetchContributions response", res);
         setContributions(res.data);
       });
-  }, [categoryId]);
+  }, [id]);
 
   useEffect(() => {
     fetchDiscussion();
