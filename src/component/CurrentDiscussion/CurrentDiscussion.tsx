@@ -65,11 +65,11 @@ const CurrentDiscussion: React.FC = () => {
     return votes.includes(contributionId);
   };
 
-  let fetchDiscussionTitle = useCallback(async () => {
+  let fetchDiscussion = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/discussions/:${categoryId}`)
       .then((res) => {
-        console.log("fetchDiscussionTitle response", res);
+        console.log("fetchDiscussion response", res);
         setDiscussionName(res.data);
       });
   }, [categoryId]);
@@ -84,10 +84,10 @@ const CurrentDiscussion: React.FC = () => {
   }, [categoryId]);
 
   useEffect(() => {
-    fetchDiscussionTitle();
+    fetchDiscussion();
     fetchVotes();
     fetchContributions();
-  }, [fetchContributions, fetchVotes, fetchDiscussionTitle]);
+  }, [fetchContributions, fetchVotes, fetchDiscussion]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
