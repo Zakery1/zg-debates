@@ -29,8 +29,8 @@ interface IVote {
 interface VotesArray extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
-  const { id } = useParams<{ id: string | undefined }>();
-  console.log("first cat id", id);
+  const { discussionId } = useParams<{ discussionId: string | undefined }>();
+  console.log("discussionId", discussionId);
 
   let userId = 1;
 
@@ -52,40 +52,46 @@ const CurrentDiscussion: React.FC = () => {
   const [votes, setVotes] = useState<VotesArray>([]);
 
   let fetchDiscussion = useCallback(async () => {
-    console.log("categoryid", id);
+    // console.log("categoryid", id);
     await axios
-      .get(`http://localhost:3000/api/discussions/${id}`)
+      .get(`http://localhost:3000/api/discussions/${discussionId}`)
       .then((res) => {
-        console.log("fetchDiscussion response", res);
-        setDiscussionName(res.data);
+        // console.log("fetchDiscussion response", res);
+        setDiscussionName(res.data.name);
       });
-  }, [id]);
+  }, [discussionId]);
 
   let fetchVotes = useCallback(async () => {
     await axios
       .get(`http://localhost:3000/api/contributions/${userId}`)
       .then((res) => {
+        console.log("fetchvotes response", res);
         let contributionIds = res.data.map((contribution: any) => {
+          console.log("@@@@fetch votes contribution", contribution)
           return contribution.contributionId;
         });
+        console.log("contributionIds", contributionIds);
         setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
       });
   }, [userId]);
 
   const userVotes = (contributionId: any) => {
+    // console.log("contributionId-----", contributionId);
+    // console.log("votes array", votes)
+
     return votes.includes(contributionId);
   };
 
   let fetchContributions = useCallback(async () => {
-    console.log("categoryid", id);
+    console.log("categoryid", discussionId);
 
     await axios
-      .get(`http://localhost:3000/api/contributions/${id}`)
+      .get(`http://localhost:3000/api/contributions/${discussionId}`)
       .then((res) => {
-        console.log("fetchContributions response", res);
+        // console.log("fetchContributions response", res);
         setContributions(res.data);
       });
-  }, [id]);
+  }, [discussionId]);
 
   useEffect(() => {
     fetchDiscussion();

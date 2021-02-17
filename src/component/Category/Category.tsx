@@ -31,7 +31,7 @@ const Category: React.FC<CategoryProps> = (props) => {
         `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
       )
       .then((res) => {
-        console.log("res for a discussion", res.data);
+        // console.log("res for a discussion", res.data);
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
