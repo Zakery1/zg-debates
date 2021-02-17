@@ -36,6 +36,8 @@ const CurrentDiscussion: React.FC = () => {
 
   const [discussionName, setDiscussionName] = useState("");
 
+  const [votes, setVotes] = useState<VotesArray>([]);
+
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
       id: null,
@@ -49,8 +51,6 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
-  const [votes, setVotes] = useState<VotesArray>([]);
-
   let fetchDiscussion = useCallback(async () => {
     // console.log("categoryid", id);
     await axios
@@ -63,7 +63,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/contributions/${userId}`)
+      .get(`http://localhost:3000/api/contributions/?userId=${userId}`)
       .then((res) => {
         console.log("fetchvotes response", res);
         let contributionIds = res.data.map((contribution: any) => {
@@ -83,7 +83,7 @@ const CurrentDiscussion: React.FC = () => {
   };
 
   let fetchContributions = useCallback(async () => {
-    console.log("categoryid", discussionId);
+    console.log("discussion", discussionId);
 
     await axios
       .get(`http://localhost:3000/api/contributions/${discussionId}`)

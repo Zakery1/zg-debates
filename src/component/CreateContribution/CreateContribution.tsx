@@ -27,7 +27,7 @@ interface CreateContributionProps {
 }
 
 interface DiscussionParams {
-  id: string;
+  discussionId: string;
 }
 
 const CreateContribution: React.FC<CreateContributionProps> = (props) => {
@@ -35,7 +35,8 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
 
-  const { id }: DiscussionParams = useParams();
+
+  const { discussionId }: DiscussionParams = useParams();
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,7 +49,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const submitContribution = async () => {
     let postData: ContributionData = {
       userId: 1,
-      discussionId: +id,
+      discussionId: +discussionId,
       contribution: contribution,
       agree: null,
       neutral: null,
