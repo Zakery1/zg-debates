@@ -25,6 +25,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   let deleteConfig = { userId: 1, contributionId: props.contributionId };
 
   let removeVote = async () => {
+    console.log("remove a vote");
     setPoints(points - 1);
     setVoteDisabled(true);
     setTimeout(() => {
@@ -34,6 +35,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     await axios
       .put(`http://localhost:3000/api/contributions`, {
         contributionId: props.contributionId,
+        voteFor: false,
       })
       .then((res) => {
         console.log(res.status);
@@ -49,6 +51,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   let addVote = async () => {
+    console.log("add a vote");
     setVoteDisabled(true);
     setPoints(points + 1);
     setTimeout(() => {
@@ -57,6 +60,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     await axios
       .put(`http://localhost:3000/api/contributions`, {
         contributionId: props.contributionId,
+        voteFor: true,
       })
       .then((res) => {
         console.log(res.status);
@@ -92,21 +96,21 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       )}
       <Tooltip title={voted ? "Remove Vote" : "Vote"}>
         <span>
-        <IconButton
-          disabled={voteDisabled}
-          style={{
-            color: voted ? "#24519b" : "grey",
-            height: "30px",
-            width: "30px",
-          }}
-          aria-label="vote"
-          onClick={() => castVote()}
-        >
-          <ArrowUpwardIcon
-            style={{ height: "20px" }}
-            className="zg-vote-arrow"
-          />
-        </IconButton>
+          <IconButton
+            disabled={voteDisabled}
+            style={{
+              color: voted ? "#24519b" : "grey",
+              height: "30px",
+              width: "30px",
+            }}
+            aria-label="vote"
+            onClick={() => castVote()}
+          >
+            <ArrowUpwardIcon
+              style={{ height: "20px" }}
+              className="zg-vote-arrow"
+            />
+          </IconButton>
         </span>
       </Tooltip>
       <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">

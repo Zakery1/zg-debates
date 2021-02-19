@@ -28,11 +28,15 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
     setOpen(false);
   };
 
-  let getSingleContribution = async () => {
+  let getEditedContribution = async () => {
     await axios
-      .get(`http://localhost:3000/api/contributions/${contributionId}`)
+      .get(`http://localhost:3000/api/contributions/?contributionId=${contributionId}`)
       .then((res) => {
-        setContribution(res.data);
+        console.log("get edited contribution res.data",res.data)
+        res.data.map((contribution: any) => {
+          setContribution(contribution.contribution);
+        })
+
       });
   };
 
@@ -47,7 +51,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
     setUpdatedContribution("");
     handleClose();
-    getSingleContribution();
+    getEditedContribution();
   };
 
   const body = (

@@ -52,33 +52,30 @@ const CurrentDiscussion: React.FC = () => {
   ]);
 
   let fetchDiscussion = useCallback(async () => {
-    // console.log("categoryid", id);
     await axios
-      .get(`http://localhost:3000/api/discussions/${discussionId}`)
+      .get(
+        `http://localhost:3000/api/discussions/?discussionId=${discussionId}`
+      )
       .then((res) => {
-        // console.log("fetchDiscussion response", res);
-        setDiscussionName(res.data.name);
+        res.data.map((discussion: any) => {
+          setDiscussionName(discussion.name);
+        });
       });
   }, [discussionId]);
 
   let fetchVotes = useCallback(async () => {
     await axios
-      .get(`http://localhost:3000/api/contributions/?userId=${userId}`)
+      .get(`http://localhost:3000/api/votes/?userId=${userId}`)
       .then((res) => {
         console.log("fetchvotes response", res);
         let contributionIds = res.data.map((contribution: any) => {
-          console.log("@@@@fetch votes contribution", contribution)
           return contribution.contributionId;
         });
-        console.log("contributionIds", contributionIds);
         setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
       });
   }, [userId]);
 
   const userVotes = (contributionId: any) => {
-    // console.log("contributionId-----", contributionId);
-    // console.log("votes array", votes)
-
     return votes.includes(contributionId);
   };
 
@@ -86,9 +83,10 @@ const CurrentDiscussion: React.FC = () => {
     console.log("discussion", discussionId);
 
     await axios
-      .get(`http://localhost:3000/api/contributions/${discussionId}`)
+      .get(
+        `http://localhost:3000/api/contributions/?discussionId=${discussionId}`
+      )
       .then((res) => {
-        // console.log("fetchContributions response", res);
         setContributions(res.data);
       });
   }, [discussionId]);

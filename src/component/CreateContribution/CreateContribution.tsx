@@ -72,6 +72,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
       });
 
     setContribution("");
+    setChoice("")
     handleClose();
     props.fetchContributions();
   };
