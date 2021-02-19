@@ -1,8 +1,8 @@
 @import "../../style/style.scss";
 
 .zg-category {
-  // background: palevioletred;
   .zg-category-header {
+    
     color: $zg-purple;
   }
 
@@ -19,6 +19,7 @@
       }
     }
     .zg-discussion-list {
+      
       // box-shadow: $box-shadow;
       padding: 20px;
       margin: 0 40px 0 40px;
@@ -38,6 +39,9 @@
 
 @media only screen and (min-width: 501px) {
   .zg-category {
+    box-shadow: $box-shadow;
+    margin: 20px;
+    margin-top: 0;
     // padding-left: 100px;
     min-width: 1100px;
     display: flex;

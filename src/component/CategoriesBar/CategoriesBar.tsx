@@ -29,7 +29,6 @@ const CategoriesBar: React.FC = () => {
 
   const fetchCategories = async () => {
     await axios.get(`http://localhost:3000/api/categories`).then((res) => {
-      // console.log("response", res)
       setCategories([...res.data]);
     });
   };

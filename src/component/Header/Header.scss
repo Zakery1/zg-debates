@@ -1,10 +1,10 @@
 @import "../../style/style.scss";
 
 .zg-header {
-  
   padding-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  box-shadow: $box-shadow;
 
 
   .zg-header-home {

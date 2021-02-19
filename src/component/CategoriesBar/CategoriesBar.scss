@@ -1,10 +1,10 @@
 @import "../../style/style.scss";
 
 .zg-categories-bar {
+
   text-align: left;
   margin: 0 40px;
-  // box-shadow: $box-shadow;
-
+  margin-top: 20px;
   .zg-categories-bar-header {
     font-size: 22px;
     font-weight: bolder;
@@ -40,24 +40,29 @@
 @media only screen and (min-width: 501px) {
   .zg-categories-bar-holder {
     display: flex;
+    margin-top: 20px;
     .zg-categories-bar {
-      // flex: 1;
-      // width: 200px;
+      box-shadow: $box-shadow;
+      // border-top: 1px solid $zg-purple;
+      // border-right: 1px solid $zg-purple;
       padding-top: 10px;
-      margin: 0 0 0 10px;
+      padding-left: 5px;
+      margin: 0 0 0 0px;
       min-height: 100vh;
       .zg-categories-bar-header {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: bolder;
         margin-bottom: 50px;
       }
       .zg-category-container {
         align-items: flex-start;
+
         .zg-category-link-holder {
           padding: 10px 10px 10px 0;
+
           margin: 10px 10px 10px 0;
           .zg-single-category {
-            font-size: 15px;
+            font-size: 12px;
             color: $zg-purple;
           }
         }
