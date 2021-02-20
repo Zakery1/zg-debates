@@ -144,8 +144,8 @@ const CurrentDiscussion: React.FC = () => {
 
   return (
     <div className="zg-current-discussion">
-      <h2 className="zg-current-discussion-header">{discussionName} </h2>
-      <div className="zg-discussion-buttons">
+      <div className="zg-discussion-header">
+        <h2 className="zg-current-discussion-header">{discussionName} </h2>
         <CreateContribution
           discussionName={discussionName}
           fetchContributions={fetchContributions}
