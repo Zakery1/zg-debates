@@ -8,10 +8,9 @@ import { SimpleCtx } from "../../context/UserContext";
 
 import "./Login.scss";
 
-
 const Login: React.FC = () => {
-  const [username, setUsernameInput] = useState<string>("");
-  const [password, setPasswordInput] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const value = useContext(SimpleCtx);
 
@@ -22,7 +21,8 @@ const Login: React.FC = () => {
         password: password,
       })
       .then((res) => {
-        console.log("res", res);
+        setUsername("");
+        setPassword("");
         value?.setUsername(res.data.username);
       })
       .catch((error) => {
@@ -38,18 +38,20 @@ const Login: React.FC = () => {
       </div>
       <form className="zg-login-portal">
         <input
+          value={username}
           autoComplete="email"
           className="zg-login-username"
           type="text"
           placeholder="Username"
-          onChange={(e) => setUsernameInput(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          value={password}
           autoComplete="currentPassword"
           className="zg-login-password"
           type="password"
           placeholder="Password"
-          onChange={(e) => setPasswordInput(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button
           onClick={() => login()}

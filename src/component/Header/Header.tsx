@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         New Twitter
       </Link>
       <User />
-      {value ? (
+      {value?.username ? (
         <span className="zg-header-login">{value.username}</span>
         
       ) : (
