@@ -24,6 +24,7 @@ const Login: React.FC = () => {
         setUsername("");
         setPassword("");
         value?.setUsername(res.data.username);
+        value?.setId(res.data.id)
       })
       .catch((error) => {
         console.log("Axios error POST on login", error);
