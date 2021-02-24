@@ -30,7 +30,6 @@ interface VotesArray extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
   const { discussionId } = useParams<{ discussionId: string | undefined }>();
-  console.log("discussionId", discussionId);
 
   let userId = 1;
 
@@ -58,7 +57,7 @@ const CurrentDiscussion: React.FC = () => {
       )
       .then((res) => {
         res.data.map((discussion: any) => {
-          setDiscussionName(discussion.name);
+          return setDiscussionName(discussion.name);
         });
       });
   }, [discussionId]);
@@ -67,7 +66,6 @@ const CurrentDiscussion: React.FC = () => {
     await axios
       .get(`http://localhost:3000/api/votes/?userId=${userId}`)
       .then((res) => {
-        console.log("fetchvotes response", res);
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
         });
@@ -80,8 +78,6 @@ const CurrentDiscussion: React.FC = () => {
   };
 
   let fetchContributions = useCallback(async () => {
-    console.log("discussion", discussionId);
-
     await axios
       .get(
         `http://localhost:3000/api/contributions/?discussionId=${discussionId}`

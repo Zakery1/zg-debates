@@ -18,7 +18,6 @@ const Header: React.FC = () => {
       <User />
       {value?.username ? (
         <span className="zg-header-login">{value.username}</span>
-        
       ) : (
         <Link className="zg-header-login" to="/login">
           Log In

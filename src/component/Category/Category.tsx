@@ -25,7 +25,7 @@ const Category: React.FC<CategoryProps> = (props) => {
     { id: null, name: "" },
   ]);
   const fetchDiscussions = useCallback(async () => {
-    console.log("props", props)
+    console.log("props", props);
     await axios
       .get(
         `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
@@ -35,7 +35,8 @@ const Category: React.FC<CategoryProps> = (props) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
-  }, [props.categoryId]);
+    console.log("is this running in category component");
+  }, [props]);
 
   useEffect(() => {
     fetchDiscussions();

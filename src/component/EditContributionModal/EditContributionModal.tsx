@@ -34,7 +34,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
       .then((res) => {
         console.log("get edited contribution res.data",res.data)
         res.data.map((contribution: any) => {
-          setContribution(contribution.contribution);
+          return setContribution(contribution.contribution);
         })
 
       });
