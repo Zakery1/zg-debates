@@ -12,8 +12,8 @@ interface UserContextInterface {
 export const SimpleCtx = createContext<UserContextInterface | null>(null);
 
 export const CtxProvider: React.FC = (props) => {
-  const [username, setUsername] = useState("zak");
-  const [id, setId] = useState(1);
+  const [username, setUsername] = useState("");
+  const [id, setId] = useState();
   console.log("props in context", props)
   console.log("username in context", username);
   console.log("id in context", id);
