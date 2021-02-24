@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
-import User from "../User/User";
-
 import { SimpleCtx } from "../../context/UserContext";
 
 import "./Header.scss";
@@ -15,9 +13,8 @@ const Header: React.FC = () => {
       <Link className="zg-header-home" to="/">
         New Twitter
       </Link>
-      <User />
       {value?.username ? (
-        <span className="zg-header-login">{value.username}</span>
+        <Link to="/user" className="zg-header-login">{value.username}</Link>
       ) : (
         <Link className="zg-header-login" to="/login">
           Log In

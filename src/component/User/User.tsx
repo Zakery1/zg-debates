@@ -1,23 +1,26 @@
 import React from "react";
 
-// import axios from "axios";
+import axios from "axios";
+
+import "./User.scss";
 
 const User: React.FC = () => {
-  // const [username, setUsername] = useState<string>("");
+  const logout = async () => {
+    await axios
+      .post("http://localhost:3000/api/logout")
+      .then((response) => {
+        console.log("user logged out");
+      });
+  };
 
-  // useEffect(() => {
-  //   async function fetchUser() {
-  //     await axios
-  //       .get(`http://localhost:3000/api/getUserById/1`)
-  //       .then((res) => {
-  //         const user = res.data;
-  //         setUsername(user);
-  //       });
-  //   }
-  //   fetchUser();
-  // }, [username]);
-
-  return <span></span>;
+  return (
+    <div>
+      User
+      <div>
+        <button onClick={logout}>Logout</button>
+      </div>
+    </div>
+  );
 };
 
 export default User;
