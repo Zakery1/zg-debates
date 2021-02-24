@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import routes from "./routes";
+
+import { CtxProvider } from "./context/UserContext";
 
 import "./App.scss";
 
@@ -11,9 +13,13 @@ import Footer from "./component/Footer/Footer";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header />
-      <div className="zg-routes"> {routes()}</div>
-      <Footer />
+      <CtxProvider>
+        <Header />
+
+        <div className="zg-routes"> {routes()}</div>
+
+        <Footer />
+      </CtxProvider>
     </div>
   );
 };

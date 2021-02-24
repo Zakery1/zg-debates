@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import axios from "axios";
 
 import Register from "../Register/Register";
 
+import { SimpleCtx } from "../../context/UserContext";
+
 import "./Login.scss";
 
+
 const Login: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsernameInput] = useState<string>("");
+  const [password, setPasswordInput] = useState<string>("");
+
+  const value = useContext(SimpleCtx);
 
   const login = async () => {
     await axios
-      .post("http://localhost:3000/api/sessions", {username: username, password: password})
+      .post("http://localhost:3000/api/sessions", {
+        username: username,
+        password: password,
+      })
       .then((res) => {
         console.log("res", res);
+        value?.setUsername(res.data.username);
       })
       .catch((error) => {
         console.log("Axios error POST on login", error);
@@ -33,14 +42,14 @@ const Login: React.FC = () => {
           className="zg-login-username"
           type="text"
           placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsernameInput(e.target.value)}
         />
         <input
           autoComplete="currentPassword"
           className="zg-login-password"
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPasswordInput(e.target.value)}
         />
         <button
           onClick={() => login()}
