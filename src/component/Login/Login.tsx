@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 
   const login = async () => {
     await axios
-      .post("http://localhost:3000/api/sessions", {
+      .post("https://fathomless-reaches-38159.herokuapp.com/api/sessions", {
         username: username,
         password: password,
       })

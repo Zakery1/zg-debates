@@ -15,7 +15,7 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
     if (props.username) {
       await axios
         .get(
-          `http://localhost:3000/api/users/${props.username}`
+          `https://fathomless-reaches-38159.herokuapp.com/api/users/${props.username}`
         )
         .then((res) => {
           if (res.data.length > 0) {

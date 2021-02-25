@@ -29,7 +29,7 @@ const Register: React.FC = () => {
       password: passwordOne,
     };
     await axios
-      .post("http://localhost:3000/api/users", { data: registrationData })
+      .post("https://fathomless-reaches-38159.herokuapp.com/api/users", { data: registrationData })
       .then((res) => {
         console.log(res.data);
       });

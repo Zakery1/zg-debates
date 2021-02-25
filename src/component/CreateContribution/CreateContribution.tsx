@@ -66,7 +66,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
     }
 
     await axios
-      .post(`http://localhost:3000/api/contributions`, { data: postData })
+      .post(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });
