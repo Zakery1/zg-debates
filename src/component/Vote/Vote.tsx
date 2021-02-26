@@ -33,7 +33,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     }, 2000);
 
     await axios
-      .put(`http://localhost:3000/api/contributions`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, {
         contributionId: props.contributionId,
         voteFor: false,
       })
@@ -42,7 +42,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`http://localhost:3000/api/votes`, {
+      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/votes`, {
         data: deleteConfig,
       })
       .then((res) => {
@@ -58,7 +58,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       setVoteDisabled(false);
     }, 2000);
     await axios
-      .put(`http://localhost:3000/api/contributions`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, {
         contributionId: props.contributionId,
         voteFor: true,
       })
@@ -66,7 +66,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
         console.log(res.status);
       });
     await axios
-      .post(`http://localhost:3000/api/votes`, {
+      .post(`https://fathomless-reaches-38159.herokuapp.com/api/votes`, {
         userId: 1,
         contributionId: props.contributionId,
       })
