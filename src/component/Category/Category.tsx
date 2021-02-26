@@ -28,7 +28,7 @@ const Category: React.FC<CategoryProps> = (props) => {
     console.log("props", props);
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?categoryId=${props.categoryId}`
+        `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
       )
       .then((res) => {
         // console.log("res for a discussion", res.data);

@@ -9,12 +9,14 @@ import { SimpleCtx } from "../../context/UserContext";
 import "./User.scss";
 
 const User: React.FC = () => {
+  console.log("local storage in logout", localStorage);
   const value = useContext(SimpleCtx);
 
   const logout = async () => {
-    await axios.post("https://fathomless-reaches-38159.herokuapp.com/api/logout").then((response) => {
+    await axios.post("http://localhost:3000/api/logout").then((response) => {
       value?.setUsername(null);
       value?.setId(null);
+      localStorage.clear();
     });
   };
 
@@ -22,7 +24,9 @@ const User: React.FC = () => {
     <div>
       User
       <div>
-        <Link to="/" onClick={logout}>Logout</Link>
+        <Link to="/" onClick={logout}>
+          Logout
+        </Link>
       </div>
     </div>
   );

@@ -14,7 +14,9 @@ const Header: React.FC = () => {
         New Twitter
       </Link>
       {value?.username ? (
-        <Link to="/user" className="zg-header-login">{value.username}</Link>
+        <Link to="/user" className="zg-header-login">
+          {value.username}
+        </Link>
       ) : (
         <Link className="zg-header-login" to="/login">
           Log In

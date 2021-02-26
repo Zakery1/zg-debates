@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 
-
 import axios from "axios";
 
 import Register from "../Register/Register";
@@ -21,8 +20,8 @@ const Login: React.FC = () => {
 
   const login = async () => {
     await axios
-    
-      .post("https://fathomless-reaches-38159.herokuapp.com/api/sessions", {
+
+      .post("http://localhost:3000/api/sessions", {
         username: username,
         password: password,
       })
@@ -30,9 +29,10 @@ const Login: React.FC = () => {
         setUsername("");
         setPassword("");
         value?.setUsername(res.data.username);
-        value?.setId(res.data.id);
+        value?.setId(res.data.userId);
+        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("userId", res.data.userId);
         history.push("/");
-
       })
       .catch((error) => {
         console.log("Axios error POST on login", error);
