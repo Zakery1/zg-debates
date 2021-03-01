@@ -17,7 +17,6 @@ export default function routes() {
         path="/discussion/:discussionId"
         component={CurrentDiscussion}
       />
-
       <Route path="/" render={() => <div>404</div>} />
     </Switch>
   );

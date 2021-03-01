@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { SimpleCtx } from "../../context/UserContext";
 
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
@@ -35,6 +37,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const [choice, setChoice] = useState("");
   const [contribution, setContribution] = useState("");
 
+  const value = useContext(SimpleCtx);
 
   const { discussionId }: DiscussionParams = useParams();
 
@@ -48,7 +51,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
 
   const submitContribution = async () => {
     let postData: ContributionData = {
-      userId: 1,
+      userId: value?.id,
       discussionId: +discussionId,
       contribution: contribution,
       agree: null,
@@ -66,13 +69,12 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
     }
 
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, { data: postData })
+      .post(`http://localhost:3000/api/contributions`, { data: postData })
       .then((res) => {
-        console.log(res.status);
       });
 
     setContribution("");
-    setChoice("")
+    setChoice("");
     handleClose();
     props.fetchContributions();
   };

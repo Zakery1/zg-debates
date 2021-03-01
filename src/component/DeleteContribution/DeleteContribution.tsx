@@ -23,14 +23,14 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
   let deleteContribution = async () => {
     if (points != null) {
       await axios
-        .delete(`https://fathomless-reaches-38159.herokuapp.com/api/votes/${contributionId}`)
+        .delete(`http://localhost:3000/api/votes/${contributionId}`)
         .then((res) => {
           console.log(res.status);
         });
     }
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/${contributionId}`)
+      .delete(`http://localhost:3000/api/contributions/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();

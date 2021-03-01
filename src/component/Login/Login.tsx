@@ -21,16 +21,17 @@ const Login: React.FC = () => {
   const login = async () => {
     await axios
 
-      .post("https://fathomless-reaches-38159.herokuapp.com/api/sessions", {
+      .post("http://localhost:3000/api/sessions", {
         username: username,
         password: password,
       })
       .then((res) => {
+        console.log("RESPONSE TO LOGIN", res)
         setUsername("");
         setPassword("");
         value?.setUsername(res.data.username);
         value?.setId(res.data.userId);
-        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("username", res.data);
         localStorage.setItem("userId", res.data.userId);
         history.push("/");
       })

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+
+import { SimpleCtx } from "../../context/UserContext";
 
 import axios from "axios";
 
@@ -29,10 +31,6 @@ interface IVote {
 interface VotesArray extends Array<IVote> {}
 
 const CurrentDiscussion: React.FC = () => {
-  const { discussionId } = useParams<{ discussionId: string | undefined }>();
-
-  let userId = 1;
-
   const [discussionName, setDiscussionName] = useState("");
 
   const [votes, setVotes] = useState<VotesArray>([]);
@@ -50,28 +48,42 @@ const CurrentDiscussion: React.FC = () => {
     },
   ]);
 
+  const { discussionId } = useParams<{ discussionId: string | undefined }>();
+  // debugger;
+
+  let value = useContext(SimpleCtx);
+  console.log("VALUE HERE", value);
+
+  useEffect(() => {
+    fetchVotes(value?.id);
+  }, []);
+
+  let fetchVotes = useCallback(
+    async (userId) => {
+      await axios
+        .get(`http://localhost:3000/api/votes/?userId=${userId}`)
+        .then((res) => {
+          let contributionIds = res.data.map((contribution: any) => {
+            return contribution.contributionId;
+          });
+          setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
+        });
+    },
+    [value]
+  );
+
+  // debugger;
   let fetchDiscussion = useCallback(async () => {
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?discussionId=${discussionId}`
+        `http://localhost:3000/api/discussions/?discussionId=${discussionId}`
       )
       .then((res) => {
         res.data.map((discussion: any) => {
           return setDiscussionName(discussion.name);
         });
       });
-  }, [discussionId]);
-
-  let fetchVotes = useCallback(async () => {
-    await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/votes/?userId=${userId}`)
-      .then((res) => {
-        let contributionIds = res.data.map((contribution: any) => {
-          return contribution.contributionId;
-        });
-        setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
-      });
-  }, [userId]);
+  }, []);
 
   const userVotes = (contributionId: any) => {
     return votes.includes(contributionId);
@@ -80,7 +92,7 @@ const CurrentDiscussion: React.FC = () => {
   let fetchContributions = useCallback(async () => {
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/contributions/?discussionId=${discussionId}`
+        `http://localhost:3000/api/contributions/?discussionId=${discussionId}`
       )
       .then((res) => {
         setContributions(res.data);
@@ -89,9 +101,8 @@ const CurrentDiscussion: React.FC = () => {
 
   useEffect(() => {
     fetchDiscussion();
-    fetchVotes();
     fetchContributions();
-  }, [fetchContributions, fetchVotes, fetchDiscussion]);
+  }, []);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)

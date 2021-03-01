@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Modal from "@material-ui/core/Modal";
 
+import axios from "axios";
+
+import { SimpleCtx } from "../../context/UserContext";
+
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-
-
-import axios from "axios";
 
 import "./CreateDiscussion.scss";
 
 interface FetchDiscussions {
   fetchDiscussions: () => Promise<void>;
 }
-
 
 interface DiscussionData {
   creatorId: number | null;
@@ -30,15 +30,17 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
   const [open, setOpen] = useState(false);
   let { categoryId } = props;
 
+  const value = useContext(SimpleCtx);
+
   const createDiscussion = async () => {
     let postData: DiscussionData = {
-      creatorId: 1,
+      creatorId: value?.id,
       categoryId: categoryId,
       discussionName: discussionName,
     };
 
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/discussions`, { data: postData })
+      .post(`http://localhost:3000/api/discussions`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useMemo } from "react";
 
 type SetUserInfo = (value: any) => void;
 
@@ -14,16 +14,26 @@ export const SimpleCtx = createContext<UserContextInterface | null>(null);
 export const CtxProvider: React.FC = (props) => {
   const [username, setUsername] = useState();
   const [id, setId] = useState();
-  console.log("props in context", props);
-  console.log("username in context", username);
-  console.log("id in context", id);
-  console.log(localStorage.username);
+
+  // const [profile, setProfile] = useState({ _id: '', photo: '', name: '', email:'', phonenumber:'', position:'', privilege:'', password:''});
+
+  // const value = useMemo(() => ({
+  //     profile, setProfile
+  // }), [profile]);
+
+  // const value
+
+
+  // debugger;
 
   useEffect(() => {
-    if (localStorage.username){ setUsername(localStorage.username);
-    setId(localStorage.userId);
+    // debugger;
+    if (localStorage.username) {
+      setUsername(localStorage.username);
+      setId(localStorage.userId);
     }
   }, []);
+
 
   return (
     <SimpleCtx.Provider

@@ -25,17 +25,14 @@ const Category: React.FC<CategoryProps> = (props) => {
     { id: null, name: "" },
   ]);
   const fetchDiscussions = useCallback(async () => {
-    console.log("props", props);
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?categoryId=${props.categoryId}`
+        `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
       )
       .then((res) => {
-        // console.log("res for a discussion", res.data);
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
-    console.log("is this running in category component");
   }, [props]);
 
   useEffect(() => {
