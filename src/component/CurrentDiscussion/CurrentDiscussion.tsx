@@ -52,14 +52,17 @@ const CurrentDiscussion: React.FC = () => {
   // debugger;
 
   let value = useContext(SimpleCtx);
-  console.log("VALUE HERE", value);
+  console.log("value VALUE HERE", value);
 
   useEffect(() => {
-    fetchVotes(value?.id);
+    if (value?.username) {
+      fetchVotes(value?.id);
+    }
   }, []);
 
   let fetchVotes = useCallback(
     async (userId) => {
+      console.log("FETCHING VOTES NOW")
       await axios
         .get(`http://localhost:3000/api/votes/?userId=${userId}`)
         .then((res) => {

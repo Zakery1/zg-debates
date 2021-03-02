@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         setPassword("");
         value?.setUsername(res.data.username);
         value?.setId(res.data.userId);
-        localStorage.setItem("username", res.data);
+        localStorage.setItem("username", res.data.username);
         localStorage.setItem("userId", res.data.userId);
         history.push("/");
       })

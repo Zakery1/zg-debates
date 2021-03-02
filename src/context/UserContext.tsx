@@ -23,7 +23,6 @@ export const CtxProvider: React.FC = (props) => {
 
   // const value
 
-
   // debugger;
 
   useEffect(() => {
@@ -33,7 +32,6 @@ export const CtxProvider: React.FC = (props) => {
       setId(localStorage.userId);
     }
   }, []);
-
 
   return (
     <SimpleCtx.Provider
