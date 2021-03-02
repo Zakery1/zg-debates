@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
@@ -6,6 +6,8 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import axios from "axios";
 
 import { Tooltip, IconButton } from "@material-ui/core";
+
+import { SimpleCtx } from "../../context/UserContext";
 
 import "./Vote.scss";
 
@@ -22,7 +24,9 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
 
-  let deleteConfig = { userId: 1, contributionId: props.contributionId };
+  const value = useContext(SimpleCtx);
+
+  let deleteConfig = { userId: value?.id, contributionId: props.contributionId };
 
   let removeVote = async () => {
     console.log("remove a vote");
@@ -67,7 +71,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
     await axios
       .post(`http://localhost:3000/api/votes`, {
-        userId: 1,
+        userId: value?.id,
         contributionId: props.contributionId,
       })
       .then((res) => {

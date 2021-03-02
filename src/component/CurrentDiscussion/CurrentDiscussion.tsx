@@ -55,21 +55,25 @@ const CurrentDiscussion: React.FC = () => {
   console.log("value VALUE HERE", value);
 
   useEffect(() => {
-    if (value?.username) {
+    if (value?.id) {
       fetchVotes(value?.id);
     }
-  }, []);
+  }, [value?.id]);
 
   let fetchVotes = useCallback(
     async (userId) => {
-      console.log("FETCHING VOTES NOW")
+      console.log("FETCHING VOTES NOW");
       await axios
         .get(`http://localhost:3000/api/votes/?userId=${userId}`)
         .then((res) => {
+          console.log("RESPONSE TO FETCH VOTES", res)
           let contributionIds = res.data.map((contribution: any) => {
             return contribution.contributionId;
           });
           setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
+        })
+        .catch((error) => {
+          console.log("fetchvotes errors", error);
         });
     },
     [value]
