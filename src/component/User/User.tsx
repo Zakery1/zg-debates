@@ -9,7 +9,6 @@ import { SimpleCtx } from "../../context/UserContext";
 import "./User.scss";
 
 const User: React.FC = () => {
-  console.log("local storage in logout", localStorage);
   const value = useContext(SimpleCtx);
 
   const logout = async () => {

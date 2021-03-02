@@ -26,7 +26,6 @@ const Login: React.FC = () => {
         password: password,
       })
       .then((res) => {
-        console.log("RESPONSE TO LOGIN", res)
         setUsername("");
         setPassword("");
         value?.setUsername(res.data.username);

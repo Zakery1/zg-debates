@@ -52,7 +52,6 @@ const CurrentDiscussion: React.FC = () => {
   // debugger;
 
   let value = useContext(SimpleCtx);
-  console.log("value VALUE HERE", value);
 
   useEffect(() => {
     if (value?.id) {
@@ -62,11 +61,9 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(
     async (userId) => {
-      console.log("FETCHING VOTES NOW");
       await axios
         .get(`http://localhost:3000/api/votes/?userId=${userId}`)
         .then((res) => {
-          console.log("RESPONSE TO FETCH VOTES", res)
           let contributionIds = res.data.map((contribution: any) => {
             return contribution.contributionId;
           });

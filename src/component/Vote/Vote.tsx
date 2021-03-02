@@ -29,7 +29,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   let deleteConfig = { userId: value?.id, contributionId: props.contributionId };
 
   let removeVote = async () => {
-    console.log("remove a vote");
     setPoints(points - 1);
     setVoteDisabled(true);
     setTimeout(() => {
@@ -55,7 +54,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   let addVote = async () => {
-    console.log("add a vote");
     setVoteDisabled(true);
     setPoints(points + 1);
     setTimeout(() => {
