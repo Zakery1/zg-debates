@@ -61,6 +61,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(
     async (userId) => {
+      console.log("fetch votes firing off --- userId", userId);
       await axios
         .get(`http://localhost:3000/api/votes/?userId=${userId}`)
         .then((res) => {
@@ -89,7 +90,9 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, []);
 
+  console.log("votes cormparison", votes);
   const userVotes = (contributionId: any) => {
+    console.log("contributionId when matching votes", contributionId);
     return votes.includes(contributionId);
   };
 
