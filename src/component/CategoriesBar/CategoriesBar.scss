@@ -44,24 +44,19 @@
     .zg-categories-bar {
       width: 164px;
       box-shadow: $box-shadow;
-      // border-top: 1px solid $zg-purple;
-      // border-right: 1px solid $zg-purple;
       padding-top: 10px;
-      padding-left: 5px;
       margin: 0 0 0 0px;
       min-height: 100vh;
+      border-radius: 0 5px 5px 0;
       .zg-categories-bar-header {
         font-size: 15px;
         font-weight: bolder;
-        margin-bottom: 50px;
+        margin-left: 15px;
       }
       .zg-category-container {
         align-items: flex-start;
 
         .zg-category-link-holder {
-          // padding: 10px 10px 10px 0;
-
-          // margin: 10px 10px 10px 0;
           .zg-single-category {
             font-size: 12px;
             color: $zg-purple;
