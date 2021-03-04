@@ -53,15 +53,8 @@ const CurrentDiscussion: React.FC = () => {
 
   let value = useContext(SimpleCtx);
 
-  useEffect(() => {
-    if (value?.id) {
-      fetchVotes(value?.id);
-    }
-  }, [value?.id]);
-
   let fetchVotes = useCallback(
     async (userId) => {
-      console.log("fetch votes firing off --- userId", userId);
       await axios
         .get(`http://localhost:3000/api/votes/?userId=${userId}`)
         .then((res) => {
@@ -74,8 +67,14 @@ const CurrentDiscussion: React.FC = () => {
           console.log("fetchvotes errors", error);
         });
     },
-    [value]
+    []
   );
+
+  useEffect(() => {
+    if (value?.id) {
+      fetchVotes(value?.id);
+    }
+  }, [fetchVotes, value?.id]);
 
   // debugger;
   let fetchDiscussion = useCallback(async () => {
@@ -88,7 +87,7 @@ const CurrentDiscussion: React.FC = () => {
           return setDiscussionName(discussion.name);
         });
       });
-  }, []);
+  }, [discussionId]);
 
   console.log("votes cormparison", votes);
   const userVotes = (contributionId: any) => {
@@ -109,7 +108,7 @@ const CurrentDiscussion: React.FC = () => {
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
-  }, []);
+  }, [fetchDiscussion, fetchContributions]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
