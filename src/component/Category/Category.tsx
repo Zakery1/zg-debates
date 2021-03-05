@@ -27,7 +27,7 @@ const Category: React.FC<CategoryProps> = (props) => {
   const fetchDiscussions = useCallback(async () => {
     await axios
       .get(
-        `http://localhost:3000/api/discussions/?categoryId=${props.categoryId}`
+        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?categoryId=${props.categoryId}`
       )
       .then((res) => {
         const retrievedDiscussions = res.data;

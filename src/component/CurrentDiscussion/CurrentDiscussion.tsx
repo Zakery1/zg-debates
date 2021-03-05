@@ -55,7 +55,7 @@ const CurrentDiscussion: React.FC = () => {
 
   let fetchVotes = useCallback(async (userId) => {
     await axios
-      .get(`http://localhost:3000/api/votes/?userId=${userId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/votes/?userId=${userId}`)
       .then((res) => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
@@ -72,7 +72,7 @@ const CurrentDiscussion: React.FC = () => {
   let fetchDiscussion = useCallback(async () => {
     await axios
       .get(
-        `http://localhost:3000/api/discussions/?discussionId=${discussionId}`
+        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?discussionId=${discussionId}`
       )
       .then((res) => {
         res.data.map((discussion: any) => {
@@ -91,7 +91,7 @@ const CurrentDiscussion: React.FC = () => {
   let fetchContributions = useCallback(async () => {
     await axios
       .get(
-        `http://localhost:3000/api/contributions/?discussionId=${discussionId}`
+        `https://fathomless-reaches-38159.herokuapp.com/api/contributions/?discussionId=${discussionId}`
       )
       .then((res) => {
         setContributions(res.data);

@@ -30,7 +30,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let getEditedContribution = async () => {
     await axios
-      .get(`http://localhost:3000/api/contributions/?contributionId=${contributionId}`)
+      .get(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/?contributionId=${contributionId}`)
       .then((res) => {
         res.data.map((contribution: any) => {
           return setContribution(contribution.contribution);
@@ -41,7 +41,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let editContribution = async () => {
     await axios
-      .put(`http://localhost:3000/api/contributions/${contributionId}`, {
+      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/${contributionId}`, {
         updatedContribution: updatedContribution,
       })
       .then((res) => {
