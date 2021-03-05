@@ -101,11 +101,8 @@ const CurrentDiscussion: React.FC = () => {
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
-
-    // console.log("test type of value?.id", typeof value?.id)
     if (value?.id) {
       fetchVotes(value?.id);
-      console.log("fetch votes called in useeffect", votes);
     }
   }, [fetchDiscussion, fetchContributions, fetchVotes, value?.id]);
 
