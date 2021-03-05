@@ -77,8 +77,12 @@
       padding-left: 15px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      // align-items: flex-start;
       margin-bottom: 0;
+      // max-height: 20px;
+      .zg-current-discussion-header {
+        margin: 25px 0 0 0;
+      }
       .zg-back-to-premises {
       }
     }
@@ -94,7 +98,7 @@
 
       .zg-list {
         // background: rgb(235, 235, 235);
-        margin-top: 15px;
+        margin: 0;
         width: 500px;
         min-height: 550px;
         box-shadow: $box-shadow;

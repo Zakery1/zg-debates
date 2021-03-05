@@ -158,10 +158,6 @@ const CurrentDiscussion: React.FC = () => {
     <div className="zg-current-discussion">
       <div className="zg-discussion-header">
         <h2 className="zg-current-discussion-header">{discussionName} </h2>
-        <CreateContribution
-          discussionName={discussionName}
-          fetchContributions={fetchContributions}
-        />
         <br />
       </div>
 
@@ -169,14 +165,26 @@ const CurrentDiscussion: React.FC = () => {
         <div className="zg-list zg-list-agree">
           <h3>Agree</h3>
           {agreeList}
+          <CreateContribution
+          discussionName={discussionName}
+          fetchContributions={fetchContributions}
+        />
         </div>
         <div className="zg-list zg-list-neutral">
           <h3>Neutral</h3>
           {neutralList}
+          <CreateContribution
+          discussionName={discussionName}
+          fetchContributions={fetchContributions}
+        />
         </div>
         <div className="zg-list zg-list-disagree">
           <h3>Disagree</h3>
           {disagreeList}
+          <CreateContribution
+          discussionName={discussionName}
+          fetchContributions={fetchContributions}
+        />
         </div>
       </div>
       <br />
