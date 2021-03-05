@@ -31,7 +31,7 @@
       flex-direction: column;
       align-items: center;
       margin-bottom: 30px;
-      h3 {
+      h4 {
         padding-bottom: 3px;
         border-bottom: 1px solid $zg-purple;
       }
@@ -72,14 +72,14 @@
 
 @media only screen and (min-width: 501px) {
   .zg-current-discussion {
-    min-height: 640px;
+    // min-height: 640px;
     .zg-discussion-header {
       padding-left: 15px;
       display: flex;
       flex-direction: column;
-      // align-items: flex-start;
+      // box-shadow: $box-shadow;
       margin-bottom: 0;
-      // max-height: 20px;
+      min-height: 73px;
       .zg-current-discussion-header {
         margin: 25px 0 0 0;
       }

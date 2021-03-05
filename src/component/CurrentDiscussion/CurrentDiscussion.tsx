@@ -163,7 +163,7 @@ const CurrentDiscussion: React.FC = () => {
 
       <div className="zg-position-container">
         <div className="zg-list zg-list-agree">
-          <h3>Agree</h3>
+          <h4>Agree</h4>
           {agreeList}
           <CreateContribution
           discussionName={discussionName}
@@ -171,7 +171,7 @@ const CurrentDiscussion: React.FC = () => {
         />
         </div>
         <div className="zg-list zg-list-neutral">
-          <h3>Neutral</h3>
+          <h4>Neutral</h4>
           {neutralList}
           <CreateContribution
           discussionName={discussionName}
@@ -179,7 +179,7 @@ const CurrentDiscussion: React.FC = () => {
         />
         </div>
         <div className="zg-list zg-list-disagree">
-          <h3>Disagree</h3>
+          <h4>Disagree</h4>
           {disagreeList}
           <CreateContribution
           discussionName={discussionName}
