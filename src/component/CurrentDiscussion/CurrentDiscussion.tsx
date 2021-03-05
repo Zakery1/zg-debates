@@ -53,28 +53,20 @@ const CurrentDiscussion: React.FC = () => {
 
   let value = useContext(SimpleCtx);
 
-  let fetchVotes = useCallback(
-    async (userId) => {
-      await axios
-        .get(`http://localhost:3000/api/votes/?userId=${userId}`)
-        .then((res) => {
-          let contributionIds = res.data.map((contribution: any) => {
-            return contribution.contributionId;
-          });
-          setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
-        })
-        .catch((error) => {
-          console.log("fetchvotes errors", error);
+  let fetchVotes = useCallback(async (userId) => {
+    await axios
+      .get(`http://localhost:3000/api/votes/?userId=${userId}`)
+      .then((res) => {
+        let contributionIds = res.data.map((contribution: any) => {
+          return contribution.contributionId;
         });
-    },
-    []
-  );
+        setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
+      })
+      .catch((error) => {
+        console.log("fetchvotes errors", error);
+      });
+  }, []);
 
-  useEffect(() => {
-    if (value?.id) {
-      fetchVotes(value?.id);
-    }
-  }, [fetchVotes, value?.id]);
 
   // debugger;
   let fetchDiscussion = useCallback(async () => {
@@ -89,8 +81,9 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [discussionId]);
 
-  console.log("votes cormparison", votes);
+
   const userVotes = (contributionId: any) => {
+    console.log("votes cormparison", votes);
     console.log("contributionId when matching votes", contributionId);
     return votes.includes(contributionId);
   };
@@ -108,7 +101,13 @@ const CurrentDiscussion: React.FC = () => {
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
-  }, [fetchDiscussion, fetchContributions]);
+
+    // console.log("test type of value?.id", typeof value?.id)
+    if (value?.id) {
+      fetchVotes(value?.id);
+      console.log("fetch votes called in useeffect", votes);
+    }
+  }, [fetchDiscussion, fetchContributions, fetchVotes, value?.id]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)

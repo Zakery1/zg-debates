@@ -38,8 +38,6 @@
       // box-shadow: $box-shadow;
     }
 
-    // margin-bot: 0 20px 30px 20px;
-
     .zg-list-agree {
      margin-right: 20px;
      border-radius: 0% 3% 3% 0;
@@ -95,13 +93,27 @@
       font-weight: bold;
 
       .zg-list {
-        background: rgb(235, 235, 235);
+        // background: rgb(235, 235, 235);
         margin-top: 15px;
         width: 500px;
         min-height: 550px;
-        .zg-contribution-holder {
-        }
+        box-shadow: $box-shadow;
       }
+      .zg-list-agree {
+        margin-right: 0px;
+        border-radius: 0% 3% 3% 0;
+       }
+   
+       .zg-list-neutral {
+         margin-right: 0px;
+         margin-left: 0px;
+         border-radius: 3%;
+       }
+   
+       .zg-list-disagree {
+         margin-left: 0px;
+         border-radius: 3% 0 0 3%;
+       }
     }
   }
 }
