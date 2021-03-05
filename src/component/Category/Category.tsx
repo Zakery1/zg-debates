@@ -62,6 +62,7 @@ const Category: React.FC<CategoryProps> = (props) => {
         <div className="zg-category-action-holder">
           <CreateDiscussion
             categoryId={props.categoryId}
+            categoryName={props.categoryName}
             fetchDiscussions={fetchDiscussions}
           />
         </div>

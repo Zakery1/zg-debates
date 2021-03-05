@@ -23,6 +23,7 @@ interface DiscussionData {
 
 interface TopicParams {
   categoryId: number | null;
+  categoryName: string | null;
 }
 
 const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
@@ -62,7 +63,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     <div className="zg-create-discussion-body">
       <h2>Create discussion</h2>
       <p>
-        Please create discussion related to topic -- topic name -- or a
+        Please create discussion related to <span style={{fontWeight: "bolder"}}>{props.categoryName}</span> or a
         moderator will delete it.
       </p>
       <textarea

@@ -5,18 +5,16 @@
     font-family: $zg-font;
     box-shadow: $box-shadow;
     width: 200px;
-    margin: 20px 0 0 0;
+    // margin: 20px 0 0 0;
     color: $zg-purple;
     text-decoration: none;
     font-weight: bolder;
+    font-size: 12px;
 
     .zg-add-icon {
       margin: 0 4px;
       height: 17px;
     }
-  }
-  .zg-open-discussion-modal:hover {
-    color: $zg-purple;
   }
 }
 
