@@ -26,6 +26,9 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   const value = useContext(SimpleCtx);
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   let deleteConfig = { userId: value?.id, contributionId: props.contributionId };
 
   let removeVote = async () => {
@@ -36,7 +39,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     }, 2000);
 
     await axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, {
+      .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
         voteFor: false,
       })
@@ -45,7 +48,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/votes`, {
+      .delete(`${baseUrl}/api/votes`, {
         data: deleteConfig,
       })
       .then((res) => {
@@ -60,7 +63,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       setVoteDisabled(false);
     }, 2000);
     await axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, {
+      .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
         voteFor: true,
       })
@@ -68,7 +71,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
         console.log(res.status);
       });
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/votes`, {
+      .post(`${baseUrl}/api/votes`, {
         userId: value?.id,
         contributionId: props.contributionId,
       })

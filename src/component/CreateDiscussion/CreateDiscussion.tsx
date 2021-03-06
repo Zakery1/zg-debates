@@ -33,6 +33,9 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
 
   const value = useContext(SimpleCtx);
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const createDiscussion = async () => {
     let postData: DiscussionData = {
       creatorId: value?.id,
@@ -41,7 +44,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     };
 
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/discussions`, { data: postData })
+      .post(`${baseUrl}/api/discussions`, { data: postData })
       .then((res) => {
         console.log(res.status);
       });

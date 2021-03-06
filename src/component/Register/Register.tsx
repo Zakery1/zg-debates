@@ -23,13 +23,18 @@ const Register: React.FC = () => {
   const [validUsername, setValidUsername] = useState<boolean>(false);
   const [validRegistration, setValidRegistration] = useState<boolean>(false);
 
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const sumbitRegistration = async () => {
     let registrationData: RegistrationData = {
       username: username,
       password: passwordOne,
     };
     await axios
-      .post("https://fathomless-reaches-38159.herokuapp.com/api/users", { data: registrationData })
+      .post(`${baseUrl}/api/users`, {
+        data: registrationData,
+      })
       .then((res) => {
         console.log(res.data);
       });
@@ -44,7 +49,7 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     checkRegistration();
-    console.log("watch it")
+    console.log("watch it");
   }, [checkRegistration]);
 
   const handleOpen = () => {

@@ -11,8 +11,11 @@ import "./User.scss";
 const User: React.FC = () => {
   const value = useContext(SimpleCtx);
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const logout = async () => {
-    await axios.post("https://fathomless-reaches-38159.herokuapp.com/api/logout").then((response) => {
+    await axios.post(`${baseUrl}/api/logout`).then((response) => {
       value?.setUsername(null);
       value?.setId(null);
       localStorage.clear();

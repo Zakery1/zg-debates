@@ -18,19 +18,22 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
 
   let contributionId = props.contributionId;
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   let points = props.points;
 
   let deleteContribution = async () => {
     if (points != null) {
       await axios
-        .delete(`https://fathomless-reaches-38159.herokuapp.com/api/votes/${contributionId}`)
+        .delete(`${baseUrl}/api/votes/${contributionId}`)
         .then((res) => {
           console.log(res.status);
         });
     }
 
     await axios
-      .delete(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/${contributionId}`)
+      .delete(`${baseUrl}/api/contributions/${contributionId}`)
       .then((res) => {
         console.log(res.status);
         window.location.reload();

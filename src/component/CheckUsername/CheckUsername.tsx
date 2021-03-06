@@ -11,11 +11,15 @@ interface CheckUsernameProps {
 }
 
 const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
+
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const checkUsername = useCallback(async () => {
     if (props.username) {
       await axios
         .get(
-          `https://fathomless-reaches-38159.herokuapp.com/api/users/${props.username}`
+          `${baseUrl}/api/users/${props.username}`
         )
         .then((res) => {
           if (res.data.length > 0) {
@@ -25,7 +29,7 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
           }
         });
     }
-  }, [props]);
+  }, [props, baseUrl]);
 
   useEffect(() => {
     checkUsername();

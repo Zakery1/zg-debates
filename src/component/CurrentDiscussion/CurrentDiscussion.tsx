@@ -53,9 +53,12 @@ const CurrentDiscussion: React.FC = () => {
 
   let value = useContext(SimpleCtx);
 
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   let fetchVotes = useCallback(async (userId) => {
     await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/votes/?userId=${userId}`)
+      .get(`${baseUrl}/api/votes/?userId=${userId}`)
       .then((res) => {
         let contributionIds = res.data.map((contribution: any) => {
           return contribution.contributionId;
@@ -65,22 +68,20 @@ const CurrentDiscussion: React.FC = () => {
       .catch((error) => {
         console.log("fetchvotes errors", error);
       });
-  }, []);
-
+  }, [baseUrl]);
 
   // debugger;
   let fetchDiscussion = useCallback(async () => {
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?discussionId=${discussionId}`
+        `${baseUrl}/api/discussions/?discussionId=${discussionId}`
       )
       .then((res) => {
         res.data.map((discussion: any) => {
           return setDiscussionName(discussion.name);
         });
       });
-  }, [discussionId]);
-
+  }, [discussionId, baseUrl]);
 
   const userVotes = (contributionId: any) => {
     console.log("votes cormparison", votes);
@@ -91,12 +92,12 @@ const CurrentDiscussion: React.FC = () => {
   let fetchContributions = useCallback(async () => {
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/contributions/?discussionId=${discussionId}`
+        `${baseUrl}/api/contributions/?discussionId=${discussionId}`
       )
       .then((res) => {
         setContributions(res.data);
       });
-  }, [discussionId]);
+  }, [discussionId, baseUrl]);
 
   useEffect(() => {
     fetchDiscussion();
@@ -163,25 +164,25 @@ const CurrentDiscussion: React.FC = () => {
           <h4>Agree</h4>
           {agreeList}
           <CreateContribution
-          discussionName={discussionName}
-          fetchContributions={fetchContributions}
-        />
+            discussionName={discussionName}
+            fetchContributions={fetchContributions}
+          />
         </div>
         <div className="zg-list zg-list-neutral">
           <h4>Neutral</h4>
           {neutralList}
           <CreateContribution
-          discussionName={discussionName}
-          fetchContributions={fetchContributions}
-        />
+            discussionName={discussionName}
+            fetchContributions={fetchContributions}
+          />
         </div>
         <div className="zg-list zg-list-disagree">
           <h4>Disagree</h4>
           {disagreeList}
           <CreateContribution
-          discussionName={discussionName}
-          fetchContributions={fetchContributions}
-        />
+            discussionName={discussionName}
+            fetchContributions={fetchContributions}
+          />
         </div>
       </div>
       <br />

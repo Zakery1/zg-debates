@@ -27,9 +27,10 @@ const CategoriesBar: React.FC = () => {
     return;
   };
 
-  const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:3000";
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const fetchCategories = useCallback( async () => {
+  const fetchCategories = useCallback(async () => {
     await axios.get(`${baseUrl}/api/categories`).then((res) => {
       setCategories([...res.data]);
     });

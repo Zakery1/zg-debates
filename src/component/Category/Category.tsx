@@ -24,16 +24,20 @@ const Category: React.FC<CategoryProps> = (props) => {
   const [discussions, setDiscussions] = useState<DiscussionsArray>([
     { id: null, name: "" },
   ]);
+
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const fetchDiscussions = useCallback(async () => {
     await axios
       .get(
-        `https://fathomless-reaches-38159.herokuapp.com/api/discussions/?categoryId=${props.categoryId}`
+        `${baseUrl}/api/discussions/?categoryId=${props.categoryId}`
       )
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
       });
-  }, [props]);
+  }, [props, baseUrl]);
 
   useEffect(() => {
     fetchDiscussions();

@@ -41,6 +41,9 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
 
   const { discussionId }: DiscussionParams = useParams();
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -69,8 +72,9 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
     }
 
     await axios
-      .post(`https://fathomless-reaches-38159.herokuapp.com/api/contributions`, { data: postData })
+      .post(`${baseUrl}/api/contributions`, { data: postData })
       .then((res) => {
+        console.log(res);
       });
 
     setContribution("");

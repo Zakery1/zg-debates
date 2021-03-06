@@ -18,10 +18,13 @@ const Login: React.FC = () => {
 
   const value = useContext(SimpleCtx);
 
+  const baseUrl =
+  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const login = async () => {
     await axios
 
-      .post("https://fathomless-reaches-38159.herokuapp.com/api/sessions", {
+      .post(`${baseUrl}/api/sessions`, {
         username: username,
         password: password,
       })

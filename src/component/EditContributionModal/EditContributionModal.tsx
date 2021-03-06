@@ -28,22 +28,29 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
     setOpen(false);
   };
 
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   let getEditedContribution = async () => {
     await axios
-      .get(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/?contributionId=${contributionId}`)
+      .get(
+        `${baseUrl}/api/contributions/?contributionId=${contributionId}`
+      )
       .then((res) => {
         res.data.map((contribution: any) => {
           return setContribution(contribution.contribution);
-        })
-
+        });
       });
   };
 
   let editContribution = async () => {
     await axios
-      .put(`https://fathomless-reaches-38159.herokuapp.com/api/contributions/${contributionId}`, {
-        updatedContribution: updatedContribution,
-      })
+      .put(
+        `${baseUrl}/api/contributions/${contributionId}`,
+        {
+          updatedContribution: updatedContribution,
+        }
+      )
       .then((res) => {
         console.log(res.status);
       });
