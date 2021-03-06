@@ -27,8 +27,10 @@ const CategoriesBar: React.FC = () => {
     return;
   };
 
+  const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:3000";
+
   const fetchCategories = async () => {
-    await axios.get(`https://fathomless-reaches-38159.herokuapp.com/api/categories`).then((res) => {
+    await axios.get(`${baseUrl}/api/categories`).then((res) => {
       setCategories([...res.data]);
     });
   };
