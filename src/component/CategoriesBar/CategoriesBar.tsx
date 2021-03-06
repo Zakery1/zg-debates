@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 
@@ -29,16 +29,16 @@ const CategoriesBar: React.FC = () => {
 
   const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:3000";
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback( async () => {
     await axios.get(`${baseUrl}/api/categories`).then((res) => {
       setCategories([...res.data]);
     });
-  };
+  }, [baseUrl]);
 
   useEffect(() => {
     console.log("watch use effect");
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   const availableCategories = categories.map((category, index) => {
     return (
