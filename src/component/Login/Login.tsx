@@ -24,7 +24,7 @@ const Login: React.FC = () => {
   const login = async () => {
     await axios
 
-      .post(`${baseUrl}/api/sessions`, {
+      .post(`${baseUrl}/api/users/sessions`, {
         username: username,
         password: password,
       })

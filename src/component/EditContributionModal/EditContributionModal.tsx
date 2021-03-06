@@ -8,6 +8,7 @@ import { Modal, Tooltip, Button } from "@material-ui/core";
 
 interface EditContributionProps {
   contributionId: number | null;
+  contributionCreator: number | null;
   contribution: string;
   discussionName: string;
 }

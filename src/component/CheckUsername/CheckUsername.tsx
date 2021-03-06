@@ -19,7 +19,7 @@ const CheckUsername: React.FC<CheckUsernameProps> = (props) => {
     if (props.username) {
       await axios
         .get(
-          `${baseUrl}/api/users/${props.username}`
+          `${baseUrl}/api/users/?username=${props.username}`
         )
         .then((res) => {
           if (res.data.length > 0) {

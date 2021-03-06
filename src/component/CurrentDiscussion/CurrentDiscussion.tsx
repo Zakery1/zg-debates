@@ -113,6 +113,7 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <Contribution
           discussionName={discussionName}
+          contributionCreator={agreeItem.userId}
           key={agreeItem.id}
           contributionId={agreeItem.id}
           points={agreeItem.points}
@@ -128,6 +129,7 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <Contribution
           discussionName={discussionName}
+          contributionCreator={neutralItem.userId}
           key={neutralItem.id}
           contributionId={neutralItem.id}
           points={neutralItem.points}
@@ -143,6 +145,7 @@ const CurrentDiscussion: React.FC = () => {
       return (
         <Contribution
           discussionName={discussionName}
+          contributionCreator={disagreeItem.userId}
           key={disagreeItem.id}
           contributionId={disagreeItem.id}
           points={disagreeItem.points}
@@ -158,7 +161,6 @@ const CurrentDiscussion: React.FC = () => {
         <h2 className="zg-current-discussion-header">{discussionName} </h2>
         <br />
       </div>
-
       <div className="zg-position-container">
         <div className="zg-list zg-list-agree">
           <h4>Agree</h4>
