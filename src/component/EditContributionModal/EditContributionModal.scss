@@ -1,7 +1,6 @@
 @import "../../style/style.scss";
 
 .zg-contribution-content {
-  cursor: pointer;
   text-align: left;
   align-items: flex-start;
   justify-content: left;
@@ -17,7 +16,10 @@
   font-family: $zg-font;
   background: none;
   overflow-wrap: break-word;
-  
+}
+
+.zg-contribution-author {
+  cursor: pointer;
 }
 
 .zg-edit-contribution-modal {

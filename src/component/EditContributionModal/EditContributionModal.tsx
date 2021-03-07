@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import axios from "axios";
+
+import { SimpleCtx } from "../../context/UserContext";
 
 import "./EditContributionModal.scss";
 
@@ -21,6 +23,8 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
   const [updatedContribution, setUpdatedContribution] = useState("");
   const [open, setOpen] = useState(false);
 
+  let value = useContext(SimpleCtx);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -34,9 +38,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let getEditedContribution = async () => {
     await axios
-      .get(
-        `${baseUrl}/api/contributions/?contributionId=${contributionId}`
-      )
+      .get(`${baseUrl}/api/contributions/?contributionId=${contributionId}`)
       .then((res) => {
         res.data.map((contribution: any) => {
           return setContribution(contribution.contribution);
@@ -46,12 +48,9 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   let editContribution = async () => {
     await axios
-      .put(
-        `${baseUrl}/api/contributions/${contributionId}`,
-        {
-          updatedContribution: updatedContribution,
-        }
-      )
+      .put(`${baseUrl}/api/contributions/${contributionId}`, {
+        updatedContribution: updatedContribution,
+      })
       .then((res) => {
         console.log(res.status);
       });
@@ -97,14 +96,22 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
     </div>
   );
 
+  console.log("compare in edit", value?.id === props.contributionCreator);
+
   return (
     <div>
-      <Tooltip placement="top" title="Edit">
-        <button className="zg-contribution-content" onClick={handleOpen}>
-          {contribution}
-        </button>
-      </Tooltip>
-
+      {value?.id == props.contributionCreator ? (
+        <Tooltip placement="top" title="Edit">
+          <button
+            className="zg-contribution-content zg-contribution-author"
+            onClick={handleOpen}
+          >
+            {contribution}
+          </button>
+        </Tooltip>
+      ) : (
+        <button className="zg-contribution-content">{contribution}</button>
+      )}
       <Modal
         className="zg-edit-contribution-modal"
         open={open}
