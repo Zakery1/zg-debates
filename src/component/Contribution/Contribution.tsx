@@ -27,11 +27,6 @@ const Contribution: React.FC<ContributionProps> = (
 
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
-  console.log(baseUrl);
-
-  useEffect(() => {
-    fetchContributionCreator();
-  }, []);
 
   let fetchContributionCreator = useCallback(async () => {
     await axios
@@ -39,7 +34,11 @@ const Contribution: React.FC<ContributionProps> = (
       .then((response: any) => {
         setContributionCreator(response.data);
       });
-  }, []);
+  }, [baseUrl, props.contributionCreator]);
+
+  useEffect(() => {
+    fetchContributionCreator();
+  }, [fetchContributionCreator]);
 
   return (
     <div className="zg-contribution-container">
@@ -59,7 +58,7 @@ const Contribution: React.FC<ContributionProps> = (
           Author: {contributionCreator}
         </span>
       </div>
-      {value?.id == props.contributionCreator ? (
+      {+value?.id === props.contributionCreator ? (
         <DeleteContribution
           points={props.points}
           contributionId={props.contributionId}

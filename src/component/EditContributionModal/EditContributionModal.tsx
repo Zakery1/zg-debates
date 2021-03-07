@@ -96,11 +96,9 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
     </div>
   );
 
-  console.log("compare in edit", value?.id === props.contributionCreator);
-
   return (
     <div>
-      {value?.id == props.contributionCreator ? (
+      {+value?.id === props.contributionCreator ? (
         <Tooltip placement="top" title="Edit">
           <button
             className="zg-contribution-content zg-contribution-author"
