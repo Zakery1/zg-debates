@@ -48,14 +48,14 @@ const Contribution: React.FC<ContributionProps> = (
         points={props.points}
         initialVote={props.initialVote}
       />
-      <div>
+      <div className="zg-content-and-author">
         <EditContributionModal
           contributionCreator={props.contributionCreator}
           discussionName={props.discussionName}
           contributionId={props.contributionId}
           contribution={props.contribution}
         />
-        <span className="zg-contribution-creator">{contributionCreator}</span>
+        <span className="zg-contribution-creator">Author:  {contributionCreator}</span>
         
       </div>
 
