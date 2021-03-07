@@ -48,13 +48,17 @@ const Contribution: React.FC<ContributionProps> = (
         points={props.points}
         initialVote={props.initialVote}
       />
-      <EditContributionModal
-        contributionCreator={props.contributionCreator}
-        discussionName={props.discussionName}
-        contributionId={props.contributionId}
-        contribution={props.contribution}
-      />
-      {contributionCreator}
+      <div>
+        <EditContributionModal
+          contributionCreator={props.contributionCreator}
+          discussionName={props.discussionName}
+          contributionId={props.contributionId}
+          contribution={props.contribution}
+        />
+        <span className="zg-contribution-creator">{contributionCreator}</span>
+        
+      </div>
+
       <DeleteContribution
         points={props.points}
         contributionId={props.contributionId}

@@ -6,6 +6,9 @@
   align-items: center;
   align-content: center;
   border-bottom: 0.1px rgb(196, 196, 196) solid;
+  .zg-contribution-creator {
+    font-family: $zg-font-italic;
+  }
 }
 
 @media only screen and (min-width: 501px) {
