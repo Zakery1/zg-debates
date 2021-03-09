@@ -12,6 +12,7 @@ import { Modal, Button } from "@material-ui/core";
 interface RegistrationData {
   username: string;
   password: string;
+  registerDate: string;
 }
 
 const Register: React.FC = () => {
@@ -26,10 +27,13 @@ const Register: React.FC = () => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
+    const date = new Date();
+
   const sumbitRegistration = async () => {
     let registrationData: RegistrationData = {
       username: username,
       password: passwordOne,
+      registerDate: date.toDateString()
     };
     await axios
       .post(`${baseUrl}/api/users`, {

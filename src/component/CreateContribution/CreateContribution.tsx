@@ -21,6 +21,7 @@ interface ContributionData {
   neutral: boolean | null;
   disagree: boolean | null;
   points: number;
+  contributeDate: string;
 }
 
 interface CreateContributionProps {
@@ -40,6 +41,8 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   const value = useContext(SimpleCtx);
 
   const { discussionId }: DiscussionParams = useParams();
+
+  const date = new Date();
 
   const baseUrl =
   process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
@@ -61,6 +64,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
       neutral: null,
       disagree: null,
       points: 0,
+      contributeDate: date.toDateString()
     };
 
     if (choice === "agree") {

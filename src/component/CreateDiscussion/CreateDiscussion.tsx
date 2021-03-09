@@ -19,6 +19,7 @@ interface DiscussionData {
   creatorId: number | null;
   categoryId: number | null;
   discussionName: string;
+  date: string;
 }
 
 interface TopicParams {
@@ -33,6 +34,8 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
 
   const value = useContext(SimpleCtx);
 
+  const date = new Date();
+
   const baseUrl =
   process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
@@ -41,6 +44,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
       creatorId: value?.id,
       categoryId: categoryId,
       discussionName: discussionName,
+      date: date.toDateString()
     };
 
     await axios
