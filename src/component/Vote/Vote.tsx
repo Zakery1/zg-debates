@@ -27,9 +27,12 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const value = useContext(SimpleCtx);
 
   const baseUrl =
-  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let deleteConfig = { userId: value?.id, contributionId: props.contributionId };
+  let deleteConfig = {
+    userId: value?.id,
+    contributionId: props.contributionId,
+  };
 
   let removeVote = async () => {
     setPoints(points - 1);
@@ -109,7 +112,9 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
               width: "30px",
             }}
             aria-label="vote"
-            onClick={() => castVote()}
+            onClick={() =>
+              value?.id ? castVote() : alert("You must be logged in to vote.")
+            }
           >
             <ArrowUpwardIcon
               style={{ height: "20px" }}
