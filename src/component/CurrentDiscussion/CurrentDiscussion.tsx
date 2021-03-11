@@ -56,26 +56,27 @@ const CurrentDiscussion: React.FC = () => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let fetchVotes = useCallback(async (userId) => {
-    await axios
-      .get(`${baseUrl}/api/votes/?userId=${userId}`)
-      .then((res) => {
-        let contributionIds = res.data.map((contribution: any) => {
-          return contribution.contributionId;
+  let fetchVotes = useCallback(
+    async (userId) => {
+      await axios
+        .get(`${baseUrl}/api/votes/?userId=${userId}`)
+        .then((res) => {
+          let contributionIds = res.data.map((contribution: any) => {
+            return contribution.contributionId;
+          });
+          return setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
+        })
+        .catch((error) => {
+          console.log("fetchvotes errors", error);
         });
-        setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
-      })
-      .catch((error) => {
-        console.log("fetchvotes errors", error);
-      });
-  }, [baseUrl]);
+    },
+    [baseUrl]
+  );
 
   // debugger;
   let fetchDiscussion = useCallback(async () => {
     await axios
-      .get(
-        `${baseUrl}/api/discussions/?discussionId=${discussionId}`
-      )
+      .get(`${baseUrl}/api/discussions/?discussionId=${discussionId}`)
       .then((res) => {
         res.data.map((discussion: any) => {
           return setDiscussionName(discussion.name);
@@ -84,32 +85,37 @@ const CurrentDiscussion: React.FC = () => {
   }, [discussionId, baseUrl]);
 
   const userVotes = (contributionId: any) => {
-    console.log("votes cormparison", votes);
-    console.log("contributionId when matching votes", contributionId);
+    console.log("votes", votes)
     return votes.includes(contributionId);
   };
 
   let fetchContributions = useCallback(async () => {
     await axios
-      .get(
-        `${baseUrl}/api/contributions/?discussionId=${discussionId}`
-      )
+      .get(`${baseUrl}/api/contributions/?discussionId=${discussionId}`)
       .then((res) => {
         setContributions(res.data);
       });
   }, [discussionId, baseUrl]);
 
+
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
+  }, [fetchDiscussion, fetchContributions, fetchVotes, value?.id]);
+
+  useEffect(() => {
     if (value?.id) {
       fetchVotes(value?.id);
     }
-  }, [fetchDiscussion, fetchContributions, fetchVotes, value?.id]);
+  }, [value?.id]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
+      // const voted = votes.filter((vote) => {
+      //   return vote === agreeItem.id as IVote;
+      // })
+      console.log("agree item comparision", agreeItem.id)
       return (
         <Contribution
           discussionName={discussionName}
@@ -117,7 +123,7 @@ const CurrentDiscussion: React.FC = () => {
           key={agreeItem.id}
           contributionId={agreeItem.id}
           points={agreeItem.points}
-          initialVote={userVotes(agreeItem.id)}
+          initialVote={true}
           contribution={agreeItem.contribution}
         />
       );
@@ -126,6 +132,7 @@ const CurrentDiscussion: React.FC = () => {
   let neutralList = contributions
     .filter((contribution) => contribution.neutral === true)
     .map((neutralItem) => {
+      console.log("neautral item comparision", neutralItem.id)
       return (
         <Contribution
           discussionName={discussionName}

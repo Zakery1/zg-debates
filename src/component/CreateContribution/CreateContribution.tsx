@@ -48,7 +48,10 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
   process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const handleOpen = () => {
-    setOpen(true);
+    if (value?.username) {
+      return setOpen(true);
+    }
+    return alert("You must be logged in to contribute.");
   };
 
   const handleClose = () => {
