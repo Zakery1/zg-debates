@@ -22,6 +22,9 @@ const Login: React.FC = () => {
   process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const login = async () => {
+    if(username.length||password.length <1) {
+      return alert("Enter login information to login.")
+    }
     await axios
 
       .post(`${baseUrl}/api/users/sessions`, {
