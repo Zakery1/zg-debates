@@ -107,7 +107,7 @@ const CurrentDiscussion: React.FC = () => {
     if (value?.id) {
       fetchVotes(value?.id);
     }
-  }, [value?.id]);
+  }, [value?.id, fetchVotes]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
