@@ -123,7 +123,7 @@ const CurrentDiscussion: React.FC = () => {
           key={agreeItem.id}
           contributionId={agreeItem.id}
           points={agreeItem.points}
-          initialVote={true}
+          initialVote={userVotes(agreeItem.id)}
           contribution={agreeItem.contribution}
         />
       );
