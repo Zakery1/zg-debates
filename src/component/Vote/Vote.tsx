@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
@@ -14,15 +14,22 @@ import "./Vote.scss";
 interface VoteProps {
   contributionId: number | null;
   points: number;
-  initialVote: boolean;
 }
 
+interface UserVote {
+  contributionId: number;
+}
+
+interface VotesArray extends Array<UserVote> {}
+
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
-  const [voted, setVoted] = useState<boolean>(props.initialVote);
+  const [voted, setVoted] = useState<boolean | null>(null);
 
   const [points, setPoints] = useState<number>(props.points);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
+
+  const [userVotes, setUserVotes] = useState<VotesArray>([]);
 
   const value = useContext(SimpleCtx);
 
@@ -33,6 +40,30 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     userId: value?.id,
     contributionId: props.contributionId,
   };
+
+  const fetchUserVotes = useCallback(async () => {
+    await axios
+      .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
+      .then((response) => {
+        return setUserVotes(response.data);
+      });
+  }, [baseUrl, value?.id]);
+
+  const checkVotes = (contributionId: any) => {
+    userVotes.map((item) => {
+      if (item.contributionId === contributionId) {
+        return setVoted(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchUserVotes();
+  }, [fetchUserVotes]);
+
+  useEffect(() => {
+    checkVotes(props.contributionId);
+  }, [props.contributionId, checkVotes]);
 
   let removeVote = async () => {
     setPoints(points - 1);
@@ -84,11 +115,12 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   const castVote = () => {
-    setVoted(!voted);
     if (voted) {
-      removeVote();
+      setVoted(false);
+      return removeVote();
     } else {
-      addVote();
+      setVoted(true);
+      return addVote();
     }
   };
 

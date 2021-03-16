@@ -56,22 +56,6 @@ const CurrentDiscussion: React.FC = () => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let fetchVotes = useCallback(
-    async (userId) => {
-      await axios
-        .get(`${baseUrl}/api/votes/?userId=${userId}`)
-        .then((res) => {
-          let contributionIds = res.data.map((contribution: any) => {
-            return contribution.contributionId;
-          });
-          return setVotes((prevVotes) => [...prevVotes, ...contributionIds]);
-        })
-        .catch((error) => {
-          console.log("fetchvotes errors", error);
-        });
-    },
-    [baseUrl]
-  );
 
   // debugger;
   let fetchDiscussion = useCallback(async () => {
@@ -84,10 +68,6 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [discussionId, baseUrl]);
 
-  const userVotes = (contributionId: any) => {
-    console.log("votes", votes)
-    return votes.includes(contributionId);
-  };
 
   let fetchContributions = useCallback(async () => {
     await axios
@@ -101,21 +81,12 @@ const CurrentDiscussion: React.FC = () => {
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
-  }, [fetchDiscussion, fetchContributions, fetchVotes, value?.id]);
+  }, [fetchDiscussion, fetchContributions, value?.id]);
 
-  useEffect(() => {
-    if (value?.id) {
-      fetchVotes(value?.id);
-    }
-  }, [value?.id, fetchVotes]);
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
     .map((agreeItem) => {
-      // const voted = votes.filter((vote) => {
-      //   return vote === agreeItem.id as IVote;
-      // })
-      console.log("agree item comparision", agreeItem.id)
       return (
         <Contribution
           discussionName={discussionName}
@@ -123,7 +94,6 @@ const CurrentDiscussion: React.FC = () => {
           key={agreeItem.id}
           contributionId={agreeItem.id}
           points={agreeItem.points}
-          initialVote={userVotes(agreeItem.id)}
           contribution={agreeItem.contribution}
         />
       );
@@ -132,7 +102,6 @@ const CurrentDiscussion: React.FC = () => {
   let neutralList = contributions
     .filter((contribution) => contribution.neutral === true)
     .map((neutralItem) => {
-      console.log("neautral item comparision", neutralItem.id)
       return (
         <Contribution
           discussionName={discussionName}
@@ -140,7 +109,6 @@ const CurrentDiscussion: React.FC = () => {
           key={neutralItem.id}
           contributionId={neutralItem.id}
           points={neutralItem.points}
-          initialVote={userVotes(neutralItem.id)}
           contribution={neutralItem.contribution}
         />
       );
@@ -156,7 +124,6 @@ const CurrentDiscussion: React.FC = () => {
           key={disagreeItem.id}
           contributionId={disagreeItem.id}
           points={disagreeItem.points}
-          initialVote={userVotes(disagreeItem.id)}
           contribution={disagreeItem.contribution}
         />
       );

@@ -13,7 +13,6 @@ interface ContributionProps {
   contributionId: number | null;
   contributionCreator: number | null;
   points: number;
-  initialVote: boolean;
   contribution: string;
   discussionName: string;
 }
@@ -45,7 +44,6 @@ const Contribution: React.FC<ContributionProps> = (
       <Vote
         contributionId={props.contributionId}
         points={props.points}
-        initialVote={props.initialVote}
       /> 
       <div className="zg-content-and-author">
         <EditContributionModal
