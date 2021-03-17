@@ -26,7 +26,6 @@ const Login: React.FC = () => {
       return alert("Enter login information to login.")
     }
     await axios
-
       .post(`${baseUrl}/api/users/sessions`, {
         username: username,
         password: password,

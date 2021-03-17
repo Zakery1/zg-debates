@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 
 import axios from "axios";
 
@@ -8,6 +8,8 @@ import CheckUsername from "../CheckUsername/CheckUsername";
 import CheckPasswords from "../CheckPasswords/CheckPasswords";
 
 import { Modal, Button } from "@material-ui/core";
+import { SimpleCtx } from "../../context/UserContext";
+import { useHistory } from "react-router-dom";
 
 interface RegistrationData {
   username: string;
@@ -27,21 +29,48 @@ const Register: React.FC = () => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-    const date = new Date();
+  const value = useContext(SimpleCtx);
+
+  let history = useHistory();
+
+  const date = new Date();
+
+  const login = async () => {
+    if (username.length < 1) {
+      return alert("Enter login information to login.");
+    }
+    await axios
+      .post(`${baseUrl}/api/users/sessions`, {
+        username: username,
+        password: passwordOne,
+      })
+      .then((res) => {
+        value?.setUsername(res.data.username);
+        value?.setId(res.data.userId);
+        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("userId", res.data.userId);
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log("Axios error POST on login", error);
+        alert("invalid username of password");
+      });
+  };
 
   const sumbitRegistration = async () => {
     let registrationData: RegistrationData = {
       username: username,
       password: passwordOne,
-      registerDate: date.toDateString()
+      registerDate: date.toDateString(),
     };
     await axios
       .post(`${baseUrl}/api/users`, {
         data: registrationData,
       })
       .then((res) => {
-        console.log(res.data);
+        login();
       });
+
     handleClose();
   };
 
