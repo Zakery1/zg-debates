@@ -62,7 +62,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     if (value?.username) {
       return setOpen(true);
     }
-    return alert("You must be logged in to contribute.");
+    return alert("You must be logged in to create a discussion.");
   };
 
   const handleClose = () => {
