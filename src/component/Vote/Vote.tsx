@@ -42,11 +42,16 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   const fetchUserVotes = useCallback(async () => {
-    await axios
+    if(value?.id) {
+      await axios
       .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
       .then((response) => {
         return setUserVotes(response.data);
       });
+    } else {
+      return;
+    }
+
   }, [baseUrl, value?.id]);
 
   const checkVotes = useCallback(
