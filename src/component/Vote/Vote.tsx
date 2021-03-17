@@ -49,13 +49,19 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
   }, [baseUrl, value?.id]);
 
-  const checkVotes = (contributionId: any) => {
-    userVotes.map((item) => {
-      if (item.contributionId === contributionId) {
+  const checkVotes = useCallback(
+    (contributionId: any) => {
+      let votedStatus = userVotes.find(
+        (item) => item.contributionId === contributionId
+      );
+      if(votedStatus?.contributionId)  {
         return setVoted(true);
+      } else {
+        return;
       }
-    });
-  };
+    },
+    [userVotes]
+  );
 
   useEffect(() => {
     fetchUserVotes();

@@ -24,16 +24,8 @@ interface ContributionItem {
 
 interface ContributionsArray extends Array<ContributionItem> {}
 
-interface IVote {
-  id: number | null;
-}
-
-interface VotesArray extends Array<IVote> {}
-
 const CurrentDiscussion: React.FC = () => {
   const [discussionName, setDiscussionName] = useState("");
-
-  const [votes, setVotes] = useState<VotesArray>([]);
 
   const [contributions, setContributions] = useState<ContributionsArray>([
     {
