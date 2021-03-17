@@ -48,7 +48,7 @@ const Login: React.FC = () => {
   return (
     <div className="zg-login">
       <div className="zg-login-title">
-        <h1>New Twitter</h1>
+        <h1>ZG-Debates</h1>
       </div>
       <form className="zg-login-portal">
         <input
