@@ -53,7 +53,7 @@ const Login: React.FC = () => {
       <form className="zg-login-portal">
         <input
           value={username}
-          autoComplete="email"
+          autoComplete="current-password"
           className="zg-login-username"
           type="text"
           placeholder="Username"
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         />
         <input
           value={password}
-          autoComplete="currentPassword"
+          autoComplete="current-password"
           className="zg-login-password"
           type="password"
           placeholder="Password"
