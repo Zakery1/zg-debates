@@ -1,1 +1,1 @@
-Visit the website at [zg-debates.netlify.app](https://zg-debates.netlify.app/){:target="_blank" rel="noopener"}.
+Visit the website at [zg-debates.netlify.app](https://zg-debates.netlify.app/).
