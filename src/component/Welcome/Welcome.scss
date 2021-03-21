@@ -1,0 +1,17 @@
+@import "../../style/style.scss";
+
+.zg-welcome {
+  box-shadow: $box-shadow;
+  margin-top: 0;
+  border-radius: 5px 5px 5px 5px;
+  min-width: 85vw;
+  min-height: 100vh;
+  //   display: flex;
+  //   flex-direction: column;
+  color: $zg-purple;
+  .zg-welcome-header {
+  }
+  p {
+      font-weight: bold;
+  }
+}

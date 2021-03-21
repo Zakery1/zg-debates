@@ -5,6 +5,7 @@ import axios from "axios";
 import "./CategoriesBar.scss";
 
 import Category from "../Category/Category";
+import Welcome from "../Welcome/Welcome";
 
 interface CategoryItem {
   id: number | null;
@@ -64,6 +65,7 @@ const CategoriesBar: React.FC = () => {
           ""
         )}
       </div>
+
       {showCategory ? (
         <Category
           // hideCategory={hideCategory}
@@ -71,7 +73,7 @@ const CategoriesBar: React.FC = () => {
           categoryName={category.categoryName}
         />
       ) : (
-        ""
+        <Welcome />
       )}
     </div>
   );
