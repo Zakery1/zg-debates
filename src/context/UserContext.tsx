@@ -7,6 +7,8 @@ interface UserContextInterface {
   setUsername: SetUserInfo;
   id: any;
   setId: SetUserInfo;
+  role: any;
+  setRole: SetUserInfo
 }
 
 export const SimpleCtx = createContext<UserContextInterface | null>(null);
@@ -14,6 +16,7 @@ export const SimpleCtx = createContext<UserContextInterface | null>(null);
 export const CtxProvider: React.FC = (props) => {
   const [username, setUsername] = useState();
   const [id, setId] = useState();
+  const [role, setRole] = useState();
 
   // const [profile, setProfile] = useState({ _id: '', photo: '', name: '', email:'', phonenumber:'', position:'', privilege:'', password:''});
 
@@ -30,8 +33,10 @@ export const CtxProvider: React.FC = (props) => {
     if (localStorage.username) {
       setUsername(localStorage.username);
       setId(localStorage.userId);
+      setRole(localStorage.role);
     }
   }, []);
+
 
   return (
     <SimpleCtx.Provider
@@ -40,6 +45,8 @@ export const CtxProvider: React.FC = (props) => {
         setUsername,
         id,
         setId,
+        role,
+        setRole
       }}
     >
       {props.children}

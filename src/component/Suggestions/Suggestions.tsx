@@ -4,8 +4,9 @@ import "./Suggestions.scss";
 
 const Suggestions: React.FC = () => {
 
-    //need to submit suggestions to new suggestions table
+  //need new suggestions table
     //retreive existing suggestions
+    //need to submit suggestions to new suggestions table
     //only allow admin to delete
 
 
