@@ -5,6 +5,7 @@ import Login from "./component/Login/Login";
 import Dashboard from "./component/Dashboard/Dashboard";
 import CurrentDiscussion from "./component/CurrentDiscussion/CurrentDiscussion";
 import User from "./component/User/User";
+import Suggestions from "./component/Suggestions/Suggestions";
 
 export default function routes() {
   return (
@@ -17,6 +18,7 @@ export default function routes() {
         path="/discussion/:discussionId"
         component={CurrentDiscussion}
       />
+      <Route exact path="/suggestions" component={Suggestions}></Route>
       <Route path="/" render={() => <div>404</div>} />
     </Switch>
   );

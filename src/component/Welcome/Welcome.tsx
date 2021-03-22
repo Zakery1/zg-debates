@@ -15,6 +15,7 @@ const Welcome: React.FC = () => {
         If you feel compelled, feel free to give suggestions on how we can
         improve <Link to="/suggestions">here</Link>.
       </p>
+      
     </div>
   );
 };
