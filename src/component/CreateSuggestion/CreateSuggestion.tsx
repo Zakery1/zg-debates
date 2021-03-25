@@ -9,8 +9,6 @@ const CreateSuggestion: React.FC = () => {
     //need to submit suggestions to new suggestions table
     //only allow admin to delete
 
-
-
   return (
     <div className="zg-create-suggestion">
       <h1>Suggestions</h1>
@@ -21,9 +19,6 @@ const CreateSuggestion: React.FC = () => {
       <input type="text" />
       <br/>
       <button>submit suggestion</button>
-      <div>
-          <h3>Existing Suggestions</h3>
-      </div>
     </div>
   );
 };
