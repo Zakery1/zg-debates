@@ -6,6 +6,10 @@ import axios from "axios";
 
 import { useParams } from "react-router-dom";
 
+import { IconButton } from "@material-ui/core";
+
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+
 import CreateContribution from "../CreateContribution/CreateContribution";
 import Contribution from "../Contribution/Contribution";
 
@@ -48,7 +52,6 @@ const CurrentDiscussion: React.FC = () => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-
   // debugger;
   let fetchDiscussion = useCallback(async () => {
     await axios
@@ -60,7 +63,6 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [discussionId, baseUrl]);
 
-
   let fetchContributions = useCallback(async () => {
     await axios
       .get(`${baseUrl}/api/contributions/?discussionId=${discussionId}`)
@@ -69,12 +71,16 @@ const CurrentDiscussion: React.FC = () => {
       });
   }, [discussionId, baseUrl]);
 
+  const copyLink = () => {
+    return navigator.clipboard.writeText(
+      `https://zg-debates.netlify.app/discussion/${discussionId}`
+    );
+  };
 
   useEffect(() => {
     fetchDiscussion();
     fetchContributions();
   }, [fetchDiscussion, fetchContributions, value?.id]);
-
 
   let agreeList = contributions
     .filter((contribution) => contribution.agree === true)
@@ -124,8 +130,12 @@ const CurrentDiscussion: React.FC = () => {
   return (
     <div className="zg-current-discussion">
       <div className="zg-discussion-header">
-        <h2 className="zg-current-discussion-header">{discussionName} </h2>
-        <br />
+        <h2 className="zg-current-discussion-title">{discussionName} </h2>
+        <div className="zg-copy-link">
+          <IconButton  style={{fontSize: "14px",  padding: "0 0", borderRadius: "4px"}} onClick={() => copyLink()}>
+            Copy link to discussion <FileCopyIcon style={{fontSize: "14px", marginLeft: "5px"}} />
+          </IconButton>
+        </div>
       </div>
       <div className="zg-position-container">
         <div className="zg-list zg-list-agree">
