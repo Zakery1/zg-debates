@@ -13,8 +13,8 @@ const Suggestions: React.FC = () => {
 
   return (
     <div className="zg-suggestions">
+      <CurrentSuggestions />
       <CreateSuggestion />
-      <CurrentSuggestions/>
     </div>
   );
 };

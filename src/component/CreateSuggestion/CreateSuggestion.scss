@@ -1,5 +1,26 @@
 @import "../../style/style.scss";
 
-.zg-create-suggestion{
+.zg-create-suggestion {
+  margin-top: 20px;
+  color: $zg-purple;
+  .zg-prompt-create {
+    margin: 10px;
+  }
+  .zg-suggestion-box {
+      display: none;
+  }
+  .zg-hidden {
+    display: inherit;
+    transition: transform 2s;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-create-suggestion {
     color: $zg-purple;
+    .zg-prompt-create {
+    }
+    .zg-suggestion-box {
+    }
+  }
 }

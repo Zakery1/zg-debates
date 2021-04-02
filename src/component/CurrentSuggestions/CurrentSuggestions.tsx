@@ -20,7 +20,12 @@ const CurrentSuggestions: React.FC = () => {
   //     suggestionAuthor: "string",
   //     creationDate: "string",
   //   });
-  const [suggestions, setSuggestions] = useState<SuggestionsArray>([]);
+  const [suggestions, setSuggestions] = useState<SuggestionsArray>([{
+    id: null,
+    suggestion: "",
+    suggestionAuthor: "",
+    creationDate: ""
+  }]);
 
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
@@ -33,15 +38,15 @@ const CurrentSuggestions: React.FC = () => {
     await axios.get(`${baseUrl}/api/suggestions/`).then((res) => {
       setSuggestions(res.data);
     });
-    console.log("suggestions", suggestions);
-  }, []);
+    console.log("suggestions");
+  }, [baseUrl]);
 
   useEffect(() => {
     fetchSuggestions();
   }, [fetchSuggestions]);
 
   const currentSuggestions = suggestions.map((currentSuggestion) => {
-    return <div>{currentSuggestion.suggestion}</div>;
+    return <div key={currentSuggestion.id}>{currentSuggestion.suggestion}</div>;
   });
 
   return (
