@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
       <h1 className="zg-welcome-header">Welcome</h1>
       <p className="zg-welcome-text">
         Welcome to ZG-Debates. Our goal is to create better quality
-        <br /> discourse surrounding important and challenging topics.{" "}
+        <br /> discourse surrounding important and challenging topics.
       </p>
       <p className="zg-welcome-text">
         If you feel compelled, feel free to give suggestions on how we can
