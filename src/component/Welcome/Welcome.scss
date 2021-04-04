@@ -10,8 +10,21 @@
   //   flex-direction: column;
   color: $zg-purple;
   .zg-welcome-header {
+    padding-top: 15px;
   }
-  p {
+  .zg-welcome-text {
       font-weight: bold;
+      margin: 20px 5px 0 5px;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-welcome { 
+    .zg-welcome-header {
+    // margin-top: 0px;
+    }
+    .zg-welcome-text {
+      // margin: 0 5px;
+    }
   }
 }

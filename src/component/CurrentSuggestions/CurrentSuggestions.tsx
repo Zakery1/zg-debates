@@ -38,7 +38,6 @@ const CurrentSuggestions: React.FC = () => {
     await axios.get(`${baseUrl}/api/suggestions/`).then((res) => {
       setSuggestions(res.data);
     });
-    console.log("suggestions");
   }, [baseUrl]);
 
   useEffect(() => {
