@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import "./CategoriesBar.scss";
 
 import Category from "../Category/Category";
@@ -27,6 +29,11 @@ const CategoriesBar: React.FC = () => {
     setCategory({ id: id, categoryName: name });
     return;
   };
+
+  const exitCategory = () => {
+    setShowCategory(false);
+    setCategory({ id: null, categoryName: "" });
+  }
 
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
@@ -60,7 +67,16 @@ const CategoriesBar: React.FC = () => {
       <div className="zg-categories-bar">
         <span className="zg-categories-bar-header">Current Topics</span>
         {categories.length ? (
-          <div className="zg-category-container">{availableCategories}</div>
+          <div>
+            <div className="zg-category-container">{availableCategories}</div>
+            <div className="zg-category-container">
+            <div className="zg-category-link-holder">
+              <button onClick={() => exitCategory()} className="zg-single-category">
+                <ArrowBackIcon />
+              </button>
+              </div>
+            </div>
+          </div>
         ) : (
           ""
         )}
