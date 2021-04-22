@@ -42,8 +42,8 @@ const Contribution: React.FC<ContributionProps> = (
   return (
     <div className="zg-contribution-container">
       <Vote contributionId={props.contributionId} points={props.points} />
-      <Vote contributionId={props.contributionId} points={props.points} />
-      <Vote contributionId={props.contributionId} points={props.points} />
+      {/* <Vote contributionId={props.contributionId} points={props.points} />
+      <Vote contributionId={props.contributionId} points={props.points} /> */}
 
       <div className="zg-content-and-author">
         <EditContributionModal
