@@ -61,7 +61,7 @@ const Category: React.FC<CategoryProps> = (props) => {
     <div className="zg-category">
       <div className="zg-category-header">
       <div className="zg-category-header-text">
-        Current {props.categoryName} discussions
+         {props.categoryName} 
       </div>
       </div>
 

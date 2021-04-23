@@ -2,6 +2,7 @@
 
 .zg-create-discussion {
   .zg-open-discussion-modal {
+    background: #d3b349;
     font-family: $zg-font;
     box-shadow: $box-shadow;
     width: 200px;
@@ -12,9 +13,25 @@
     font-size: 12px;
 
     .zg-add-icon {
-      margin: 0 4px;
+      margin: 5px 4px;
       height: 17px;
     }
+  }
+}
+
+.zg-create-action {
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .zg-create-discussion-button-text {
+
   }
 }
 

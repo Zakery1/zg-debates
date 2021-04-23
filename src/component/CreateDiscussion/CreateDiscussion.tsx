@@ -103,10 +103,10 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
   );
   return (
     <div className="zg-create-discussion">
-      <Button className="zg-open-discussion-modal" type="button" onClick={handleOpen}>
-        Create Discussion
+      <button className="zg-open-discussion-modal zg-create-action" type="button" onClick={handleOpen}>
+        <div className="zg-create-discussion-button-text">Create Discussion</div>
         <AddCircleIcon className="zg-add-icon"/>
-      </Button>
+      </button>
       <Modal
         className="zg-create-discussion-modal"
         open={open}
