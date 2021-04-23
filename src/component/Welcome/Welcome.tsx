@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Welcome.scss";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Welcome: React.FC = () => {
   return (

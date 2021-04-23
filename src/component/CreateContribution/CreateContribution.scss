@@ -2,6 +2,7 @@
 
 .zg-contribution {
   outline: 0;
+
   .zg-modal-contribute {
     box-shadow: $box-shadow;
     font-family: $zg-font;
@@ -9,6 +10,21 @@
     color: $zg-purple;
     text-decoration: none;
     font-weight: bolder;
+    margin-right: 5px;
+    background: #d3b349;
+    font-family: $zg-font;
+    box-shadow: $box-shadow;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
   }
 
   .zg-plus-icon {
@@ -16,6 +32,7 @@
     height: 17px;
   }
   .zg-modal-contribute:hover {
+    cursor: pointer;
   }
 }
 
@@ -75,7 +92,10 @@
       color: $zg-purple;
       font-family: $zg-font;
       font-weight: bolder;
-      // box-shadow: $box-shadow;
+    }
+    .zg-contribution-valid {
+      background: #d3b349;
+      box-shadow: $box-shadow;
     }
     .zg-disabled {
       opacity: 0.5;
@@ -100,7 +120,6 @@
       color: $zg-purple;
       text-decoration: none;
       font-weight: bolder;
-      margin-top: 8px;
     }
   }
   .zg-contribution-modal {

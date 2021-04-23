@@ -6,7 +6,6 @@
     font-family: $zg-font;
     box-shadow: $box-shadow;
     width: 200px;
-    // margin: 20px 0 0 0;
     color: $zg-purple;
     text-decoration: none;
     font-weight: bolder;
@@ -62,6 +61,12 @@ p {
       font-family: $zg-font;
       font-weight: bolder;
     }
+
+    .zg-create-discussion-valid {
+      background: #d3b349;
+      box-shadow: $box-shadow;
+    }
+
     .zg-discussion-input {
       margin-top: 20px;
       width: 250px;
@@ -79,6 +84,7 @@ p {
 }
 
 @media only screen and (min-width: 501px) {
+  
   .zg-create-discussion-modal {
     .zg-create-discussion-body {
       height: 500px;

@@ -16,8 +16,15 @@
       font-weight: bolder;
       margin: 15px 0;
     }
-    .zg-copy-link {
-      .zg-icon-button {
+    .zg-link-and-create-holder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .zg-copy-link {
+        margin-left: 8px;
+        font-size: 11px;
+        .zg-icon-button {
+        }
       }
     }
   }
@@ -73,8 +80,17 @@
       .zg-current-discussion-title {
         margin: 25px 0 0 0;
       }
-      .zg-copy-link {
-            margin-top: 5px;
+      .zg-link-and-create-holder {
+        display: flex;
+        flex-direction: row;
+        margin: 10px 5px 5px 5px;
+        .zg-copy-link {
+          // margin-left: 15px;
+          // font-size: 11px;
+          // margin-top: 3px;
+          .zg-icon-button {
+          }
+        }
       }
     }
     .zg-position-container {
@@ -92,7 +108,7 @@
         margin: 0;
         width: 33vw;
         min-height: 550px;
-        box-shadow: $box-shadow;
+        // box-shadow: $box-shadow;
       }
       .zg-list-agree {
         margin-right: 0px;

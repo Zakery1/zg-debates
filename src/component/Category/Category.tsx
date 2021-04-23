@@ -46,14 +46,14 @@ const Category: React.FC<CategoryProps> = (props) => {
 
   let currentDiscussions = discussions.map((discussion, index) => {
     return (
-      <div key={index} className="zg-category-link-holder">
-        <Link
+      <Link key={index} to={`/discussion/${discussion.id}`} className="zg-category-link-holder">
+        <div
           className="zg-discussion-link"
-          to={`/discussion/${discussion.id}`}
+          
         >
           {discussion.name}
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   });
 

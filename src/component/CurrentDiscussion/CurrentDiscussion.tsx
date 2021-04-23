@@ -131,36 +131,35 @@ const CurrentDiscussion: React.FC = () => {
     <div className="zg-current-discussion">
       <div className="zg-discussion-header">
         <h2 className="zg-current-discussion-title">{discussionName} </h2>
-        <div className="zg-copy-link">
-          <IconButton  style={{fontSize: "14px",  padding: "0 0", borderRadius: "4px"}} onClick={() => copyLink()}>
-            Copy link to discussion <FileCopyIcon style={{fontSize: "14px", marginLeft: "5px"}} />
-          </IconButton>
+
+        <div className="zg-link-and-create-holder">
+          <CreateContribution
+            discussionName={discussionName}
+            fetchContributions={fetchContributions}
+          />
+          <div className="zg-copy-link">
+            <IconButton
+              style={{ fontSize: "14px", padding: "0 0", borderRadius: "4px" }}
+              onClick={() => copyLink()}
+            >
+              Copy link to discussion{" "}
+              <FileCopyIcon style={{ fontSize: "14px", marginLeft: "5px" }} />
+            </IconButton>
+          </div>
         </div>
       </div>
       <div className="zg-position-container">
         <div className="zg-list zg-list-agree">
           <h4>Agree</h4>
           {agreeList}
-          <CreateContribution
-            discussionName={discussionName}
-            fetchContributions={fetchContributions}
-          />
         </div>
         <div className="zg-list zg-list-neutral">
           <h4>Neutral</h4>
           {neutralList}
-          <CreateContribution
-            discussionName={discussionName}
-            fetchContributions={fetchContributions}
-          />
         </div>
         <div className="zg-list zg-list-disagree">
           <h4>Disagree</h4>
           {disagreeList}
-          <CreateContribution
-            discussionName={discussionName}
-            fetchContributions={fetchContributions}
-          />
         </div>
       </div>
       <br />

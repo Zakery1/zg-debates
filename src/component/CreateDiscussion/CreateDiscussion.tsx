@@ -73,19 +73,19 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     <div className="zg-create-discussion-body">
       <h2>Create discussion</h2>
       <p>
-        Please create discussion related to <span style={{fontWeight: "bolder"}}>{props.categoryName}</span> or a
+        Create a premise related to <span style={{fontWeight: "bolder"}}>{props.categoryName}</span> or a
         moderator will delete it.
       </p>
       <textarea
         onChange={(e) => setDiscussionName(e.target.value)}
         className="zg-discussion-input"
-        maxLength={200}
+        maxLength={70}
         autoFocus
       />
       <br />
       {discussionName ? (
         <Button
-          className="zg-create-discussion-button"
+          className="zg-create-discussion-button zg-create-discussion-valid"
           onClick={createDiscussion}
         >
           Create Discussion!

@@ -17,6 +17,9 @@
 
   .zg-category-button-holder {
     .zg-category-action-holder {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
       .zg-back-to-topics {
         width: 170px;
         box-shadow: $box-shadow;
@@ -32,11 +35,16 @@
       padding: 20px;
       margin: 0 40px 0 40px;
       .zg-category-link-holder {
-        margin: 15px 5px 5px 5px;
+        margin: 5px 5px 15px 5px;
+        
+        background: $zg-purple;
+        border-radius: 4px;
+        display: flex;
+        text-decoration: none;
         .zg-discussion-link {
           font-weight: bolder;
-          color: $zg-purple;
-          text-decoration: none;
+          color: white;
+          padding: 5px;
           font-family: $zg-font;
         }
       }
