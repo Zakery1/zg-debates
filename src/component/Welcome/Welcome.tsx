@@ -15,8 +15,8 @@ const Welcome: React.FC = () => {
         <br /> discourse surrounding important and challenging topics.
       </p>
       <p className="zg-welcome-text">
-        If you feel compelled, feel free to give suggestions on how we can
-        improve <Link to="/suggestions">here</Link>.
+        {/* If you feel compelled, feel free to give suggestions on how we can
+        improve <Link to="/suggestions">here</Link>. */}
       </p>
     </div>
   );
