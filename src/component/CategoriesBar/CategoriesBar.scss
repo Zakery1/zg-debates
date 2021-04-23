@@ -1,7 +1,6 @@
 @import "../../style/style.scss";
 
 .zg-categories-bar {
-
   text-align: left;
   margin: 0 40px;
   margin-top: 20px;
@@ -10,19 +9,19 @@
     font-weight: bolder;
     color: $zg-purple;
     margin-top: 20px;
+    margin-bottom: 15px;
     padding: 5px;
-    // border-radius: 5px;
-    // background: $zg-purple;
     color: $zg-purple;
     border-bottom: 2px solid $zg-purple;
     border-top: 2px solid $zg-purple;
+    max-width: fit-content;
   }
 
   .zg-category-container {
     font-size: 10px;
     .zg-category-link-holder {
       padding: 10px;
-      margin: 10px;
+      margin: 5px;
       .zg-single-category {
         font-family: $zg-font;
         text-align: left;
@@ -63,6 +62,8 @@
         align-items: flex-start;
 
         .zg-category-link-holder {
+          margin: 5px;
+          padding: 5px;
           .zg-single-category {
             font-size: 12px;
           }

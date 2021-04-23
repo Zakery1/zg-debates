@@ -65,7 +65,7 @@ const CategoriesBar: React.FC = () => {
   return (
     <div className="zg-categories-bar-holder">
       <div className="zg-categories-bar">
-        <span className="zg-categories-bar-header">Current Topics</span>
+        <div className="zg-categories-bar-header">Current Topics</div>
         {categories.length ? (
           <div>
             <div className="zg-category-container">{availableCategories}</div>
