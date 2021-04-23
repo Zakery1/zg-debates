@@ -59,9 +59,12 @@ const Category: React.FC<CategoryProps> = (props) => {
 
   return (
     <div className="zg-category">
-      <h3 className="zg-category-header">
+      <div className="zg-category-header">
+      <div className="zg-category-header-text">
         Current {props.categoryName} discussions
-      </h3>
+      </div>
+      </div>
+
       <div className="zg-category-button-holder">
         <div className="zg-category-action-holder">
           <CreateDiscussion
