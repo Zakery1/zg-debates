@@ -24,6 +24,9 @@ interface ContributionItem {
   neutral: boolean | null;
   disagree: boolean | null;
   points: number;
+  contributionDate: string | null;
+  hyperboles: number;
+  trolls: number;
 }
 
 interface ContributionsArray extends Array<ContributionItem> {}
@@ -41,6 +44,9 @@ const CurrentDiscussion: React.FC = () => {
       neutral: null,
       disagree: null,
       points: 0,
+      contributionDate: null,
+      hyperboles: 0,
+      trolls: 0,
     },
   ]);
 
@@ -93,6 +99,8 @@ const CurrentDiscussion: React.FC = () => {
           contributionId={agreeItem.id}
           points={agreeItem.points}
           contribution={agreeItem.contribution}
+          hyperboles={agreeItem.hyperboles}
+          trolls={agreeItem.trolls}
         />
       );
     });
@@ -108,6 +116,8 @@ const CurrentDiscussion: React.FC = () => {
           contributionId={neutralItem.id}
           points={neutralItem.points}
           contribution={neutralItem.contribution}
+          hyperboles={neutralItem.hyperboles}
+          trolls={neutralItem.trolls}
         />
       );
     });
@@ -123,6 +133,8 @@ const CurrentDiscussion: React.FC = () => {
           contributionId={disagreeItem.id}
           points={disagreeItem.points}
           contribution={disagreeItem.contribution}
+          hyperboles={disagreeItem.hyperboles}
+          trolls={disagreeItem.trolls}
         />
       );
     });

@@ -14,10 +14,13 @@ import "./Vote.scss";
 interface VoteProps {
   contributionId: number | null;
   points: number;
+  hyperboles: number | null;
+  trolls: number | null;
 }
 
 interface UserVote {
   contributionId: number;
+  voteType: number;
 }
 
 interface VotesArray extends Array<UserVote> {}
@@ -26,6 +29,8 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [voted, setVoted] = useState<boolean | null>(null);
 
   const [points, setPoints] = useState<number>(props.points);
+  const [hyperboles, setHyperboles] = useState<number | null>(props.hyperboles);
+  const [trolls, setTrolls] = useState<number | null>(props.trolls);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
 
@@ -42,16 +47,16 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   const fetchUserVotes = useCallback(async () => {
-    if(value?.id) {
+    if (value?.id) {
       await axios
-      .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
-      .then((response) => {
-        return setUserVotes(response.data);
-      });
+        .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
+        .then((response) => {
+          console.log("RESPONSE FOR USER VOTES", response.data);
+          return setUserVotes(response.data);
+        });
     } else {
       return;
     }
-
   }, [baseUrl, value?.id]);
 
   const checkVotes = useCallback(
@@ -59,7 +64,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       let votedStatus = userVotes.find(
         (item) => item.contributionId === contributionId
       );
-      if(votedStatus?.contributionId)  {
+      if (votedStatus?.contributionId) {
         return setVoted(true);
       } else {
         return;
@@ -107,6 +112,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     setTimeout(() => {
       setVoteDisabled(false);
     }, 2000);
+
     await axios
       .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
@@ -115,10 +121,12 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       .then((res) => {
         console.log(res.status);
       });
+
     await axios
       .post(`${baseUrl}/api/votes`, {
         userId: value?.id,
         contributionId: props.contributionId,
+        voteType: 1,
       })
       .then((res) => {
         console.log(res.status);
@@ -137,38 +145,32 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   return (
     <div className="zg-vote-container">
-      {voteDisabled ? (
-        <CheckCircleIcon
-          style={{ color: voted ? "#24519b" : "grey", height: "15px" }}
-          className="zg-vote-check"
-        />
-      ) : (
-        ""
-      )}
       <Tooltip title={voted ? "Remove Vote" : "Vote"}>
-        <span>
-          <IconButton
-            disabled={voteDisabled}
-            style={{
-              color: voted ? "#24519b" : "grey",
-              height: "30px",
-              width: "30px",
-            }}
-            aria-label="vote"
-            onClick={() =>
-              value?.id ? castVote() : alert("You must be logged in to vote.")
-            }
-          >
-            <ArrowUpwardIcon
-              style={{ height: "20px" }}
-              className="zg-vote-arrow"
-            />
-          </IconButton>
-        </span>
+        <IconButton
+          disabled={voteDisabled}
+          style={{
+            color: voted ? "#24519b" : "grey",
+            height: "15px",
+            width: "15px",
+          }}
+          aria-label="vote"
+          onClick={() =>
+            value?.id ? castVote() : alert("You must be logged in to vote.")
+          }
+        >
+          <ArrowUpwardIcon
+            style={{ height: "15px" }}
+            className="zg-vote-arrow"
+          />
+        </IconButton>
       </Tooltip>
+
       <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-        {points}
+
+        {points}{" "}
       </span>
+      <div>{trolls}</div>
+      <div>{hyperboles}</div>
     </div>
   );
 };

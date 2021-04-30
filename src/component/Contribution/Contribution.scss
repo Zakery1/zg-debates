@@ -7,6 +7,10 @@
   align-content: center;
   border-bottom: 0.1px rgb(196, 196, 196) solid;
   .zg-content-and-author {
+    .zg-vote-section {
+      display: flex;
+      flex-direction: row;
+    }
     .zg-contribution-creator {
       padding-left: 8px;
       padding-bottom: 5px;
@@ -24,8 +28,9 @@
     justify-content: space-evenly;
     min-width: 30vw;
     .zg-content-and-author {
+      .zg-vote-section {
+      }
       .zg-contribution-creator {
-
         // font-size: 14px;
       }
     }
