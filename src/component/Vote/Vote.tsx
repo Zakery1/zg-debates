@@ -25,6 +25,8 @@ interface UserVote {
 
 interface VotesArray extends Array<UserVote> {}
 
+const votingConfigs = [{itemNumber: 1, color: '#24519b', message: "Vote"}]
+
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [voted, setVoted] = useState<boolean | null>(null);
 
@@ -133,44 +135,53 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
   };
 
-  const castVote = () => {
-    if (voted) {
-      setVoted(false);
-      return removeVote();
-    } else {
-      setVoted(true);
-      return addVote();
+  const castVote = (voteType: number) => {
+    if (voteType === 1) {
+      if (voted) {
+        setVoted(false);
+        return removeVote();
+      } else {
+        setVoted(true);
+        return addVote();
+      }
     }
   };
 
+  const voteOptions = votingConfigs.map((voteType) => {
+    return (
+      <>
+        <Tooltip title={voted ? `Remove ${voteType.message}` : `${voteType.message}`}>
+          <IconButton
+            disabled={voteDisabled}
+            style={{
+              color: voted ? `${voteType.color}` : "grey",
+              height: "15px",
+              width: "15px",
+            }}
+            aria-label="vote"
+            onClick={() =>
+              value?.id ? castVote(voteType.itemNumber) : alert("You must be logged in to vote.")
+            }
+          >
+            <ArrowUpwardIcon
+              style={{ height: "15px" }}
+              className="zg-vote-arrow"
+            />
+          </IconButton>
+        </Tooltip>
+        <span
+          style={{ color: voted ? `${voteType.color}` : "grey" }}
+          className="zg-points"
+        >
+          {points}
+        </span>
+      </>
+    );
+  });
+
   return (
     <div className="zg-vote-container">
-      <Tooltip title={voted ? "Remove Vote" : "Vote"}>
-        <IconButton
-          disabled={voteDisabled}
-          style={{
-            color: voted ? "#24519b" : "grey",
-            height: "15px",
-            width: "15px",
-          }}
-          aria-label="vote"
-          onClick={() =>
-            value?.id ? castVote() : alert("You must be logged in to vote.")
-          }
-        >
-          <ArrowUpwardIcon
-            style={{ height: "15px" }}
-            className="zg-vote-arrow"
-          />
-        </IconButton>
-      </Tooltip>
-
-      <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-
-        {points}{" "}
-      </span>
-      <div>{trolls}</div>
-      <div>{hyperboles}</div>
+      {voteOptions}
     </div>
   );
 };
