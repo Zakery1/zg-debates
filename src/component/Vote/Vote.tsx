@@ -25,10 +25,14 @@ interface UserVote {
 
 interface VotesArray extends Array<UserVote> {}
 
-const votingConfigs = [{itemNumber: 1, color: '#24519b', message: "Vote"}]
-
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [voted, setVoted] = useState<boolean | null>(null);
+
+  const votingConfigs = [
+    { voteType: 1, color: "#24519b", message: "Vote" },
+    { voteType: 2, color: "#720000", message: "Hyperbole" },
+    { voteType: 3, color: "#726A00", message: "Troll" },
+  ];
 
   const [points, setPoints] = useState<number>(props.points);
   const [hyperboles, setHyperboles] = useState<number | null>(props.hyperboles);
@@ -36,7 +40,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
 
-  const [userVotes, setUserVotes] = useState<VotesArray>([]);
+  const [userPoints, setUserPoints] = useState<VotesArray>([]);
 
   const value = useContext(SimpleCtx);
 
@@ -49,30 +53,31 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   };
 
   const fetchUserVotes = useCallback(async () => {
-    if (value?.id) {
+    if (!value?.id) {
+      return;
+    } else {
       await axios
         .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
         .then((response) => {
           console.log("RESPONSE FOR USER VOTES", response.data);
-          return setUserVotes(response.data);
+          return setUserPoints(response.data);
         });
-    } else {
-      return;
     }
   }, [baseUrl, value?.id]);
 
-  const checkVotes = useCallback(
-    (contributionId: any) => {
-      let votedStatus = userVotes.find(
+  const checkVotes = useCallback((contributionId: any) => {
+
+      let votedStatus = userPoints.find(
         (item) => item.contributionId === contributionId
       );
       if (votedStatus?.contributionId) {
         return setVoted(true);
+
       } else {
         return;
       }
     },
-    [userVotes]
+    [userPoints]
   );
 
   useEffect(() => {
@@ -83,15 +88,33 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     checkVotes(props.contributionId);
   }, [props.contributionId, checkVotes]);
 
-  let removeVote = async () => {
-    setPoints(points - 1);
-    setVoteDisabled(true);
-    setTimeout(() => {
-      setVoteDisabled(false);
-    }, 2000);
+    //api calls
+    let addVote = async (voteType: number) => {
+      await axios
+        .put(`${baseUrl}/api/contributions`, {
+          contributionId: props.contributionId,
+          voteFor: true,
+          voteType: voteType
+        })
+        .then((res) => {
+          console.log(res.status);
+        });
+  
+      await axios
+        .post(`${baseUrl}/api/votes`, {
+          userId: value?.id,
+          contributionId: props.contributionId,
+          voteType: voteType,
+        })
+        .then((res) => {
+          console.log(res.status);
+        });
+    };
 
+  let removeVote = async () => {
     await axios
-      .put(`${baseUrl}/api/contributions`, {
+      .put(`${baseUrl}/api/contributions`, 
+      {
         contributionId: props.contributionId,
         voteFor: false,
       })
@@ -108,49 +131,34 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       });
   };
 
-  let addVote = async () => {
-    setVoteDisabled(true);
-    setPoints(points + 1);
-    setTimeout(() => {
-      setVoteDisabled(false);
-    }, 2000);
 
-    await axios
-      .put(`${baseUrl}/api/contributions`, {
-        contributionId: props.contributionId,
-        voteFor: true,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
 
-    await axios
-      .post(`${baseUrl}/api/votes`, {
-        userId: value?.id,
-        contributionId: props.contributionId,
-        voteType: 1,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
-  };
-
+  //toggle votted and invoke method of api calls
   const castVote = (voteType: number) => {
     if (voteType === 1) {
+      setVoteDisabled(true);
+      setTimeout(() => {
+        setVoteDisabled(false);
+      }, 2000);
+
       if (voted) {
         setVoted(false);
+        setPoints(points - 1);
         return removeVote();
       } else {
         setVoted(true);
-        return addVote();
+        setPoints(points + 1);
+        return addVote(1);
       }
     }
   };
 
   const voteOptions = votingConfigs.map((voteType) => {
     return (
-      <>
-        <Tooltip title={voted ? `Remove ${voteType.message}` : `${voteType.message}`}>
+      <span key={voteType.color}>
+        <Tooltip
+          title={voted ? `Remove ${voteType.message}` : `${voteType.message}`}
+        >
           <IconButton
             disabled={voteDisabled}
             style={{
@@ -160,7 +168,9 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
             }}
             aria-label="vote"
             onClick={() =>
-              value?.id ? castVote(voteType.itemNumber) : alert("You must be logged in to vote.")
+              value?.id
+                ? castVote(voteType.voteType)
+                : alert("You must be logged in to vote.")
             }
           >
             <ArrowUpwardIcon
@@ -175,15 +185,11 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
         >
           {points}
         </span>
-      </>
+      </span>
     );
   });
 
-  return (
-    <div className="zg-vote-container">
-      {voteOptions}
-    </div>
-  );
+  return <div className="zg-vote-container">{voteOptions}</div>;
 };
 
 export default Vote;
