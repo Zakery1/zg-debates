@@ -15,8 +15,8 @@ interface ContributionProps {
   points: number;
   contribution: string;
   discussionName: string;
-  hyperboles: number| null;
-  trolls: number | null;
+  hyperboles: number;
+  trolls: number;
 }
 
 const Contribution: React.FC<ContributionProps> = (
