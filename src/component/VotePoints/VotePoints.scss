@@ -1,0 +1,26 @@
+.zg-vote-points {
+  .zg-vote-arrow {
+  }
+
+  .zg-vote-check {
+    max-width: 12.5px;
+  }
+  .zg-points {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-vote-points {
+    .zg-vote-arrow {
+    }
+
+    .zg-vote-check {
+      max-width: 15px;
+    }
+
+    .zg-points {
+      // font-size: 12px;
+    }
+  }
+}

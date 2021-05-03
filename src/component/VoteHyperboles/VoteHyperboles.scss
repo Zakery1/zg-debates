@@ -1,0 +1,28 @@
+.zg-vote-hyperboles {
+    font-size: 14px;
+    .zg-vote-arrow {
+    }
+  
+    .zg-vote-check {
+      max-width: 12.5px;
+    }
+    .zg-hyperboles {
+      font-size: 15px;
+    }
+  }
+  
+  @media only screen and (min-width: 501px) {
+    .zg-vote-hyperboles {
+      .zg-vote-arrow {
+      }
+  
+      .zg-vote-check {
+        max-width: 15px;
+      }
+  
+      .zg-hyperboles {
+        // font-size: 12px;
+      }
+    }
+  }
+  

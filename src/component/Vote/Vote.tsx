@@ -9,6 +9,13 @@ import { Tooltip, IconButton } from "@material-ui/core";
 
 import { SimpleCtx } from "../../context/UserContext";
 
+import VoteHyperboles from "../VoteHyperboles/VoteHyperboles";
+import VotePoints from "../VotePoints/VotePoints";
+
+import VoteTrolls from "../VoteTrolls/VoteTrolls";
+
+
+
 import "./Vote.scss";
 
 interface VoteProps {
@@ -26,17 +33,19 @@ interface UserVote {
 interface VotesArray extends Array<UserVote> {}
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
-
   const votingConfigs = [
+    /////////////
     { voteType: 1, color: "#24519b", message: "Vote" },
+        /////////////
     { voteType: 2, color: "#720000", message: "Hyperbole" },
     { voteType: 3, color: "#726A00", message: "Troll" },
   ];
 
+      /////////////
   const [voted, setVoted] = useState<boolean | null>(null);
+      /////////////
   const [hyperboled, setHyperboled] = useState<boolean | null>(null);
   const [trolled, setTrolled] = useState<boolean | null>(null);
-
 
   const [points, setPoints] = useState<number>(props.points);
   const [hyperboles, setHyperboles] = useState<number>(props.hyperboles);
@@ -47,7 +56,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [userTrolls, setUserTrolls] = useState<VotesArray>([]);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-  
+
   const value = useContext(SimpleCtx);
 
   const baseUrl =
@@ -58,24 +67,24 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     contributionId: props.contributionId,
   };
 
-
-
-
-  const fetchUserVotes = useCallback(async (userId) => {
-    if (!userId) {
-      return;
-    } else {
-      await axios
-        .get(`${baseUrl}/api/votes/?userId=${userId}`)
-        .then((response) => {
-          response.data.map((vote: UserVote)=> {
-            if(vote.voteType === 1) {
-              setUserPoints((exhistingPoints =>[...exhistingPoints, vote]))
-            }
-
-        })});
-  }}, [baseUrl, value?.id]);
-
+  const fetchUserVotes = useCallback(
+    async (userId) => {
+      if (!userId) {
+        return;
+      } else {
+        await axios
+          .get(`${baseUrl}/api/votes/?userId=${userId}`)
+          .then((response) => {
+            response.data.map((vote: UserVote) => {
+              if (vote.voteType === 1) {
+                setUserPoints((exhistingPoints) => [...exhistingPoints, vote]);
+              }
+            });
+          });
+      }
+    },
+    [baseUrl, value?.id]
+  );
 
   const checkVotes = useCallback(
     (contributionId: any) => {
@@ -90,14 +99,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     },
     [userPoints]
   );
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     fetchUserVotes(value?.id);
@@ -154,7 +155,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   //toggle voted and invoke method of api calls
   const castVote = (voteType: number) => {
-
     if (voteType === 1) {
       setVoteDisabled(true);
       setTimeout(() => {
@@ -189,50 +189,55 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
       }
     }
 
-
     //add here for vote type 3
   };
 
-
   //This map needs to be able to talk to the three types of voting
-  const voteOptions = votingConfigs.map((voteType) => {
-    return (
-      <span key={voteType.color}>
-        <Tooltip
-          title={voted ? `Remove ${voteType.message}` : `${voteType.message}`}
-        >
-          <IconButton
-            disabled={voteDisabled}
-            style={{
-              color: voted ? `${voteType.color}` : "grey",
-              height: "15px",
-              width: "15px",
-            }}
-            aria-label="vote"
-            onClick={() =>
-              value?.id
-                ? castVote(voteType.voteType)
-                : alert("You must be logged in to vote.")
-            }
-          >
-            <ArrowUpwardIcon
-              style={{ height: "15px" }}
-              className="zg-vote-arrow"
-            />
-          </IconButton>
-        </Tooltip>
-        <span
-          style={{ color: voted ? `${voteType.color}` : "grey" }}
-          className="zg-points"
-        >
-          {/* need to display trolls and hyperboles */}
-          {points}
-        </span>
-      </span>
-    );
-  });
+  // const voteOptions = votingConfigs.map((voteType) => {
+  //   return (
+  //     <span key={voteType.color}>
+  //       <Tooltip
+  //         title={voted ? `Remove ${voteType.message}` : `${voteType.message}`}
+  //       >
+  //         <IconButton
+  //           disabled={voteDisabled}
+  //           style={{
+  //             color: voted ? `${voteType.color}` : "grey",
+  //             height: "15px",
+  //             width: "15px",
+  //           }}
+  //           aria-label="vote"
+  //           onClick={() =>
+  //             value?.id
+  //               ? castVote(voteType.voteType)
+  //               : alert("You must be logged in to vote.")
+  //           }
+  //         >
+  //           <ArrowUpwardIcon
+  //             style={{ height: "15px" }}
+  //             className="zg-vote-arrow"
+  //           />
+  //         </IconButton>
+  //       </Tooltip>
+  //       <span
+  //         style={{ color: voted ? `${voteType.color}` : "grey" }}
+  //         className="zg-points"
+  //       >
+  //         {/* need to display trolls and hyperboles */}
+  //         {points}
+  //       </span>
+  //     </span>
+  //   );
+  // });
 
-  return <div className="zg-vote-container">{voteOptions}</div>;
+  return (
+    <div className="zg-vote-container">
+      <VotePoints points={points} />
+      <VoteHyperboles hyperboles={hyperboles} />
+      <VoteTrolls trolls={trolls} />
+      {/* {voteOptions} */}
+    </div>
+  );
 };
 
 export default Vote;
