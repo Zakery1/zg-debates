@@ -4,6 +4,7 @@ import "./VoteHyperboles.scss";
 
 interface HyperbolesProps {
     hyperboles: number;
+    contributionId: number | null;
 }
 
 const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {

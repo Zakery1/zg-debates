@@ -4,15 +4,22 @@ import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
+import axios from "axios";
+
 import { SimpleCtx } from "../../context/UserContext";
 
 interface VotePointsProps {
   points: number;
+  contributionId: number | null;
 }
 
-
 const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const [voted, setVoted] = useState<boolean | null>(null);
+
+  const [points, setPoints] = useState<number>(props.points);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
 
@@ -20,30 +27,80 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
 
   const value = useContext(SimpleCtx);
 
+  let deleteConfig = {
+    userId: value?.id,
+    contributionId: props.contributionId,
+  };
+
+
+
+
+
   const castVote = (voteType: number) => {
-      setVoteDisabled(true);
-      setTimeout(() => {
-        setVoteDisabled(false);
-      });
+    setVoteDisabled(true);
+    setTimeout(() => {
+      setVoteDisabled(false);
+    });
+    if (voted) {
+      setVoted(false);
+      setPoints(points - 1);
+      return removeVote(voteType);
+    } else {
+      setVoted(true);
+      setPoints(points + 1);
+      return addVote(voteType);
     }
-    //   if (voted) {
-    //     setVoted(false);
-    //     setPoints(points - 1);
-    //     return removeVote(voteType);
+  };
 
-    //   } else {
+  let removeVote = async (voteType: number) => {
+    console.log("Got Here 1");
+    await axios
+      .put(`${baseUrl}/api/contributions`, {
+        contributionId: props.contributionId,
+        voteFor: false,
+        voteType: voteType,
+      })
+      .then((res) => {
+        console.log("Got Here 2");
+        console.log(res.status);
+      });
 
-    //     setVoted(true);
-    //     setPoints(points + 1);
-    //     // return addVote(voteType);
+    await axios
+      .delete(`${baseUrl}/api/votes`, {
+        data: deleteConfig,
+      })
+      .then((res) => {
+        console.log("Got Here 3");
+        console.log(res.status);
+      });
+  };
 
-    //   }
-    // }
+  let addVote = async (voteType: number) => {
+    await axios
+      .put(`${baseUrl}/api/contributions`, {
+        contributionId: props.contributionId,
+        voteFor: true,
+        voteType: voteType,
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
 
+    await axios
+      .post(`${baseUrl}/api/votes`, {
+        userId: value?.id,
+        contributionId: props.contributionId,
+        voteType: voteType,
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
+  };
 
   return (
     <div className="zg-vote-points">
-        <Tooltip title={voted ? "Remove Vote" : "Vote" }>
+      <Tooltip title={voted ? "Remove Vote" : "Vote"}>
+        <span>
           <IconButton
             disabled={voteDisabled}
             style={{
@@ -53,9 +110,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
             }}
             aria-label="vote"
             onClick={() =>
-              value?.id
-                ? castVote(1)
-                : alert("You must be logged in to vote.")
+              value?.id ? castVote(1) : alert("You must be logged in to vote.")
             }
           >
             <ArrowUpwardIcon
@@ -63,15 +118,12 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
               className="zg-vote-arrow"
             />
           </IconButton>
-        </Tooltip>
-        <span
-          style={{ color: voted ? "#24519b" : "grey" }}
-          className="zg-points"
-        >
-            {"points"}
-          {/* need to display trolls and hyperboles */}
         </span>
-
+      </Tooltip>
+      <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
+        {points}
+        {/* need to display trolls and hyperboles */}
+      </span>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import "./VoteTrolls.scss";
 
 interface TrollsProps {
     trolls: number;
+    contributionId: number | null;
 }
 
 const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
