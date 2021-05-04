@@ -32,10 +32,6 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
     contributionId: props.contributionId,
   };
 
-
-
-
-
   const castVote = (voteType: number) => {
     setVoteDisabled(true);
     setTimeout(() => {
@@ -121,7 +117,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
         </span>
       </Tooltip>
       <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-        {points}
+      {points || "0"}
         {/* need to display trolls and hyperboles */}
       </span>
     </div>

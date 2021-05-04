@@ -108,50 +108,50 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     checkVotes(props.contributionId);
   }, [props.contributionId, checkVotes]);
 
-  let addVote = async (voteType: number) => {
-    await axios
-      .put(`${baseUrl}/api/contributions`, {
-        contributionId: props.contributionId,
-        voteFor: true,
-        voteType: voteType,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
+  // let addVote = async (voteType: number) => {
+  //   await axios
+  //     .put(`${baseUrl}/api/contributions`, {
+  //       contributionId: props.contributionId,
+  //       voteFor: true,
+  //       voteType: voteType,
+  //     })
+  //     .then((res) => {
+  //       console.log(res.status);
+  //     });
 
-    await axios
-      .post(`${baseUrl}/api/votes`, {
-        userId: value?.id,
-        contributionId: props.contributionId,
-        voteType: voteType,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
-  };
+  //   await axios
+  //     .post(`${baseUrl}/api/votes`, {
+  //       userId: value?.id,
+  //       contributionId: props.contributionId,
+  //       voteType: voteType,
+  //     })
+  //     .then((res) => {
+  //       console.log(res.status);
+  //     });
+  // };
 
-  let removeVote = async (voteType: number) => {
-    console.log("Got Here 1");
-    await axios
-      .put(`${baseUrl}/api/contributions`, {
-        contributionId: props.contributionId,
-        voteFor: false,
-        voteType: voteType,
-      })
-      .then((res) => {
-        console.log("Got Here 2");
-        console.log(res.status);
-      });
+  // let removeVote = async (voteType: number) => {
+  //   console.log("Got Here 1");
+  //   await axios
+  //     .put(`${baseUrl}/api/contributions`, {
+  //       contributionId: props.contributionId,
+  //       voteFor: false,
+  //       voteType: voteType,
+  //     })
+  //     .then((res) => {
+  //       console.log("Got Here 2");
+  //       console.log(res.status);
+  //     });
 
-    await axios
-      .delete(`${baseUrl}/api/votes`, {
-        data: deleteConfig,
-      })
-      .then((res) => {
-        console.log("Got Here 3");
-        console.log(res.status);
-      });
-  };
+  //   await axios
+  //     .delete(`${baseUrl}/api/votes`, {
+  //       data: deleteConfig,
+  //     })
+  //     .then((res) => {
+  //       console.log("Got Here 3");
+  //       console.log(res.status);
+  //     });
+  // };
 
   //toggle voted and invoke method of api calls
   // const castVote = (voteType: number) => {
@@ -233,8 +233,8 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   return (
     <div className="zg-vote-container">
       <VotePoints contributionId={props.contributionId} points={props.points} />
-      <VoteHyperboles contributionId={props.contributionId} hyperboles={hyperboles} />
-      <VoteTrolls  contributionId={props.contributionId} trolls={trolls} />
+      <VoteHyperboles contributionId={props.contributionId} hyperboles={props.hyperboles} />
+      <VoteTrolls  contributionId={props.contributionId} trolls={props.trolls} />
       {/* {voteOptions} */}
     </div>
   );

@@ -73,6 +73,7 @@ const CurrentDiscussion: React.FC = () => {
     await axios
       .get(`${baseUrl}/api/contributions/?discussionId=${discussionId}`)
       .then((res) => {
+        console.log("CONTRIBUTION RESOURCE", res.data)
         setContributions(res.data);
       });
   }, [discussionId, baseUrl]);

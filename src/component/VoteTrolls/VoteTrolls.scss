@@ -1,28 +1,26 @@
 .zg-vote-trolls {
-    font-size: 14px;
+  .zg-vote-arrow {
+  }
+
+  .zg-vote-check {
+    max-width: 12.5px;
+  }
+  .zg-trolls {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-vote-trolls {
     .zg-vote-arrow {
     }
-  
+
     .zg-vote-check {
-      max-width: 12.5px;
+      max-width: 15px;
     }
+
     .zg-trolls {
-      font-size: 15px;
+      // font-size: 12px;
     }
   }
-  
-  @media only screen and (min-width: 501px) {
-    .zg-vote-trolls {
-      .zg-vote-arrow {
-      }
-  
-      .zg-vote-check {
-        max-width: 15px;
-      }
-  
-      .zg-trolls {
-        // font-size: 12px;
-      }
-    }
-  }
-  
+}
