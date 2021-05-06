@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 
 import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
@@ -8,16 +8,25 @@ import axios from "axios";
 
 import { SimpleCtx } from "../../context/UserContext";
 
+interface UserVote {
+  contributionId: number;
+  voteDate: string;
+  voteType: number;
+}
+
+interface UserVotesArray extends Array<UserVote> {}
+
 interface VotePointsProps {
   points: number;
   contributionId: number | null;
+  pointed: boolean | null;
 }
 
 const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [voted, setVoted] = useState<boolean | null>(null);
+  const [voted, setVoted] = useState<boolean | null>(props.pointed);
 
   const [points, setPoints] = useState<number>(props.points);
 
@@ -31,6 +40,11 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
     userId: value?.id,
     contributionId: props.contributionId,
   };
+
+  useEffect(() => {
+  }, []);
+
+
 
   const castVote = (voteType: number) => {
     setVoteDisabled(true);
@@ -117,7 +131,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
         </span>
       </Tooltip>
       <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-      {points || "0"}
+        {points || "0"}
         {/* need to display trolls and hyperboles */}
       </span>
     </div>

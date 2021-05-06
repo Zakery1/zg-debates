@@ -11,6 +11,14 @@ interface UserContextInterface {
   setRole: SetUserInfo
 }
 
+interface UserVote {
+  contributionId: number;
+  voteType: number;
+  voteId: number;
+}
+
+interface VotesArray extends Array<UserVote> {}
+
 export const SimpleCtx = createContext<UserContextInterface | null>(null);
 
 export const CtxProvider: React.FC = (props) => {
@@ -28,7 +36,12 @@ export const CtxProvider: React.FC = (props) => {
 
   // debugger;
 
+
+  
+
+
   useEffect(() => {
+
     // debugger;
     if (localStorage.username) {
       setUsername(localStorage.username);
