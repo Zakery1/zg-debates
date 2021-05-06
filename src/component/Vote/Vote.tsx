@@ -47,13 +47,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const [hyperboled, setHyperboled] = useState<boolean | null>(false);
   const [trolled, setTrolled] = useState<boolean | null>(false);
 
-  // console.log("pointed, hyperboled, trolled", pointed, hyperboled, trolled);
-
-  // const [points, setPoints] = useState<number>(props.points);
-  const [hyperboles, setHyperboles] = useState<number>(props.hyperboles);
-
-  const [trolls, setTrolls] = useState<number>(props.trolls);
-
   const [userVotes, setUserVotes] = useState<UserVotesArray>([
     {
       contributionId: 0,
@@ -92,14 +85,44 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     [baseUrl, value?.id]
   );
 
-  const checkVotes = () => {
-    let votedStatus = userVotes.find(
-      (item) => item.contributionId === props.contributionId
+  const checkPointed = () => {
+    let pointedStatus = userVotes.find(
+      (item) =>
+        item.contributionId === props.contributionId && item.voteType === 1
     );
-    if (votedStatus?.contributionId) {
-      return setPointed(true);
-    } else {
-      return;
+
+    console.log("pointedStatus", pointedStatus)
+
+
+    if (pointedStatus) {
+      setPointed(true);
+    }
+  };
+
+  const checkHyperboled = () => {
+    let hyperboledStatus = userVotes.find(
+      (item) =>
+        item.contributionId === props.contributionId && item.voteType === 2
+    );
+    console.log("hyperboledStatus", hyperboledStatus)
+
+
+    if (hyperboledStatus) {
+      setHyperboled(true);
+    }
+  };
+
+  const checkTrolled = () => {
+    let trolledStatus = userVotes.find(
+      (item) =>
+        item.contributionId === props.contributionId && item.voteType === 3
+    );
+
+    console.log("tolledStatus", trolledStatus)
+    console.log(" ")
+
+    if (trolledStatus) {
+      setTrolled(true);
     }
   };
 
@@ -108,26 +131,40 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   }, [fetchUserVotes]);
 
   useEffect(() => {
-    checkVotes();
-  }, [checkVotes])
+    checkPointed();
+  }, [checkPointed]);
+
+  useEffect(() => {
+    checkHyperboled();
+  }, [checkHyperboled]);
+
+  useEffect(() => {
+    checkTrolled();
+  }, [checkTrolled]);
 
   return (
     <div className="zg-vote-container">
       {showVotes ? (
-        <VotePoints
-          pointed={pointed}
-          contributionId={props.contributionId}
-          points={props.points}
-        />
+        <>
+          <VotePoints
+            contributionId={props.contributionId}
+            points={props.points}
+            pointed={pointed}
+          />
+          <VoteHyperboles
+            contributionId={props.contributionId}
+            hyperboles={props.hyperboles}
+            hyperboled={hyperboled}
+          />
+          <VoteTrolls
+            contributionId={props.contributionId}
+            trolls={props.trolls}
+            trolled={trolled}
+          />
+        </>
       ) : (
         "no user votes"
       )}
-
-      <VoteHyperboles
-        contributionId={props.contributionId}
-        hyperboles={props.hyperboles}
-      />
-      <VoteTrolls contributionId={props.contributionId} trolls={props.trolls} />
     </div>
   );
 };

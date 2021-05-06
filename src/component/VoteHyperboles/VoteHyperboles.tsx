@@ -10,18 +10,19 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 interface HyperbolesProps {
     hyperboles: number;
     contributionId: number | null;
+    hyperboled: boolean | null;
 }
 
 const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
-    const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [voted, setVoted] = useState<boolean | null>(null);
+  const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
+  const [voted, setVoted] = useState<boolean | null>(props.hyperboled);
+  // console.log("VOTED IN HYPERBOLED", voted)
 
   const [hyperboles, setHyperboles] = useState<number>(props.hyperboles);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-
-  const votingConfigs = [{ voteType: 1, color: "#726A00", message: "Hyperbole" }];
 
   const value = useContext(SimpleCtx);
 
@@ -47,7 +48,6 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
   };
 
   let removeVote = async (voteType: number) => {
-    console.log("Got Here 1");
     await axios
       .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
@@ -55,7 +55,6 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log("Got Here 2");
         console.log(res.status);
       });
 
@@ -64,7 +63,6 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
         data: deleteConfig,
       })
       .then((res) => {
-        console.log("Got Here 3");
         console.log(res.status);
       });
   };

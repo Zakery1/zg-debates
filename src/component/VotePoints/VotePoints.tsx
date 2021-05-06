@@ -15,16 +15,17 @@ interface VotePointsProps {
 }
 
 const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
+
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
+
   const [voted, setVoted] = useState<boolean | null>(props.pointed);
+  // console.log("VOTED IN POINTED", voted)
 
   const [points, setPoints] = useState<number>(props.points);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-
-  const votingConfigs = [{ voteType: 1, color: "#24519b", message: "Vote" }];
 
   const value = useContext(SimpleCtx);
 
@@ -32,10 +33,6 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
     userId: value?.id,
     contributionId: props.contributionId,
   };
-
-  useEffect(() => {
-  }, []);
-
 
 
   const castVote = (voteType: number) => {
@@ -55,7 +52,6 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   };
 
   let removeVote = async (voteType: number) => {
-    console.log("Got Here 1");
     await axios
       .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
@@ -63,7 +59,6 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log("Got Here 2");
         console.log(res.status);
       });
 
@@ -72,7 +67,6 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
         data: deleteConfig,
       })
       .then((res) => {
-        console.log("Got Here 3");
         console.log(res.status);
       });
   };

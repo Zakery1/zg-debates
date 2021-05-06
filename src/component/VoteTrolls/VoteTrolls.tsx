@@ -10,18 +10,18 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 interface TrollsProps {
     trolls: number;
     contributionId: number | null;
+    trolled: boolean | null;
 }
 
 const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
     const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [voted, setVoted] = useState<boolean | null>(null);
+  const [voted, setVoted] = useState<boolean | null>(props.trolled);
+  // console.log("voted IN TRolled",  voted)
 
   const [trolls, setTrolls] = useState<number>(props.trolls);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-
-  const votingConfigs = [{ voteType: 1, color: "#720000", message: "Troll" }];
 
   const value = useContext(SimpleCtx);
 
@@ -47,7 +47,6 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
   };
 
   let removeVote = async (voteType: number) => {
-    console.log("Got Here 1");
     await axios
       .put(`${baseUrl}/api/contributions`, {
         contributionId: props.contributionId,
@@ -55,7 +54,6 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log("Got Here 2");
         console.log(res.status);
       });
 
@@ -64,7 +62,6 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         data: deleteConfig,
       })
       .then((res) => {
-        console.log("Got Here 3");
         console.log(res.status);
       });
   };
@@ -77,7 +74,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log(res.status);
+        console.log( res.status)
       });
 
     await axios
@@ -87,7 +84,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log(res.status);
+        console.log( res.status);
       });
   };
 
