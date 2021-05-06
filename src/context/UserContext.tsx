@@ -11,13 +11,7 @@ interface UserContextInterface {
   setRole: SetUserInfo
 }
 
-interface UserVote {
-  contributionId: number;
-  voteType: number;
-  voteId: number;
-}
 
-interface VotesArray extends Array<UserVote> {}
 
 export const SimpleCtx = createContext<UserContextInterface | null>(null);
 

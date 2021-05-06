@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
@@ -7,14 +7,6 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import axios from "axios";
 
 import { SimpleCtx } from "../../context/UserContext";
-
-interface UserVote {
-  contributionId: number;
-  voteDate: string;
-  voteType: number;
-}
-
-interface UserVotesArray extends Array<UserVote> {}
 
 interface VotePointsProps {
   points: number;
