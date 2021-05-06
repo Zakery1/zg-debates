@@ -32,6 +32,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
+    voteType: 1
   };
 
 

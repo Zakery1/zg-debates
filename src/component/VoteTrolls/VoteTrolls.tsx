@@ -28,6 +28,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
+    voteType: 3
   };
 
   const castVote = (voteType: number) => {

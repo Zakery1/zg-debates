@@ -29,6 +29,7 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
+    voteType: 2
   };
 
   const castVote = (voteType: number) => {
