@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
@@ -19,9 +19,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-
   const [voted, setVoted] = useState<boolean | null>(props.pointed);
-  // console.log("VOTED IN POINTED", voted)
 
   const [points, setPoints] = useState<number>(props.points);
 

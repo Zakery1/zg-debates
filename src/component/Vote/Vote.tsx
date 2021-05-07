@@ -24,18 +24,9 @@ interface UserVote {
   voteType: number;
 }
 
-interface VotesArray extends Array<UserVote> {}
-
 interface UserVotesArray extends Array<UserVote> {}
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
-  const votingConfigs = [
-    /////////////
-    { voteType: 1, color: "#24519b", message: "Vote" },
-    /////////////
-    { voteType: 2, color: "#720000", message: "Hyperbole" },
-    { voteType: 3, color: "#726A00", message: "Troll" },
-  ];
 
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
@@ -55,25 +46,13 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
     },
   ]);
 
-  // const [userPoints, setUserPoints] = useState<VotesArray>([]);
-  const [userHyperboles, setUserHyperboles] = useState<VotesArray>([]);
-  const [userTrolls, setUserTrolls] = useState<VotesArray>([]);
-
-  const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-
   const value = useContext(SimpleCtx);
-
-  let deleteConfig = {
-    userId: value?.id,
-    contributionId: props.contributionId,
-  };
 
   const fetchUserVotes = useCallback(
     async (userId) => {
       if (!userId) {
         return;
       } else {
-        console.log("FETCHING VOTES");
         await axios
           .get(`${baseUrl}/api/votes/?userId=${userId}`)
           .then((response) => {
@@ -82,65 +61,56 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
           });
       }
     },
-    [baseUrl, value?.id]
+    [baseUrl]
   );
 
-  const checkPointed = () => {
-    let pointedStatus = userVotes.find(
-      (item) =>
-        item.contributionId === props.contributionId && item.voteType === 1
-    );
 
-    console.log("pointedStatus", pointedStatus)
-
-
-    if (pointedStatus) {
-      setPointed(true);
-    }
-  };
-
-  const checkHyperboled = () => {
-    let hyperboledStatus = userVotes.find(
-      (item) =>
-        item.contributionId === props.contributionId && item.voteType === 2
-    );
-    console.log("hyperboledStatus", hyperboledStatus)
-
-
-    if (hyperboledStatus) {
-      setHyperboled(true);
-    }
-  };
-
-  const checkTrolled = () => {
-    let trolledStatus = userVotes.find(
-      (item) =>
-        item.contributionId === props.contributionId && item.voteType === 3
-    );
-
-    console.log("tolledStatus", trolledStatus)
-    console.log(" ")
-
-    if (trolledStatus) {
-      setTrolled(true);
-    }
-  };
 
   useEffect(() => {
     fetchUserVotes(value?.id);
-  }, [fetchUserVotes]);
+  }, [fetchUserVotes, value?.id]);
 
   useEffect(() => {
+    const checkPointed = () => {
+      let pointedStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 1
+      );
+  
+      if (pointedStatus) {
+        setPointed(true);
+      }
+    };
     checkPointed();
-  }, [checkPointed]);
+  }, [props.contributionId, userVotes]);
 
   useEffect(() => {
+    const checkHyperboled = () => {
+      let hyperboledStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 2
+      );
+  
+      if (hyperboledStatus) {
+        setHyperboled(true);
+      }
+    };
     checkHyperboled();
-  }, [checkHyperboled]);
+  }, [props.contributionId, userVotes]);
 
   useEffect(() => {
+    const checkTrolled = () => {
+      let trolledStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 3
+      );
+  
+      if (trolledStatus) {
+        setTrolled(true);
+      }
+    };
     checkTrolled();
-  }, [checkTrolled]);
+  }, [props.contributionId, userVotes]);
 
   return (
     <div className="zg-vote-container">

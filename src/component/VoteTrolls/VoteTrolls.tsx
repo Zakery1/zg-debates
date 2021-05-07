@@ -17,7 +17,6 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
     const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const [voted, setVoted] = useState<boolean | null>(props.trolled);
-  // console.log("voted IN TRolled",  voted)
 
   const [trolls, setTrolls] = useState<number>(props.trolls);
 
