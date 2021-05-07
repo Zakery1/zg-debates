@@ -4,30 +4,31 @@ import "./VoteTrolls.scss";
 import { SimpleCtx } from "../../context/UserContext";
 import axios from "axios";
 import { Tooltip, IconButton } from "@material-ui/core";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-
 
 interface TrollsProps {
-    trolls: number;
-    contributionId: number | null;
-    trolled: boolean | null;
+  trolls: number;
+  contributionId: number | null;
+  trolled: boolean | null;
 }
 
 const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
-    const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
 
   const [voted, setVoted] = useState<boolean | null>(props.trolled);
 
   const [trolls, setTrolls] = useState<number>(props.trolls);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
+  console.log('vote disabled', voteDisabled)
 
   const value = useContext(SimpleCtx);
 
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
-    voteType: 3
+    voteType: 3,
   };
 
   const castVote = (voteType: number) => {
@@ -74,7 +75,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log( res.status)
+        console.log(res.status);
       });
 
     await axios
@@ -84,7 +85,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
         voteType: voteType,
       })
       .then((res) => {
-        console.log( res.status);
+        console.log(res.status);
       });
   };
 
@@ -95,29 +96,28 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
           <IconButton
             disabled={voteDisabled}
             style={{
-              color: voted ? "#720000" : "grey",
-              height: "15px",
-              width: "15px",
+              background: voted ? "#720000" : "white",
+              color: voted ? "grey" : "#720000",
+              border: "2px solid #720000",
+              height: "4px",
+              width: "4px"
             }}
             aria-label="vote"
             onClick={() =>
               value?.id ? castVote(3) : alert("You must be logged in to vote.")
             }
           >
-            <ArrowUpwardIcon
-              style={{ height: "15px" }}
-              className="zg-vote-arrow"
-            />
+            <div
+              style={{ color: voted ? "white" : "#720000" }}
+              className="zg-trolls"
+            >
+              {trolls || 0}
+            </div>
           </IconButton>
         </span>
       </Tooltip>
-      <span style={{ color: voted ? "#720000" : "grey" }} className="zg-trolls">
-        {trolls || 0}
-        {/* need to display trolls and hyperboles */}
-      </span>
     </div>
   );
 };
-
 
 export default VoteTrolls;

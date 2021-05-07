@@ -1,4 +1,7 @@
+@import "../../style/style.scss";
+
 .zg-vote-points {
+  margin-right: 3px;
   .zg-vote-arrow {
   }
 
@@ -6,7 +9,9 @@
     max-width: 12.5px;
   }
   .zg-points {
-    font-size: 15px;
+    font-size: 13px;
+    font-family: $zg-font;
+    font-weight: bold;
   }
 }
 

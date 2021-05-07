@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 
 import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 import axios from "axios";
 
@@ -15,7 +14,6 @@ interface VotePointsProps {
 }
 
 const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
-
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
@@ -30,9 +28,8 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
-    voteType: 1
+    voteType: 1,
   };
-
 
   const castVote = (voteType: number) => {
     setVoteDisabled(true);
@@ -99,7 +96,9 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
           <IconButton
             disabled={voteDisabled}
             style={{
-              color: voted ? "#24519b" : "grey",
+              background: voted ? "#24519b" : "white",
+              color: voted ? "grey" : "#24519b",
+              border: "2px solid #24519b",
               height: "15px",
               width: "15px",
             }}
@@ -108,17 +107,15 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
               value?.id ? castVote(1) : alert("You must be logged in to vote.")
             }
           >
-            <ArrowUpwardIcon
-              style={{ height: "15px" }}
-              className="zg-vote-arrow"
-            />
+            <span
+              style={{ color: voted ? "white" : "#24519b" }}
+              className="zg-points"
+            >
+              {points || "0"}
+            </span>
           </IconButton>
         </span>
       </Tooltip>
-      <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-        {points || "0"}
-        {/* need to display trolls and hyperboles */}
-      </span>
     </div>
   );
 };

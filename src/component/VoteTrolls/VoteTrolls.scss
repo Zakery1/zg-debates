@@ -1,3 +1,5 @@
+@import "../../style/style.scss";
+
 .zg-vote-trolls {
   .zg-vote-arrow {
   }
@@ -6,7 +8,9 @@
     max-width: 12.5px;
   }
   .zg-trolls {
-    font-size: 15px;
+    font-size: 13px;
+    font-family: $zg-font;
+    font-weight: bold;
   }
 }
 

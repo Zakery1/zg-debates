@@ -4,21 +4,18 @@ import "./VoteHyperboles.scss";
 import { SimpleCtx } from "../../context/UserContext";
 import axios from "axios";
 import { Tooltip, IconButton } from "@material-ui/core";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-
 
 interface HyperbolesProps {
-    hyperboles: number;
-    contributionId: number | null;
-    hyperboled: boolean | null;
+  hyperboles: number;
+  contributionId: number | null;
+  hyperboled: boolean | null;
 }
 
 const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
-
-  const baseUrl = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const [voted, setVoted] = useState<boolean | null>(props.hyperboled);
-  // console.log("VOTED IN HYPERBOLED", voted)
 
   const [hyperboles, setHyperboles] = useState<number>(props.hyperboles);
 
@@ -29,7 +26,7 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
   let deleteConfig = {
     userId: value?.id,
     contributionId: props.contributionId,
-    voteType: 2
+    voteType: 2,
   };
 
   const castVote = (voteType: number) => {
@@ -97,7 +94,9 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
           <IconButton
             disabled={voteDisabled}
             style={{
-              color: voted ? "#726A00" : "grey",
+              background: voted ? "#726A00" : "white",
+              color: voted ? "grey" : "#726A00",
+              border: "2px solid #726A00",
               height: "15px",
               width: "15px",
             }}
@@ -106,18 +105,16 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
               value?.id ? castVote(2) : alert("You must be logged in to vote.")
             }
           >
-            <ArrowUpwardIcon
-              style={{ height: "15px" }}
-              className="zg-vote-arrow"
-            />
+            <span
+              style={{ color: voted ? "white" : "#726A00" }}
+              className="zg-hyperboles"
+            >
+              {hyperboles || "0"}
+              {/* need to display hyperboles and hyperboles */}
+            </span>
           </IconButton>
         </span>
       </Tooltip>
-      <span style={{ color: voted ? "#726A00" : "grey" }} className="zg-hyperboles">
-        
-        {hyperboles || "0"}
-        {/* need to display hyperboles and hyperboles */}
-      </span>
     </div>
   );
 };
