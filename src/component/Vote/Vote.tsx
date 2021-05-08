@@ -31,8 +31,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [showVotes, setShowVotes] = useState<boolean>(false);
-
   /////////////
   const [pointed, setPointed] = useState<boolean | null>(false);
   const [hyperboled, setHyperboled] = useState<boolean | null>(false);
@@ -57,7 +55,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
           .get(`${baseUrl}/api/votes/?userId=${userId}`)
           .then((response) => {
             setUserVotes(response.data);
-            setShowVotes(true);
           });
       }
     },
@@ -114,8 +111,7 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   return (
     <div className="zg-vote-container">
-      {showVotes ? (
-        <>
+
           <VotePoints
             contributionId={props.contributionId}
             points={props.points}
@@ -131,10 +127,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
             trolls={props.trolls}
             trolled={trolled}
           />
-        </>
-      ) : (
-        "no user votes"
-      )}
     </div>
   );
 };
