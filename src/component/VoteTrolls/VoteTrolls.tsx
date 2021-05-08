@@ -21,7 +21,6 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
   const [trolls, setTrolls] = useState<number>(props.trolls);
 
   const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-  console.log('vote disabled', voteDisabled)
 
   const value = useContext(SimpleCtx);
 
