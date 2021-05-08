@@ -1,7 +1,8 @@
 @import "../../style/style.scss";
 
 .zg-vote-points {
-  margin-right: 3px;
+  margin-right: 5px;
+  margin-left: 5px;
   .zg-vote-arrow {
   }
 
@@ -17,6 +18,7 @@
 
 @media only screen and (min-width: 501px) {
   .zg-vote-points {
+    margin-left: 0;
     .zg-vote-arrow {
     }
 

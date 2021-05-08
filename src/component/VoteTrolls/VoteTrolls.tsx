@@ -99,8 +99,8 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
               background: voted ? "#720000" : "white",
               color: voted ? "grey" : "#720000",
               border: "2px solid #720000",
-              height: "4px",
-              width: "4px"
+              height: "10px",
+              width: "10px"
             }}
             aria-label="vote"
             onClick={() =>
