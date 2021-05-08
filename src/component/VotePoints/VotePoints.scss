@@ -1,0 +1,33 @@
+@import "../../style/style.scss";
+
+.zg-vote-points {
+  margin-right: 5px;
+  margin-left: 5px;
+  .zg-vote-arrow {
+  }
+
+  .zg-vote-check {
+    max-width: 12.5px;
+  }
+  .zg-points {
+    font-size: 13px;
+    font-family: $zg-font;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-vote-points {
+    margin-left: 0;
+    .zg-vote-arrow {
+    }
+
+    .zg-vote-check {
+      max-width: 15px;
+    }
+
+    .zg-points {
+      // font-size: 12px;
+    }
+  }
+}

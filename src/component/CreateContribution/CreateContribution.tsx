@@ -21,6 +21,8 @@ interface ContributionData {
   neutral: boolean | null;
   disagree: boolean | null;
   points: number;
+  hyperboles: number;
+  trolls: number;
   contributeDate: string;
 }
 
@@ -67,6 +69,8 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
       neutral: null,
       disagree: null,
       points: 0,
+      hyperboles: 0,
+      trolls: 0,
       contributeDate: date.toDateString()
     };
 

@@ -15,6 +15,8 @@ interface ContributionProps {
   points: number;
   contribution: string;
   discussionName: string;
+  hyperboles: number;
+  trolls: number;
 }
 
 const Contribution: React.FC<ContributionProps> = (
@@ -35,17 +37,20 @@ const Contribution: React.FC<ContributionProps> = (
       });
   }, [baseUrl, props.contributionCreator]);
 
+
   useEffect(() => {
     fetchContributionCreator();
   }, [fetchContributionCreator]);
 
   return (
     <div className="zg-contribution-container">
-      <Vote contributionId={props.contributionId} points={props.points} />
       {/* <Vote contributionId={props.contributionId} points={props.points} />
       <Vote contributionId={props.contributionId} points={props.points} /> */}
 
       <div className="zg-content-and-author">
+        <div className="zg-vote-section">
+          <Vote contributionId={props.contributionId} points={props.points} hyperboles={props.hyperboles} trolls={props.trolls} />
+        </div>
         <EditContributionModal
           contributionCreator={props.contributionCreator}
           discussionName={props.discussionName}

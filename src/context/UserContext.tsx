@@ -11,6 +11,8 @@ interface UserContextInterface {
   setRole: SetUserInfo
 }
 
+
+
 export const SimpleCtx = createContext<UserContextInterface | null>(null);
 
 export const CtxProvider: React.FC = (props) => {
@@ -28,7 +30,12 @@ export const CtxProvider: React.FC = (props) => {
 
   // debugger;
 
+
+  
+
+
   useEffect(() => {
+
     // debugger;
     if (localStorage.username) {
       setUsername(localStorage.username);

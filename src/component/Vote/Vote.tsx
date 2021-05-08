@@ -1,174 +1,140 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-
 import axios from "axios";
 
-import { Tooltip, IconButton } from "@material-ui/core";
-
 import { SimpleCtx } from "../../context/UserContext";
+
+import VoteHyperboles from "../VoteHyperboles/VoteHyperboles";
+import VotePoints from "../VotePoints/VotePoints";
+
+import VoteTrolls from "../VoteTrolls/VoteTrolls";
 
 import "./Vote.scss";
 
 interface VoteProps {
   contributionId: number | null;
   points: number;
+  hyperboles: number;
+  trolls: number;
 }
 
 interface UserVote {
   contributionId: number;
+  voteDate: string;
+  voteType: number;
 }
 
-interface VotesArray extends Array<UserVote> {}
+interface UserVotesArray extends Array<UserVote> {}
 
 const Vote: React.FC<VoteProps> = (props: VoteProps) => {
-  const [voted, setVoted] = useState<boolean | null>(null);
-
-  const [points, setPoints] = useState<number>(props.points);
-
-  const [voteDisabled, setVoteDisabled] = useState<boolean>(false);
-
-  const [userVotes, setUserVotes] = useState<VotesArray>([]);
-
-  const value = useContext(SimpleCtx);
 
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let deleteConfig = {
-    userId: value?.id,
-    contributionId: props.contributionId,
-  };
+  const [showVotes, setShowVotes] = useState<boolean>(false);
 
-  const fetchUserVotes = useCallback(async () => {
-    if(value?.id) {
-      await axios
-      .get(`${baseUrl}/api/votes/?userId=${value?.id}`)
-      .then((response) => {
-        return setUserVotes(response.data);
-      });
-    } else {
-      return;
-    }
+  /////////////
+  const [pointed, setPointed] = useState<boolean | null>(false);
+  const [hyperboled, setHyperboled] = useState<boolean | null>(false);
+  const [trolled, setTrolled] = useState<boolean | null>(false);
 
-  }, [baseUrl, value?.id]);
+  const [userVotes, setUserVotes] = useState<UserVotesArray>([
+    {
+      contributionId: 0,
+      voteDate: "",
+      voteType: 0,
+    },
+  ]);
 
-  const checkVotes = useCallback(
-    (contributionId: any) => {
-      let votedStatus = userVotes.find(
-        (item) => item.contributionId === contributionId
-      );
-      if(votedStatus?.contributionId)  {
-        return setVoted(true);
-      } else {
+  const value = useContext(SimpleCtx);
+
+  const fetchUserVotes = useCallback(
+    async (userId) => {
+      if (!userId) {
         return;
+      } else {
+        await axios
+          .get(`${baseUrl}/api/votes/?userId=${userId}`)
+          .then((response) => {
+            setUserVotes(response.data);
+            setShowVotes(true);
+          });
       }
     },
-    [userVotes]
+    [baseUrl]
   );
 
-  useEffect(() => {
-    fetchUserVotes();
-  }, [fetchUserVotes]);
+
 
   useEffect(() => {
-    checkVotes(props.contributionId);
-  }, [props.contributionId, checkVotes]);
+    fetchUserVotes(value?.id);
+  }, [fetchUserVotes, value?.id]);
 
-  let removeVote = async () => {
-    setPoints(points - 1);
-    setVoteDisabled(true);
-    setTimeout(() => {
-      setVoteDisabled(false);
-    }, 2000);
+  useEffect(() => {
+    const checkPointed = () => {
+      let pointedStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 1
+      );
+  
+      if (pointedStatus) {
+        setPointed(true);
+      }
+    };
+    checkPointed();
+  }, [props.contributionId, userVotes]);
 
-    await axios
-      .put(`${baseUrl}/api/contributions`, {
-        contributionId: props.contributionId,
-        voteFor: false,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
+  useEffect(() => {
+    const checkHyperboled = () => {
+      let hyperboledStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 2
+      );
+  
+      if (hyperboledStatus) {
+        setHyperboled(true);
+      }
+    };
+    checkHyperboled();
+  }, [props.contributionId, userVotes]);
 
-    await axios
-      .delete(`${baseUrl}/api/votes`, {
-        data: deleteConfig,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
-  };
-
-  let addVote = async () => {
-    setVoteDisabled(true);
-    setPoints(points + 1);
-    setTimeout(() => {
-      setVoteDisabled(false);
-    }, 2000);
-    await axios
-      .put(`${baseUrl}/api/contributions`, {
-        contributionId: props.contributionId,
-        voteFor: true,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
-    await axios
-      .post(`${baseUrl}/api/votes`, {
-        userId: value?.id,
-        contributionId: props.contributionId,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
-  };
-
-  const castVote = () => {
-    if (voted) {
-      setVoted(false);
-      return removeVote();
-    } else {
-      setVoted(true);
-      return addVote();
-    }
-  };
+  useEffect(() => {
+    const checkTrolled = () => {
+      let trolledStatus = userVotes.find(
+        (item) =>
+          item.contributionId === props.contributionId && item.voteType === 3
+      );
+  
+      if (trolledStatus) {
+        setTrolled(true);
+      }
+    };
+    checkTrolled();
+  }, [props.contributionId, userVotes]);
 
   return (
     <div className="zg-vote-container">
-      {voteDisabled ? (
-        <CheckCircleIcon
-          style={{ color: voted ? "#24519b" : "grey", height: "15px" }}
-          className="zg-vote-check"
-        />
+      {showVotes ? (
+        <>
+          <VotePoints
+            contributionId={props.contributionId}
+            points={props.points}
+            pointed={pointed}
+          />
+          <VoteHyperboles
+            contributionId={props.contributionId}
+            hyperboles={props.hyperboles}
+            hyperboled={hyperboled}
+          />
+          <VoteTrolls
+            contributionId={props.contributionId}
+            trolls={props.trolls}
+            trolled={trolled}
+          />
+        </>
       ) : (
-        ""
+        "no user votes"
       )}
-      <Tooltip title={voted ? "Remove Vote" : "Vote"}>
-        <span>
-          <IconButton
-            disabled={voteDisabled}
-            style={{
-              color: voted ? "#24519b" : "grey",
-              height: "30px",
-              width: "30px",
-            }}
-            aria-label="vote"
-            onClick={() =>
-              value?.id ? castVote() : alert("You must be logged in to vote.")
-            }
-          >
-            <ArrowUpwardIcon
-              style={{ height: "20px" }}
-              className="zg-vote-arrow"
-            />
-          </IconButton>
-        </span>
-      </Tooltip>
-      <span style={{ color: voted ? "#24519b" : "grey" }} className="zg-points">
-        {points}
-      </span>
     </div>
   );
 };

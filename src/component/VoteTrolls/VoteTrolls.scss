@@ -1,0 +1,30 @@
+@import "../../style/style.scss";
+
+.zg-vote-trolls {
+  .zg-vote-arrow {
+  }
+
+  .zg-vote-check {
+    max-width: 12.5px;
+  }
+  .zg-trolls {
+    font-size: 13px;
+    font-family: $zg-font;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-vote-trolls {
+    .zg-vote-arrow {
+    }
+
+    .zg-vote-check {
+      max-width: 15px;
+    }
+
+    .zg-trolls {
+      // font-size: 12px;
+    }
+  }
+}

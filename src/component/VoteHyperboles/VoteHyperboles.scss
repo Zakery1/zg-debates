@@ -1,0 +1,32 @@
+@import "../../style/style.scss";
+
+.zg-vote-hyperboles {
+  margin-right: 5px;
+  .zg-vote-arrow {
+
+  }
+
+  .zg-vote-check {
+    max-width: 12.5px;
+  }
+  .zg-hyperboles {
+    font-size: 13px;
+    font-family: $zg-font;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  .zg-vote-hyperboles {
+    .zg-vote-arrow {
+    }
+
+    .zg-vote-check {
+      max-width: 15px;
+    }
+
+    .zg-hyperboles {
+      // font-size: 12px;
+    }
+  }
+}
