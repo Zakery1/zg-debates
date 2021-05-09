@@ -37,14 +37,14 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
   const date = new Date();
 
   const baseUrl =
-  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const createDiscussion = async () => {
     let postData: DiscussionData = {
       creatorId: value?.id,
       categoryId: categoryId,
       discussionName: discussionName,
-      date: date.toDateString()
+      date: date.toDateString(),
     };
 
     await axios
@@ -57,7 +57,7 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     handleClose();
     props.fetchDiscussions();
   };
-  
+
   const handleOpen = () => {
     if (value?.username) {
       return setOpen(true);
@@ -73,7 +73,8 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
     <div className="zg-create-discussion-body">
       <h2>Create discussion</h2>
       <p>
-        Create a premise related to <span style={{fontWeight: "bolder"}}>{props.categoryName}</span> or a
+        Create a premise related to{" "}
+        <span style={{ fontWeight: "bolder" }}>{props.categoryName}</span> or a
         moderator will delete it.
       </p>
       <textarea
@@ -91,22 +92,35 @@ const CreateDiscussion: React.FC<TopicParams & FetchDiscussions> = (props) => {
           Create Discussion!
         </Button>
       ) : (
-        <Button style={{opacity:".5"}} className="zg-create-discussion-button" disabled>
+        <Button
+          style={{ opacity: ".5" }}
+          className="zg-create-discussion-button"
+          disabled
+        >
           Create Discussion!
         </Button>
       )}
 
       <br />
       <br />
-      <Button className="zg-cancel-discussion-button" onClick={handleClose}>Cancel</Button>
+      <Button className="zg-cancel-discussion-button" onClick={handleClose}>
+        Cancel
+      </Button>
     </div>
   );
   return (
     <div className="zg-create-discussion">
-      <button className="zg-open-discussion-modal zg-create-action" type="button" onClick={handleOpen}>
-        <div className="zg-create-discussion-button-text">Create Discussion</div>
-        <AddCircleIcon className="zg-add-icon"/>
-      </button>
+      <Button
+        className="zg-open-discussion-modal zg-create-action"
+        type="button"
+        onClick={handleOpen}
+        style={{border: "1.5px solid #d3b349"}}
+      >
+        <div className="zg-create-discussion-button-text">
+          Create Discussion
+        </div>
+        <AddCircleIcon className="zg-add-icon" />
+      </Button>
       <Modal
         className="zg-create-discussion-modal"
         open={open}

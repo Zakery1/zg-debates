@@ -34,13 +34,15 @@
       .zg-category-link-holder {
         margin: 5px 5px 15px 5px;
         
-        background: $zg-purple;
-        border-radius: 2px;
+        // background: $zg-purple;
+        color: $zg-purple;
+        border: 1px solid $zg-purple;
+        border-radius: 3px;
         display: flex;
         text-decoration: none;
         .zg-discussion-link {
           font-weight: bolder;
-          color: white;
+
           padding: 15px;
           font-family: $zg-font;
         }
@@ -76,6 +78,7 @@
           margin: 5px 0;
           .zg-discussion-link {
             font-size: 14px;
+            
           }
         }
       }
