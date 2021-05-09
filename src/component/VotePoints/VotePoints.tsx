@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./VotePoints.scss";
 import { Tooltip, IconButton } from "@material-ui/core";
@@ -17,7 +17,7 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [voted, setVoted] = useState<boolean | null>(props.pointed);
+  const [voted, setVoted] = useState<boolean | null>(false);
 
   const [points, setPoints] = useState<number>(props.points);
 
@@ -30,6 +30,12 @@ const VotePoints: React.FC<VotePointsProps> = (props: VotePointsProps) => {
     contributionId: props.contributionId,
     voteType: 1,
   };
+
+  useEffect(() => {
+    if (props.pointed) {
+      setVoted(true);
+    }
+  }, [props.pointed])
 
   const castVote = (voteType: number) => {
     setVoteDisabled(true);

@@ -111,7 +111,6 @@ const Vote: React.FC<VoteProps> = (props: VoteProps) => {
 
   return (
     <div className="zg-vote-container">
-
           <VotePoints
             contributionId={props.contributionId}
             points={props.points}

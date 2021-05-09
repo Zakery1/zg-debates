@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./VoteTrolls.scss";
 import { SimpleCtx } from "../../context/UserContext";
@@ -15,8 +15,7 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-
-  const [voted, setVoted] = useState<boolean | null>(props.trolled);
+  const [voted, setVoted] = useState<boolean | null>(false);
 
   const [trolls, setTrolls] = useState<number>(props.trolls);
 
@@ -29,6 +28,12 @@ const VoteTrolls: React.FC<TrollsProps> = (props: TrollsProps) => {
     contributionId: props.contributionId,
     voteType: 3,
   };
+
+  useEffect(() => {
+    if (props.trolled) {
+      setVoted(true);
+    }
+  }, [props.trolled])
 
   const castVote = (voteType: number) => {
     setVoteDisabled(true);

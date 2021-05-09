@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./VoteHyperboles.scss";
 import { SimpleCtx } from "../../context/UserContext";
@@ -15,7 +15,7 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  const [voted, setVoted] = useState<boolean | null>(props.hyperboled);
+  const [voted, setVoted] = useState<boolean | null>(false);
 
   const [hyperboles, setHyperboles] = useState<number>(props.hyperboles);
 
@@ -28,6 +28,12 @@ const VoteHyperboles: React.FC<HyperbolesProps> = (props: HyperbolesProps) => {
     contributionId: props.contributionId,
     voteType: 2,
   };
+
+  useEffect(() => {
+    if (props.hyperboled) {
+      setVoted(true);
+    }
+  }, [props.hyperboled])
 
   const castVote = (voteType: number) => {
     setVoteDisabled(true);

@@ -12,6 +12,8 @@
     justify-content: center;
     margin-bottom: 0px;
     .zg-current-discussion-title {
+      box-shadow: $box-shadow;
+      padding: 3px;
       color: $zg-purple;
       font-weight: bolder;
       margin: 15px 0;
