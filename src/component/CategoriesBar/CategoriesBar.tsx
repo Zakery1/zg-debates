@@ -8,6 +8,7 @@ import "./CategoriesBar.scss";
 
 import Category from "../Category/Category";
 import Welcome from "../Welcome/Welcome";
+import { Button } from "@material-ui/core";
 
 interface CategoryItem {
   id: number | null;
@@ -49,18 +50,33 @@ const CategoriesBar: React.FC = () => {
     fetchCategories();
   }, [fetchCategories]);
 
+
+
+
+
+
+
   const availableCategories = categories.map((category, index) => {
     return (
       <div className="zg-category-link-holder" key={index}>
-        <button
+        <Button
+        color="primary"
+        variant="outlined"
           onClick={() => selectCategory(category.id, category.categoryName)}
           className="zg-single-category"
         >
-          {category.categoryName}
-        </button>
+          <span style={{fontFamily: "Montserrat"}} className="zg-category-text">{category.categoryName}</span>
+        </Button>
       </div>
     );
   });
+
+
+
+
+
+
+  
 
   return (
     <div className="zg-categories-bar-holder">

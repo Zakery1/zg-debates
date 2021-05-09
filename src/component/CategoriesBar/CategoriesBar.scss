@@ -12,8 +12,8 @@
     margin-bottom: 15px;
     padding: 5px;
     color: $zg-purple;
-    border-bottom: 2px solid $zg-purple;
-    border-top: 2px solid $zg-purple;
+    border-bottom: 1px solid $zg-purple;
+    border-top: 1px solid $zg-purple;
     max-width: fit-content;
   }
 
@@ -23,17 +23,22 @@
       padding: 10px;
       margin: 5px;
       .zg-single-category {
-        font-family: $zg-font;
+        font: $zg-font;
         text-align: left;
         font-size: 20px;
         font-weight: bolder;
         text-decoration: none;
-        border: none;
         cursor: pointer;
         padding: 5px;
-        border-radius: 2px;
-        background: $zg-purple;
-        color: white;
+        border-radius: 3px;
+        color: $zg-purple;
+        border: solid 1px $zg-purple;
+        width: 100%;
+        background: white;
+        text-align: center;
+        .zg-category-text {
+          font: $zg-font;
+        }
       }
     }
   }
@@ -48,12 +53,12 @@
     margin-top: 20px;
     .zg-categories-bar {
       width: 164px;
-      // box-shadow: $box-shadow;
       padding-top: 10px;
       margin: 0 0 0 0px;
       min-height: 100vh;
       border-radius: 0 5px 5px 0;
       .zg-categories-bar-header {
+        width: 100%;
         font-size: 15px;
         font-weight: bolder;
         margin-left: 15px;
@@ -62,10 +67,14 @@
         align-items: flex-start;
 
         .zg-category-link-holder {
-          margin: 5px;
+          margin: 5px 15px 5px 5px;
           padding: 5px;
           .zg-single-category {
-            font-size: 12px;
+            font-size: 11px;
+            border-radius: 3px;
+            .zg-category-text {
+
+            }
           }
         }
       }
