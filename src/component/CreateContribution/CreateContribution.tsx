@@ -148,13 +148,13 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
 
   return (
     <div className="zg-contribution">
-      <button
+      <Button
         className="zg-modal-contribute"
         type="button"
         onClick={handleOpen}
       >
         Contribute <AddCircleIcon className="zg-plus-icon" />
-      </button>
+      </Button>
       <Modal
         className="zg-contribution-modal"
         open={open}

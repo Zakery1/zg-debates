@@ -143,7 +143,7 @@ const CurrentDiscussion: React.FC = () => {
   return (
     <div className="zg-current-discussion">
       <div className="zg-discussion-header">
-        <h2 className="zg-current-discussion-title">{discussionName} </h2>
+        <div className="zg-current-discussion-title">{discussionName} </div>
 
         <div className="zg-link-and-create-holder">
           <CreateContribution
