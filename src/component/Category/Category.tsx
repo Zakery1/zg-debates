@@ -36,12 +36,18 @@ const Category: React.FC<CategoryProps> = (props) => {
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
+        scrollToCategoriesMobile();
+
       });
   }, [props, baseUrl]);
 
+  const scrollToCategoriesMobile = () => {
+    if(window.innerWidth < 501)
+    document.getElementById('zg-back')?.scrollIntoView({behavior: "smooth"});
+  }
+
   useEffect(() => {
     fetchDiscussions();
-    console.log("watch useeffect");
   }, [fetchDiscussions]);
 
   let currentDiscussions = discussions.map((discussion, index) => {
@@ -60,7 +66,7 @@ const Category: React.FC<CategoryProps> = (props) => {
   return (
     <div className="zg-category">
       <div className="zg-category-header">
-      <div className="zg-category-header-text">
+      <div id="zg-back" className="zg-category-header-text">
          {props.categoryName} 
       </div>
       </div>
