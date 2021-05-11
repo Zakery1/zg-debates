@@ -53,17 +53,21 @@
     }
 
     .zg-list-agree {
+      margin-top: 15px;
+      border: solid 1px rgb(64, 255, 0);
       margin-right: 20px;
       border-radius: 0% 3% 3% 0;
     }
 
     .zg-list-neutral {
+      border: solid 1px rgb(242, 255, 0);
       margin-right: 10px;
       margin-left: 10px;
       border-radius: 3%;
     }
 
     .zg-list-disagree {
+      border: solid 1px rgb(255, 0, 0);
       margin-left: 20px;
       border-radius: 3% 0 0 3%;
     }
@@ -113,13 +117,14 @@
         min-height: 550px;
       }
       .zg-list-agree {
+        margin-top: 0;
         margin-right: 0px;
         border-radius: 0% 3% 3% 0;
       }
 
       .zg-list-neutral {
-        margin-right: 0px;
-        margin-left: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
         border-radius: 3%;
       }
 
