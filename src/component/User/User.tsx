@@ -26,7 +26,7 @@ const User: React.FC = () => {
     <div>
       User
       <div>
-        <Link to="/" onClick={logout}>
+        <Link className="zg-logout" to="/" onClick={logout}>
           Logout
         </Link>
       </div>
