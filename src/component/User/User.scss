@@ -1,19 +1,48 @@
 @import "../../style/style.scss";
 
-.zg-logout:visited { text-decoration: none; ; }
-.zg-logout:hover { text-decoration: none;}
-.zg-logout:focus { text-decoration: none; }
-.zg-logout:hover, a:active { text-decoration: none; }
+.zg-user {
+  background: pink;
 
-.zg-logout {
+  .zg-user-contribution-list {
+
+    .zg-user-contribution-item {
+      display: grid;
+      margin-top: 5px;
+    }
+
+  }
+
+  .zg-logout:visited {
+    text-decoration: none;
+  }
+  .zg-logout:hover {
+    text-decoration: none;
+  }
+  .zg-logout:focus {
+    text-decoration: none;
+  }
+  .zg-logout:hover,
+  a:active {
+    text-decoration: none;
+  }
+
+  .zg-logout {
     font-size: 12px;
-  color: $zg-purple;
-  text-decoration: none;
+    color: $zg-purple;
+    text-decoration: none;
+  }
 }
 
-
-
 @media only screen and (min-width: 501px) {
-  .zg-logout {
+  .zg-user {
+    background: rgb(192, 255, 206);
+    .zg-user-contribution-list {
+      .zg-user-contribution-item {
+        background: rgb(136, 136, 233);
+      }
+    }
+
+    .zg-logout {
+    }
   }
 }

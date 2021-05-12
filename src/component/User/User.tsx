@@ -78,9 +78,9 @@ const User: React.FC = () => {
   }, []);
 
   let contributionList = () =>
-    userContributions.map((contribution) => {
+  userContributions.filter((item) => item.userId == value?.id).map((contribution) => {
       return (
-        <span key={contribution.id}>
+        <div key={contribution.id} className="zg-user-contribution-item">
           <div>
             {contribution.contribution}
             {contribution.points}
@@ -88,19 +88,21 @@ const User: React.FC = () => {
             {contribution.trolls}
             <button>delete</button>
           </div>
-          <br />
           <Link to={`/discussion/${contribution.discussionId}`}>
             Go to discussion
           </Link>
-        </span>
+        </div>
       );
     });
 
   return (
-    <div>
+    <div className="zg-user">
       User
       <div>
+        <div className="zg-user-contribution-list">
         {contributionList()}
+        </div>
+
         <br />
         <Link className="zg-logout" to="/" onClick={logout}>
           Logout
