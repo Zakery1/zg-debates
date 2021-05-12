@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
@@ -11,6 +11,8 @@ import "./DeleteContribution.scss";
 interface DeleteProps {
   contributionId: number | null;
   points: number | null;
+  hyperboles: number | null;
+  trolls: number | null;
 }
 
 const DeleteContribution: React.FC<DeleteProps> = (props) => {
@@ -19,12 +21,18 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
   let contributionId = props.contributionId;
 
   const baseUrl =
-  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let points = props.points;
+  let checkForVotes = () => {
+    if (props.points || props.hyperboles || props.trolls) {
+      return true;
+    }
+    return false;
+  };
 
   let deleteContribution = async () => {
-    if (points != null) {
+    console.log("heckForVotes", checkForVotes());
+    if (checkForVotes()) {
       await axios
         .delete(`${baseUrl}/api/votes/${contributionId}`)
         .then((res) => {

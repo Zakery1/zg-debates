@@ -44,9 +44,6 @@ const Contribution: React.FC<ContributionProps> = (
 
   return (
     <div className="zg-contribution-container">
-      {/* <Vote contributionId={props.contributionId} points={props.points} />
-      <Vote contributionId={props.contributionId} points={props.points} /> */}
-
       <div className="zg-content-and-author">
         <div className="zg-vote-section">
           <Vote contributionId={props.contributionId} points={props.points} hyperboles={props.hyperboles} trolls={props.trolls} />
@@ -62,10 +59,8 @@ const Contribution: React.FC<ContributionProps> = (
         </span>
       </div>
       {+value?.id === props.contributionCreator ? (
-        <DeleteContribution
-          points={props.points}
-          contributionId={props.contributionId}
-        />
+        <DeleteContribution contributionId={props.contributionId} points={props.points} hyperboles={props.hyperboles} trolls={props.trolls} />
+
       ) : (
         <div style={{ minWidth: "30px" }}></div>
       )}

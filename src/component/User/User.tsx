@@ -6,7 +6,11 @@ import axios from "axios";
 
 import { SimpleCtx } from "../../context/UserContext";
 
+import DeleteContribution from "../DeleteContribution/DeleteContribution";
+
+
 import "./User.scss";
+import { ListItemSecondaryAction } from "@material-ui/core";
 
 interface ContributionItem {
   id: number | null;
@@ -49,14 +53,14 @@ const User: React.FC = () => {
 
   const value = useContext(SimpleCtx);
 
-  const getUserContributions = async () => {
-    await axios
-      .get(`${baseUrl}/api/contributions/?userId=${value?.id}`)
-      .then((res) => {
-        // console.log("CONTRIBUTION RESOURCE", res.data)
-        setUserContributions(res.data);
-      });
-  };
+  // const getUserContributions = async () => {
+  //   await axios
+  //     .get(`${baseUrl}/api/contributions/?userId=${value?.id}`)
+  //     .then((res) => {
+  //       // console.log("CONTRIBUTION RESOURCE", res.data)
+  //       setUserContributions(res.data);
+  //     });
+  // };
 
   const logout = async () => {
     await axios.post(`${baseUrl}/api/users/logout`).then((response) => {
@@ -82,11 +86,12 @@ const User: React.FC = () => {
       return (
         <div key={contribution.id} className="zg-user-contribution-item">
           <div>
+            {}
             {contribution.contribution}
             {contribution.points}
             {contribution.hyperboles}
             {contribution.trolls}
-            <button>delete</button>
+            <DeleteContribution contributionId={contribution.id} points={contribution.points} hyperboles={contribution.hyperboles} trolls={contribution.trolls} />
           </div>
           <Link to={`/discussion/${contribution.discussionId}`}>
             Go to discussion
