@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import { SimpleCtx } from "../../context/UserContext";
 
@@ -29,18 +29,34 @@ const Contribution: React.FC<ContributionProps> = (
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  let fetchContributionCreator = useCallback(async () => {
-    await axios
-      .get(`${baseUrl}/api/users/?userId=${props.contributionCreator}`)
-      .then((response: any) => {
-        setContributionCreator(response.data);
-      });
-  }, [baseUrl, props.contributionCreator]);
+  // let fetchContributionCreator = useCallback(async () => {
+  //   await axios
+  //     .get(`${baseUrl}/api/users/?userId=${props.contributionCreator}`)
+  //     .then((response: any) => {
+  //       setContributionCreator(response.data);
+  //     });
+  // }, [baseUrl, props.contributionCreator]);
 
 
   useEffect(() => {
-    fetchContributionCreator();
-  }, [fetchContributionCreator]);
+    let mounted = true;
+
+    let fetchContributionCreator = async () => {
+      await axios
+        .get(`${baseUrl}/api/users/?userId=${props.contributionCreator}`)
+        .then((response: any) => {
+          setContributionCreator(response.data);
+        });
+    };
+
+    if(mounted) {
+      fetchContributionCreator();
+    }
+
+    return () => {
+      mounted = false;
+    }
+  }, [ baseUrl, props.contributionCreator]);
 
   return (
     <div className="zg-contribution-container">

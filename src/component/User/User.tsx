@@ -6,12 +6,9 @@ import axios from "axios";
 
 import { SimpleCtx } from "../../context/UserContext";
 
-import DeleteContribution from "../DeleteContribution/DeleteContribution";
-
 import Contribution from "../Contribution/Contribution";
 
 import "./User.scss";
-import { ListItemSecondaryAction } from "@material-ui/core";
 
 interface ContributionItem {
   id: number | null;
@@ -80,12 +77,12 @@ const User: React.FC = () => {
         });
     };
     getUserContributions();
-  }, []);
+  }, [baseUrl, value?.id]);
 
   let contributionList = () =>
     userContributions.map((contribution) => {
       // console.log("contribution.userId === value?.id", contribution.userId, value?.id)
-      if (contribution.userId == value?.id) {
+      if (contribution.userId?.toString() === value?.id) {
         return (
           <div key={contribution.id} className="zg-contributions-container">
             <Contribution
@@ -106,8 +103,8 @@ const User: React.FC = () => {
           </div>
         );
       } else {
-        return;
-      }
+        return " ";
+      } 
     });
 
   return (
