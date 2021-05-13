@@ -29,15 +29,6 @@ const Contribution: React.FC<ContributionProps> = (
   const baseUrl =
     process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
-  // let fetchContributionCreator = useCallback(async () => {
-  //   await axios
-  //     .get(`${baseUrl}/api/users/?userId=${props.contributionCreator}`)
-  //     .then((response: any) => {
-  //       setContributionCreator(response.data);
-  //     });
-  // }, [baseUrl, props.contributionCreator]);
-
-
   useEffect(() => {
     let mounted = true;
 
@@ -45,24 +36,29 @@ const Contribution: React.FC<ContributionProps> = (
       await axios
         .get(`${baseUrl}/api/users/?userId=${props.contributionCreator}`)
         .then((response: any) => {
-          setContributionCreator(response.data);
+          if (mounted) {
+            setContributionCreator(response.data);
+          }
         });
     };
 
-    if(mounted) {
-      fetchContributionCreator();
-    }
+    fetchContributionCreator();
 
     return () => {
       mounted = false;
-    }
-  }, [ baseUrl, props.contributionCreator]);
+    };
+  }, [baseUrl, props.contributionCreator]);
 
   return (
     <div className="zg-contribution-container">
       <div className="zg-content-and-author">
         <div className="zg-vote-section">
-          <Vote contributionId={props.contributionId} points={props.points} hyperboles={props.hyperboles} trolls={props.trolls} />
+          <Vote
+            contributionId={props.contributionId}
+            points={props.points}
+            hyperboles={props.hyperboles}
+            trolls={props.trolls}
+          />
         </div>
         <EditContributionModal
           contributionCreator={props.contributionCreator}
@@ -75,8 +71,12 @@ const Contribution: React.FC<ContributionProps> = (
         </span>
       </div>
       {+value?.id === props.contributionCreator ? (
-        <DeleteContribution contributionId={props.contributionId} points={props.points} hyperboles={props.hyperboles} trolls={props.trolls} />
-
+        <DeleteContribution
+          contributionId={props.contributionId}
+          points={props.points}
+          hyperboles={props.hyperboles}
+          trolls={props.trolls}
+        />
       ) : (
         <div style={{ minWidth: "30px" }}></div>
       )}

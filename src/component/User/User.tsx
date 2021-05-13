@@ -51,15 +51,6 @@ const User: React.FC = () => {
 
   const value = useContext(SimpleCtx);
 
-  // const getUserContributions = async () => {
-  //   await axios
-  //     .get(`${baseUrl}/api/contributions/?userId=${value?.id}`)
-  //     .then((res) => {
-  //       // console.log("CONTRIBUTION RESOURCE", res.data)
-  //       setUserContributions(res.data);
-  //     });
-  // };
-
   const logout = async () => {
     await axios.post(`${baseUrl}/api/users/logout`).then((response) => {
       value?.setUsername(null);
@@ -81,7 +72,6 @@ const User: React.FC = () => {
 
   let contributionList = () =>
     userContributions.map((contribution) => {
-      // console.log("contribution.userId === value?.id", contribution.userId, value?.id)
       if (contribution.userId?.toString() === value?.id) {
         return (
           <div key={contribution.id} className="zg-contributions-container">
