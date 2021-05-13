@@ -62,7 +62,7 @@ const EditContributionModal: React.FC<EditContributionProps> = (props) => {
 
   const body = (
     <div className="zg-edit-contribute-body">
-      <h2>{props.discussionName}</h2>
+      <p>{props.discussionName}</p>
 
       <textarea
         className="zg-edit-contribution-input"

@@ -113,7 +113,7 @@ const CreateContribution: React.FC<CreateContributionProps> = (props) => {
 
   const body = (
     <div className="zg-contribute-body">
-      <h2>{props.discussionName}</h2>
+      <p>{props.discussionName}</p>
       <div className="zg-choice-group">{choiceButtons}</div>
 
       <textarea
