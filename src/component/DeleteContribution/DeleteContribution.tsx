@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
@@ -31,7 +31,6 @@ const DeleteContribution: React.FC<DeleteProps> = (props) => {
   };
 
   let deleteContribution = async () => {
-    console.log("heckForVotes", checkForVotes());
     if (checkForVotes()) {
       await axios
         .delete(`${baseUrl}/api/votes/${contributionId}`)
