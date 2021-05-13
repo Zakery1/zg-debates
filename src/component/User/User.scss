@@ -1,49 +1,82 @@
 @import "../../style/style.scss";
 
 .zg-user {
-  background: pink;
-
+  .zg-contribution-list-header {
+    color: $zg-purple;
+    margin: 10px;
+    border-bottom: 1px solid $zg-purple;
+  }
   .zg-user-contribution-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    .zg-user-contribution-item {
-      display: grid;
-      margin-top: 5px;
-      background: rgb(136, 136, 233);
+    .zg-contributions-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+
+      .zg-user-contribution-item {
+        margin-top: 5px;
+      }
     }
 
   }
-
-  .zg-logout:visited {
-    text-decoration: none;
-  }
-  .zg-logout:hover {
-    text-decoration: none;
-  }
-  .zg-logout:focus {
-    text-decoration: none;
-  }
-  .zg-logout:hover,
-  a:active {
-    text-decoration: none;
-  }
-
-  .zg-logout {
+  .zg-link {
     font-size: 12px;
     color: $zg-purple;
     text-decoration: none;
+  }
+  .zg-link:visited {
+    text-decoration: none;
+  }
+  .zg-link:hover {
+    text-decoration: none;
+  }
+  .zg-link:focus {
+    text-decoration: none;
+  }
+  .zg-link:hover,
+  a:active {
+    text-decoration: none;
+  }
+  .zg-go-to-discussion {
+    margin: 5px;
+    font-size: 15px;
   }
 }
 
 @media only screen and (min-width: 501px) {
   .zg-user {
-    background: rgb(192, 255, 206);
+    .zg-contribution-list-header {
+    }
     .zg-user-contribution-list {
-      .zg-user-contribution-item {
-
+      .zg-contributions-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .zg-user-contribution-item {
+        }
       }
     }
+    .zg-link {
+      
+    }
+    .zg-link:visited {
+      
+    }
+    .zg-link:hover {
+      
+    }
+    .zg-link:focus {
+      
+    }
+    .zg-link:hover,
+    a:active {
+      
+    }
+    .zg-go-to-discussion {
 
-    .zg-logout {
     }
   }
 }

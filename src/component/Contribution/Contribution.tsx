@@ -23,6 +23,7 @@ const Contribution: React.FC<ContributionProps> = (
   props: ContributionProps
 ) => {
   const [contributionCreator, setContributionCreator] = useState<string>("");
+  console.log("props contribution componenet", props)
 
   let value = useContext(SimpleCtx);
 

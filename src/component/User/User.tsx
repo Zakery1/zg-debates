@@ -8,6 +8,7 @@ import { SimpleCtx } from "../../context/UserContext";
 
 import DeleteContribution from "../DeleteContribution/DeleteContribution";
 
+import Contribution from "../Contribution/Contribution";
 
 import "./User.scss";
 import { ListItemSecondaryAction } from "@material-ui/core";
@@ -82,37 +83,45 @@ const User: React.FC = () => {
   }, []);
 
   let contributionList = () =>
-  userContributions.filter((item) => item.userId == value?.id).map((contribution) => {
-      return (
-        <div key={contribution.id} className="zg-user-contribution-item">
-          <div>
-            {}
-            {contribution.contribution}
-            {contribution.points}
-            {contribution.hyperboles}
-            {contribution.trolls}
-            <DeleteContribution contributionId={contribution.id} points={contribution.points} hyperboles={contribution.hyperboles} trolls={contribution.trolls} />
+    userContributions.map((contribution) => {
+      // console.log("contribution.userId === value?.id", contribution.userId, value?.id)
+      if (contribution.userId == value?.id) {
+        return (
+          <div key={contribution.id} className="zg-contributions-container">
+            <Contribution
+              discussionName={" "}
+              contributionCreator={contribution.userId}
+              contributionId={contribution.id}
+              points={contribution.points}
+              contribution={contribution.contribution}
+              hyperboles={contribution.hyperboles}
+              trolls={contribution.trolls}
+            />
+            <Link
+              className="zg-link zg-go-to-discussion"
+              to={`/discussion/${contribution.discussionId}`}
+            >
+              Go to discussion
+            </Link>
           </div>
-          <Link to={`/discussion/${contribution.discussionId}`}>
-            Go to discussion
-          </Link>
-        </div>
-      );
+        );
+      } else {
+        return;
+      }
     });
 
   return (
     <div className="zg-user">
-      User
-      <div>
-        <div className="zg-user-contribution-list">
-        {contributionList()}
-        </div>
+      <div className="zg-user-contribution-list">
+        <div className="zg-contribution-list-header">My Contributions</div>
 
-        <br />
-        <Link className="zg-logout" to="/" onClick={logout}>
-          Logout
-        </Link>
+        <div>
+          <div className="zg-user-contribution-list">{contributionList()}</div>
+        </div>
       </div>
+      <Link className="zg-link" to="/" onClick={logout}>
+        Logout
+      </Link>
     </div>
   );
 };
