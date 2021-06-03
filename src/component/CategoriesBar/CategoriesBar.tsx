@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import "./CategoriesBar.scss";
 
@@ -18,6 +18,9 @@ interface CategoryItem {
 interface CategoriesArray extends Array<CategoryItem> {}
 
 const CategoriesBar: React.FC = () => {
+  const baseUrl =
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [category, setCategory] = useState<CategoryItem>({
     id: null,
@@ -34,10 +37,7 @@ const CategoriesBar: React.FC = () => {
   const exitCategory = () => {
     setShowCategory(false);
     setCategory({ id: null, categoryName: "" });
-  }
-
-  const baseUrl =
-    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+  };
 
   const fetchCategories = useCallback(async () => {
     await axios.get(`${baseUrl}/api/categories`).then((res) => {
@@ -50,46 +50,41 @@ const CategoriesBar: React.FC = () => {
     fetchCategories();
   }, [fetchCategories]);
 
-
-
-
-
-
-
   const availableCategories = categories.map((category, index) => {
     return (
       <div className="zg-category-link-holder" key={index}>
         <Button
-        color="primary"
-        variant="outlined"
+          color="primary"
+          variant="outlined"
           onClick={() => selectCategory(category.id, category.categoryName)}
           className="zg-single-category"
         >
-          <span style={{fontFamily: "Montserrat"}} className="zg-category-text">{category.categoryName}</span>
+          <span
+            style={{ fontFamily: "Montserrat" }}
+            className="zg-category-text"
+          >
+            {category.categoryName}
+          </span>
         </Button>
       </div>
     );
   });
 
-
-
-
-
-
-  
-
   return (
     <div className="zg-categories-bar-holder">
       <div className="zg-categories-bar">
-        <div className="zg-categories-bar-header">Current Topics</div>
+        <div className="zg-categories-bar-header">Go to  Topic</div>
         {categories.length ? (
           <div>
             <div className="zg-category-container">{availableCategories}</div>
             <div className="zg-category-container">
-            <div className="zg-category-link-holder">
-              <button onClick={() => exitCategory()} className="zg-single-category">
-                <ArrowBackIcon />
-              </button>
+              <div className="zg-category-link-holder">
+                <button
+                  onClick={() => exitCategory()}
+                  className="zg-single-category"
+                >
+                  <ArrowBackIcon />
+                </button>
               </div>
             </div>
           </div>
