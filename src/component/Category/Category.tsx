@@ -26,25 +26,24 @@ const Category: React.FC<CategoryProps> = (props) => {
   ]);
 
   const baseUrl =
-  process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
+    process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_LOCAL_SERVER;
 
   const fetchDiscussions = useCallback(async () => {
     await axios
-      .get(
-        `${baseUrl}/api/discussions/?categoryId=${props.categoryId}`
-      )
+      .get(`${baseUrl}/api/discussions/?categoryId=${props.categoryId}`)
       .then((res) => {
         const retrievedDiscussions = res.data;
         setDiscussions(retrievedDiscussions);
         scrollToCategoriesMobile();
-
       });
   }, [props, baseUrl]);
 
   const scrollToCategoriesMobile = () => {
-    if(window.innerWidth < 501)
-    document.getElementById('zg-back')?.scrollIntoView({behavior: "smooth"});
-  }
+    if (window.innerWidth < 501)
+      document
+        .getElementById("zg-back")
+        ?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     fetchDiscussions();
@@ -52,13 +51,12 @@ const Category: React.FC<CategoryProps> = (props) => {
 
   let currentDiscussions = discussions.map((discussion, index) => {
     return (
-      <Link key={index} to={`/discussion/${discussion.id}`} className="zg-category-link-holder">
-        <div
-          className="zg-discussion-link"
-          
-        >
-          {discussion.name}
-        </div>
+      <Link
+        key={index}
+        to={`/discussion/${discussion.id}`}
+        className="zg-category-link-holder"
+      >
+        <div className="zg-discussion-link">{discussion.name}</div>
       </Link>
     );
   });
@@ -66,9 +64,9 @@ const Category: React.FC<CategoryProps> = (props) => {
   return (
     <div className="zg-category">
       <div className="zg-category-header">
-      <div id="zg-back" className="zg-category-header-text">
-         {props.categoryName} 
-      </div>
+        <div id="zg-back" className="zg-category-header-text">
+          {props.categoryName}
+        </div>
       </div>
 
       <div className="zg-category-button-holder">
@@ -79,8 +77,10 @@ const Category: React.FC<CategoryProps> = (props) => {
             fetchDiscussions={fetchDiscussions}
           />
         </div>
-        {discussions.length ? (
-          <div className="zg-discussion-list">{currentDiscussions}</div>
+        {discussions.length > 1 ? (
+          <>
+            <div className="zg-discussion-list">{currentDiscussions}</div>
+          </>
         ) : (
           "we need discussions"
         )}
