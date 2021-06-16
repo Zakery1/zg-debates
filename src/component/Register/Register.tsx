@@ -53,7 +53,7 @@ const Register: React.FC = () => {
       })
       .catch((error) => {
         console.log("Axios error POST on login", error);
-        alert("invalid username of password");
+        alert("invalid username or password");
       });
   };
 
