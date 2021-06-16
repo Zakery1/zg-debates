@@ -82,7 +82,7 @@ const Category: React.FC<CategoryProps> = (props) => {
             <div className="zg-discussion-list">{currentDiscussions}</div>
           </>
         ) : (
-          "we need discussions"
+          <div className="zg-need-discussions">we need discussions</div>
         )}
       </div>
     </div>

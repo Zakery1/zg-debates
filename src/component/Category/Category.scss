@@ -9,7 +9,6 @@
       font-weight: bold;
       color: $zg-purple;
       border-bottom: 1px solid $zg-purple;
-      // border-top: 1px solid $zg-purple;
       padding: 7px 5px;
       margin: 15px;
     }
@@ -33,8 +32,6 @@
       margin: 0 40px 0 40px;
       .zg-category-link-holder {
         margin: 5px 5px 15px 5px;
-        
-        // background: $zg-purple;
         color: $zg-purple;
         border: 1px solid $zg-purple;
         border-radius: 3px;
@@ -46,6 +43,11 @@
           font-family: $zg-font;
         }
       }
+    }
+    .zg-need-discussions {
+      margin: 15px;
+      color: $zg-purple;
+      font-weight: bold;
     }
   }
 }
