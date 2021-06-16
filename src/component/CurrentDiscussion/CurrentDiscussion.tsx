@@ -80,7 +80,7 @@ const CurrentDiscussion: React.FC = () => {
 
   const copyLink = () => {
     return navigator.clipboard.writeText(
-      `https://zg-debates.netlify.app/discussion/${discussionId}`
+      `https://hyperbolia.com/discussion/${discussionId}`
     );
   };
 

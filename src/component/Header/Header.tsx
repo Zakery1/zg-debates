@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   return (
     <div className="zg-header">
       <Link className="zg-header-home" to="/">
-        ZG-Debates
+        Hyperbolia
       </Link>
       {value?.username ? (
         <Link to="/user" className="zg-header-login">

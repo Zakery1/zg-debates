@@ -1,1 +1,1 @@
-Visit the website at [zg-debates.netlify.app](https://zg-debates.netlify.app/).
+Visit the website at [hyperbolia.com](https://hyperbolia.com/).

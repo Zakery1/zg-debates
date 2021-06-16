@@ -11,7 +11,7 @@ const Welcome: React.FC = () => {
       </div>
 
       <p className="zg-welcome-text">
-        Welcome to ZG-Debates. Our goal is to create better quality
+        Welcome to Hyperbolia. Our goal is to create better quality
         <br /> discourse surrounding important and challenging topics.
       </p>
       <p className="zg-welcome-text">
